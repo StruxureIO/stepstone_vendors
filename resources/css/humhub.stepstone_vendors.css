@@ -1,0 +1,318 @@
+
+textarea:focus, input:focus{
+  outline: none;
+}
+
+div.panel.panel-default {
+  padding: 10px;
+}
+
+#vendors-admin-search-wraper {
+  position: relative;
+}
+
+#vendors-admin-search,
+#vendors-type-admin-search {
+  background-color: transparent;
+  padding: 8px 6px;
+  position: absolute;
+  top: -36px;
+  left: 96%;
+}
+
+.grid-view table tbody tr {
+  height: 20px;
+}
+
+#vendor-type-form {
+  padding: 10px;
+}
+
+#vendor-type {
+  margin-bottom: 20px !important;
+}    
+
+#vendor-select-row {
+  margin-bottom: 15px;
+}
+
+#vendor-button-row {
+  text-align: center;
+}
+
+#alwrap {
+  position: relative;
+}
+
+#ajaxloader {
+  background: url("../images/ajax-loader.gif") no-repeat scroll center center transparent;
+  bottom: -12px;
+  height: 32px;
+  position: absolute;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.vendor-heading {
+  font-size: 14px;
+}
+
+table#vendors-table tbody tr {
+  font-size: 12px;  
+}
+
+#vendors-table {
+  width: 100%;
+}
+
+#vendors-table tr {
+  border-bottom: 1px solid black;
+}
+
+#vendors-table td {
+  padding: 20px 10px;
+  width: 20%;
+}
+
+table#vendors-table a:not(.checked) span.fa.fa-star {
+  color: #ccc;
+}
+
+table#vendors-table td a.checked:hover,
+.checked {
+  color: #EDAE49;
+}
+
+#no-vendors-founds {
+  text-align: center;
+}
+
+#step-vendors-prev, #step-vendors-next {  
+  cursor: pointer;
+}
+
+#step-vendors-prev:hover, #step-vendors-next:hover {
+  color: #61B633;
+}  
+
+#step-vendors-prev {
+  float: left;
+}
+
+#step-vendors-next {
+  float: right;
+}
+
+#vendors-page-navigation {
+  margin-top: 10px;
+}
+
+table#vendor-subtypes {
+  margin-top: 20px;
+  width: 100% !important;  
+}
+
+.sbty-name {
+  width: 80%;
+}
+
+.sbty-delete,
+.sbty-edit {
+  width: 5%;
+}
+
+.gray {
+  background-color: #eee;
+}
+
+#vendor-subtypes td {
+  padding: 5px;
+}
+
+div.list-group-item details dl dt {
+  padding-left: 20px;
+  font-weight: normal;
+}
+
+a.vendor-subtype,
+a.vendor-list-type {
+  cursor: pointer;
+}
+
+div.container.vendor-layout {
+  font-family: 'open sans';
+}
+
+div.vendor-layout div.panel.panel-default {
+    padding: 0 !important;
+}
+
+#vendor-header {
+  border: 1px solid #000;
+  min-height: 200px;
+  width: 100%;
+}
+
+#header-top {
+  height: 50%;
+  padding: 65px 90px 0;
+}
+
+#header-bottom {
+  height: 50%;
+  background-color: #E7E7E7;  
+  padding: 10px 90px;
+}
+
+h1#vendor_name {
+  font-weight: 700;
+  font-size: 25px;
+  font-family: 'open sans';
+  display: inline-block;
+}
+
+span#vendor_subtype {
+  margin-left: 30px;  
+  position: relative;
+  top: 1px;
+  font-family: 'open sans';
+  color: #000;  
+}
+
+table#vendor-info {
+  font-size: 12px;
+}
+
+.vendor-contributor,
+.vendor-rating,
+.vendor-contact,
+.vendor-area {
+  width: 120px;
+}
+
+#vendor-titles {
+  height: 30px;
+}
+
+#latest-ratings,
+#vendor-menu {
+  background-color: #fff;
+  border: 1px solid #000;
+  font-family: 'Chalkboard';
+  padding: 10px;
+}
+
+ul#vendor-menu-list {
+  padding-left: 10px;
+}
+
+ul#vendor-menu-list li {
+  list-style: none;
+  padding: 5px 0;
+}
+
+.rator-name {
+  font-size: 10px;
+}
+
+.rating-date {
+  color: #ccc;
+  font-size: 10px;   
+}
+
+table#vendor-info tbody tr td {
+  vertical-align: top;
+}
+
+#rating-container {
+  background-color: #fff;
+  border: 1px solid #000;
+  margin-bottom: 21px;
+  min-height: 100px;
+  padding-top: 21px;
+}
+
+.rating-box {
+  font-family: 'open sans';
+  padding: 0 62px 20px;
+}
+
+.no-rating-box {
+  font-family: 'open sans';
+  padding: 0 62px;
+  line-height: 54px;
+}
+.rating-box-name {
+  font-size: 12px;
+  margin-left: 25px;
+}
+
+.rating-box-date {
+  color: #aaa;
+  font-size: 10px;
+}
+
+.rating-divider {
+  color: #ccc;
+  margin-bottom: 16px;
+  margin-top: 0;
+  text-align: center;
+}
+
+.rating-line-1 {
+  margin-bottom: 16px;
+}
+
+.rating-line-2 {
+  font-size: 12px;
+  line-height: 16.34px;
+  margin-bottom: 0;  
+}
+
+.rating-section-title {
+  font-family: 'Chalkboard';
+  font-size: 18px;
+}
+
+#submit-new-rating {
+  background-color: #fff;
+  border: 1px solid #000;
+  min-height: 100px;  
+}
+
+#submit-new-rating {
+  margin-bottom: 21px;
+}
+
+#rating-row {
+  padding: 40px 0 25px;
+}
+
+#vendor-user-review {
+  border-radius: 5px;
+  min-height: 114px;
+  width: 100%;
+}
+
+#submit-row {
+  margin-top: 12px;
+}
+
+#submit-review {
+  background-color: #111;
+  border: none;
+  border-radius: 4px;
+  color: #FFFFFF;  
+  cursor: pointer;
+  display: inline-block;
+  font-family: Chalkboard;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  overflow: hidden;
+  padding: 8px 16px;
+  vertical-align: middle;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+}
