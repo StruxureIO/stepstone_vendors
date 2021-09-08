@@ -166,7 +166,7 @@ $where group by v.id order by t.type_name, vendor_name limit $offset, " . MAX_VE
       
       if($model->validate() && $model->save()) {
         
-        $model->vendorAdded();      
+        //$model->vendorAdded();      
                  
         //return $this->redirect(['admin/index']);
         return $this->redirect(['vendors/index', 'cguid' => $cguid]);

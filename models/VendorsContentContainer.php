@@ -171,17 +171,12 @@ class VendorsContentContainer extends ContentActiveRecord implements Searchable
 //    }        
 
     
-//    public function afterSave($insert, $changedAttributes)
-//    {
-//        if(!$this->getContentType()->afterSave($this, $insert, $changedAttributes)) {
-//            throw new LogicException('Could not save content type'.$this->getContentType()->getLabel());
-//        }
-//        
-//            //$activity = new \humhub\modules\calendar\activities\ResponseAttend;
-//        
-//
-//        parent::afterSave($insert, $changedAttributes);
-//    }
+    public function afterSave($insert, $changedAttributes){
+      
+      $this->vendorAdded();
+
+      parent::afterSave($insert, $changedAttributes);
+    }
     
     public function getWallOut($params = Array()) {
       
