@@ -175,27 +175,14 @@ class VendorsContentContainer extends ContentActiveRecord implements Searchable
 
 
     public function afterSave($insert, $changedAttributes){
-        Yii::error(VarDumper::dumpAsString('afterSave-afterSave-VendorsContentContainer'));
-//        if ($insert && $this->object_model == User::class) {
-//            \humhub\modules\user\notifications\Followed::instance()
-//                ->from($this->user)
-//                ->about($this)
-//                ->send($this->getTarget());
-//
-//            \humhub\modules\user\activities\UserFollow::instance()
-//                ->from($this->user)
-//                ->container($this->user)
-//                ->about($this)
-//                ->save();
-//        }
-//
-//        $this->trigger(Follow::EVENT_FOLLOWING_CREATED, new FollowEvent(['user' => $this->user, 'target' => $this->getTarget()]));
 
         $notification = VendorAdded::instance()->about(Post::findOne(['id' => 1]));
         $notification->send(User::findOne(['id' => 1]));
+
         $this->vendorAdded();
 
-      parent::afterSave($insert, $changedAttributes);
+        parent::afterSave($insert, $changedAttributes);
+
     }
 
     public function getWallOut($params = Array()) {

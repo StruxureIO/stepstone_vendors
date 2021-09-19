@@ -12,11 +12,11 @@ class VendorAdded extends BaseNotification
 
     public function html()
     {
-        return '<h1>TestedMailViewNotificationHTML</h1>';
+        return '<h1>TestedMailViewNotificationHTML 111</h1>';
     }
 
     public function text()
     {
-        return 'TestedMailViewNotificationText';
+        return 'TestedMailViewNotificationText 222';
     }
 }
