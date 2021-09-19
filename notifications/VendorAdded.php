@@ -9,14 +9,16 @@ use yii\bootstrap\Html;
 class VendorAdded extends BaseNotification
 {
     public $moduleId = 'stepstone_vendors';
-//    public $requireOriginator = false;
+    public $requireOriginator = false;
     public $requireSource = false;
 
     public function html()
     {
-        return Yii::t('UserModule.notification', '{displayName} is now following you.', [
-            'displayName' => Html::tag('strong', Html::encode($this->originator->displayName)),
-        ]);
+        return 'New Vendor Added!!!';
+//        return Yii::t('UserModule.notification', '{displayName} is now following you.', [
+//            'displayName' => Html::tag('strong', 'Test' ),
+//        ]);
+//        Html::encode($this->originator->displayName)
     }
 
     public function text()
