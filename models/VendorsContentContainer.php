@@ -2,6 +2,8 @@
 
 namespace humhub\modules\stepstone_vendors\models;
 
+use humhub\modules\post\models\Post;
+use humhub\modules\stepstone_vendors\notifications\VendorAdded;
 use humhub\modules\stepstone_vendors\permissions\CreateVendors;
 use humhub\modules\stepstone_vendors\permissions\ManageVendors;
 use humhub\modules\content\models\Content;
@@ -19,6 +21,7 @@ use humhub\modules\space\models\Space;
 use humhub\modules\user\models\User;
 use humhub\modules\stepstone_vendors\models\VendorTypes;
 use Yii;
+use yii\helpers\VarDumper;
 
 //use humhub\modules\content\widgets\richtext\RichText;
 //use humhub\modules\content\components\behaviors\CompatModuleManager;
@@ -44,7 +47,7 @@ use Yii;
  * @property int $updated_by
 */
 
-//abstract 
+//abstract
 class VendorsContentContainer extends ContentActiveRecord implements Searchable
 {
 
@@ -56,26 +59,26 @@ class VendorsContentContainer extends ContentActiveRecord implements Searchable
      * @var bool field only used in edit form
      */
     public $visibility = VendorsContentContainer::VISIBILITY_PUBLIC;
-    
+
     protected $moduleId = 'stepstone_vendors';
 
     //public $id = 2;
-    
+
     //public $name = 'Vendors';
-  
+
     //public $autoFollow = false;
 
     protected $streamChannel = 'default';
-    
+
     public $canMove = true;
-        
+
     public $wallEntryClass = "humhub\modules\stepstone_vendors\widgets\WallEntry";
-    
+
     public static function tableName()
     {
         return 'vendors';
     }
-    
+
     public function rules()
     {
         return [
@@ -87,7 +90,7 @@ class VendorsContentContainer extends ContentActiveRecord implements Searchable
             [['vendor_phone'], 'string', 'max' => 30],
         ];
     }
-    
+
     public function behaviors()
     {
       return [
@@ -96,7 +99,7 @@ class VendorsContentContainer extends ContentActiveRecord implements Searchable
         ]
       ];
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -118,12 +121,12 @@ class VendorsContentContainer extends ContentActiveRecord implements Searchable
             'updated_by' => 'Updated By',
         ];
     }
-    
+
     public function getVendorTypesRecords()
     {
         return $this->hasOne(VendorTypes::class(), ['vendor_type' => 'type_id']);
-    }    
-        
+    }
+
     public function getContentName()
     {
         return Yii::t('StepstoneVendorsModule.base', "Vendor");
@@ -136,7 +139,7 @@ class VendorsContentContainer extends ContentActiveRecord implements Searchable
     {
         return $this->vendor_name;
     }
-    
+
     public function getUrl()
     {
         return Url::base() . "/index.php?r=stepstone_vendors%2Fvendors&cguid=$this->content->container;";
@@ -164,48 +167,65 @@ class VendorsContentContainer extends ContentActiveRecord implements Searchable
 //    public function beforeSave($insert)
 //    {
 //        $this->content->visibility = Content::VISIBILITY_PUBLIC;
-//        
+//
 //        $this->streamChannel = 'default';
-//                        
+//
 //        return parent::beforeSave($insert);
-//    }        
+//    }
 
-    
+
     public function afterSave($insert, $changedAttributes){
-      
-      $this->vendorAdded();
+        Yii::error(VarDumper::dumpAsString('afterSave-afterSave-VendorsContentContainer'));
+//        if ($insert && $this->object_model == User::class) {
+//            \humhub\modules\user\notifications\Followed::instance()
+//                ->from($this->user)
+//                ->about($this)
+//                ->send($this->getTarget());
+//
+//            \humhub\modules\user\activities\UserFollow::instance()
+//                ->from($this->user)
+//                ->container($this->user)
+//                ->about($this)
+//                ->save();
+//        }
+//
+//        $this->trigger(Follow::EVENT_FOLLOWING_CREATED, new FollowEvent(['user' => $this->user, 'target' => $this->getTarget()]));
+
+        $notification = VendorAdded::instance()->about(Post::findOne(['id' => 1]));
+        $notification->send(User::findOne(['id' => 1]));
+        $this->vendorAdded();
 
       parent::afterSave($insert, $changedAttributes);
     }
-    
+
     public function getWallOut($params = Array()) {
-      
+
       return WallEntry::widget(['vendors' => $this]);
-      
+
     }
-        
+
     public function getSearchAttributes() {
-              
+
         $attributes['name'] = $this->vendor_name;
-        
+
         if(!empty($this->vendor_contact))
           $attributes['contact'] = $this->vendor_contact;
-        
+
         if(!empty($this->vendor_phone))
           $attributes['phone'] = $this->vendor_phone;
-        
+
         if(!empty($this->vendor_email))
           $attributes['email'] = $this->vendor_email;
-        
+
         if(!empty($this->vendor_area))
           $attributes['area'] = $this->vendor_area;
-        
+
         $this->trigger(self::EVENT_SEARCH_ADD, new SearchAddEvent($attributes));
 
         return $attributes;
-      
+
     }
-    
+
 //    public function getSearchAttributes()
 //    {
 //        $attributes = [
@@ -226,17 +246,17 @@ class VendorsContentContainer extends ContentActiveRecord implements Searchable
 //        $this->trigger(self::EVENT_SEARCH_ADD, new SearchAddEvent($attributes));
 //        return $attributes;
 //    }
-    
-    
+
+
     public function vendorAdded() {
-      
+
       $activity = new \humhub\modules\stepstone_vendors\activities\NewVendor();
       $activity->source = $this;
       $activity->originator = Yii::$app->user->getIdentity();
       $activity->create();
-            
+
     }
-    
+
 //    public function handleContentSave($evt, $content = null)
 //    {
 //        /* @var $content Content */
@@ -247,6 +267,6 @@ class VendorsContentContainer extends ContentActiveRecord implements Searchable
 //
 //        return true;
 //    }
-    
-    
+
+
 }
