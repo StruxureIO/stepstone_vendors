@@ -3,12 +3,14 @@
 namespace humhub\modules\stepstone_vendors\models;
 
 use humhub\modules\post\models\Post;
+use humhub\modules\space\models\Membership;
 use humhub\modules\stepstone_vendors\notifications\VendorAdded;
 use humhub\modules\stepstone_vendors\permissions\CreateVendors;
 use humhub\modules\stepstone_vendors\permissions\ManageVendors;
 use humhub\modules\content\models\Content;
 use humhub\modules\content\components\ContentActiveRecord;
 use humhub\modules\content\components\ContentContainerActiveRecord;
+use humhub\modules\user\components\ActiveQueryUser;
 use humhub\modules\vendors\activities;
 use humhub\modules\search\interfaces\Searchable;
 use humhub\modules\search\events\SearchAddEvent;
@@ -21,6 +23,7 @@ use humhub\modules\space\models\Space;
 use humhub\modules\user\models\User;
 use humhub\modules\stepstone_vendors\models\VendorTypes;
 use Yii;
+use yii\db\ActiveQuery;
 use yii\helpers\VarDumper;
 
 //use humhub\modules\content\widgets\richtext\RichText;
@@ -45,8 +48,7 @@ use yii\helpers\VarDumper;
  * @property int $created_by
  * @property string $updated_at
  * @property int $updated_by
-*/
-
+ */
 //abstract
 class VendorsContentContainer extends ContentActiveRecord implements Searchable
 {
@@ -93,11 +95,11 @@ class VendorsContentContainer extends ContentActiveRecord implements Searchable
 
     public function behaviors()
     {
-      return [
-        'acl' => [
-          'class' => \humhub\components\behaviors\AccessControl::class,
-        ]
-      ];
+        return [
+            'acl' => [
+                'class' => \humhub\components\behaviors\AccessControl::class,
+            ]
+        ];
     }
 
     /**
@@ -156,8 +158,9 @@ class VendorsContentContainer extends ContentActiveRecord implements Searchable
         return $this->vendor_name;
     }
 
-    public function getIcon() {
-        if($this->hasAttribute('icon') && $this->icon) {
+    public function getIcon()
+    {
+        if ($this->hasAttribute('icon') && $this->icon) {
             return $this->icon;
         }
 
@@ -173,39 +176,60 @@ class VendorsContentContainer extends ContentActiveRecord implements Searchable
 //        return parent::beforeSave($insert);
 //    }
 
-
-    public function afterSave($insert, $changedAttributes){
-
-        $notification = VendorAdded::instance()->about(Post::findOne(['id' => 1]));
-        $notification->send(User::findOne(['id' => 1]));
+    public function afterSave($insert, $changedAttributes)
+    {
+        $users = $this->findSpaceMembers($this->content->contentcontainer_id);
+        //Sending notification
+        if (!empty($users)) {
+            $notification = VendorAdded::instance();
+            Yii::error($this->content->contentcontainer_id);
+            $notification->sendBulk($users);
+        }
 
         $this->vendorAdded();
-
         parent::afterSave($insert, $changedAttributes);
 
     }
 
-    public function getWallOut($params = Array()) {
+    public function findSpaceMembers ($spaceContainerId) {
+        $space = Space::find()
+            ->where(['contentcontainer_id' => $spaceContainerId])
+            ->one();
+        $members = Membership::find()
+            ->where(['space_id' => $space->id])
+            ->asArray()
+            ->all();
+        $usersIds = array_map(function ($member) {
+            return $member['user_id'];
+        }, $members);
+        return User::find()
+            ->where(['in', 'id', $usersIds])
+            ->all();
+    }
 
-      return WallEntry::widget(['vendors' => $this]);
+    public function getWallOut($params = array())
+    {
+
+        return WallEntry::widget(['vendors' => $this]);
 
     }
 
-    public function getSearchAttributes() {
+    public function getSearchAttributes()
+    {
 
         $attributes['name'] = $this->vendor_name;
 
-        if(!empty($this->vendor_contact))
-          $attributes['contact'] = $this->vendor_contact;
+        if (!empty($this->vendor_contact))
+            $attributes['contact'] = $this->vendor_contact;
 
-        if(!empty($this->vendor_phone))
-          $attributes['phone'] = $this->vendor_phone;
+        if (!empty($this->vendor_phone))
+            $attributes['phone'] = $this->vendor_phone;
 
-        if(!empty($this->vendor_email))
-          $attributes['email'] = $this->vendor_email;
+        if (!empty($this->vendor_email))
+            $attributes['email'] = $this->vendor_email;
 
-        if(!empty($this->vendor_area))
-          $attributes['area'] = $this->vendor_area;
+        if (!empty($this->vendor_area))
+            $attributes['area'] = $this->vendor_area;
 
         $this->trigger(self::EVENT_SEARCH_ADD, new SearchAddEvent($attributes));
 
@@ -235,12 +259,13 @@ class VendorsContentContainer extends ContentActiveRecord implements Searchable
 //    }
 
 
-    public function vendorAdded() {
+    public function vendorAdded()
+    {
 
-      $activity = new \humhub\modules\stepstone_vendors\activities\NewVendor();
-      $activity->source = $this;
-      $activity->originator = Yii::$app->user->getIdentity();
-      $activity->create();
+        $activity = new \humhub\modules\stepstone_vendors\activities\NewVendor();
+        $activity->source = $this;
+        $activity->originator = Yii::$app->user->getIdentity();
+        $activity->create();
 
     }
 

@@ -16,7 +16,7 @@ class VendorAdded extends BaseNotification
     {
         return 'New Vendor Added!!!';
 //        return Yii::t('UserModule.notification', '{displayName} is now following you.', [
-//            'displayName' => Html::tag('strong', 'Test' ),
+//            'displayName' => Html::tag('strong', Html::encode($this->originator->displayName) ),
 //        ]);
 //        Html::encode($this->originator->displayName)
     }
@@ -24,5 +24,9 @@ class VendorAdded extends BaseNotification
     public function text()
     {
         return 'TestedMailViewNotificationText 222';
+    }
+
+    public function about($source) {
+
     }
 }
