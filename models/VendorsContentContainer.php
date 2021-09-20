@@ -4,6 +4,7 @@ namespace humhub\modules\stepstone_vendors\models;
 
 use humhub\modules\post\models\Post;
 use humhub\modules\space\models\Membership;
+use humhub\modules\stepstone_vendors\helpers\Url;
 use humhub\modules\stepstone_vendors\notifications\VendorAdded;
 use humhub\modules\stepstone_vendors\permissions\CreateVendors;
 use humhub\modules\stepstone_vendors\permissions\ManageVendors;
@@ -178,11 +179,18 @@ class VendorsContentContainer extends ContentActiveRecord implements Searchable
 
     public function afterSave($insert, $changedAttributes)
     {
+        $vendor = Vendors::find()
+            ->where(['id'=>$this->content->object_id])
+            ->one();
+
+        $space = Space::find()
+            ->where(['contentcontainer_id' => $this->content->contentcontainer_id])
+            ->one();
+
         $users = $this->findSpaceMembers($this->content->contentcontainer_id);
         //Sending notification
         if (!empty($users)) {
-            $notification = VendorAdded::instance();
-            Yii::error($this->content->contentcontainer_id);
+            $notification = VendorAdded::instance()->about($this);
             $notification->sendBulk($users);
         }
 

@@ -3,8 +3,11 @@
 namespace humhub\modules\stepstone_vendors\notifications;
 
 use humhub\modules\notification\components\BaseNotification;
+use humhub\modules\space\models\Space;
+use humhub\modules\stepstone_vendors\models\Vendors;
 use Yii;
 use yii\bootstrap\Html;
+use yii\helpers\VarDumper;
 
 class VendorAdded extends BaseNotification
 {
@@ -14,19 +17,14 @@ class VendorAdded extends BaseNotification
 
     public function html()
     {
-        return 'New Vendor Added!!!';
-//        return Yii::t('UserModule.notification', '{displayName} is now following you.', [
-//            'displayName' => Html::tag('strong', Html::encode($this->originator->displayName) ),
+        /**@var Vendors $vendor */
+        $vendor = $this->source;
+        Yii::error(VarDumper::dumpAsString($vendor));
+//        $vendor = $this->source;
+
+//        return Yii::t('UserModule.notification', 'Vendor {$vendorName} added.', [
+//            'vendorName' => $vendor->vendor_name
 //        ]);
-//        Html::encode($this->originator->displayName)
-    }
-
-    public function text()
-    {
-        return 'TestedMailViewNotificationText 222';
-    }
-
-    public function about($source) {
-
+        return 'dsadsasda';
     }
 }
