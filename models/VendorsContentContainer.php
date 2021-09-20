@@ -4,7 +4,7 @@ namespace humhub\modules\stepstone_vendors\models;
 
 use humhub\modules\post\models\Post;
 use humhub\modules\space\models\Membership;
-use humhub\modules\stepstone_vendors\helpers\Url;
+
 use humhub\modules\stepstone_vendors\notifications\VendorAdded;
 use humhub\modules\stepstone_vendors\permissions\CreateVendors;
 use humhub\modules\stepstone_vendors\permissions\ManageVendors;
@@ -25,6 +25,7 @@ use humhub\modules\user\models\User;
 use humhub\modules\stepstone_vendors\models\VendorTypes;
 use Yii;
 use yii\db\ActiveQuery;
+use yii\helpers\Url;
 use yii\helpers\VarDumper;
 
 //use humhub\modules\content\widgets\richtext\RichText;
@@ -127,7 +128,7 @@ class VendorsContentContainer extends ContentActiveRecord implements Searchable
 
     public function getVendorTypesRecords()
     {
-        return $this->hasOne(VendorTypes::class(), ['vendor_type' => 'type_id']);
+        return $this->hasOne(VendorTypes::class, ['vendor_type' => 'type_id']);
     }
 
     public function getContentName()
@@ -145,7 +146,7 @@ class VendorsContentContainer extends ContentActiveRecord implements Searchable
 
     public function getUrl()
     {
-        return Url::base() . "/index.php?r=stepstone_vendors%2Fvendors&cguid=$this->content->container;";
+        return Url::base() . "/index.php?r=stepstone_vendors%2Fvendors&cguid=" . $this->content->container->guid;
     }
 
 //    public function getContentType()
@@ -179,18 +180,13 @@ class VendorsContentContainer extends ContentActiveRecord implements Searchable
 
     public function afterSave($insert, $changedAttributes)
     {
-        $vendor = Vendors::find()
-            ->where(['id'=>$this->content->object_id])
-            ->one();
-
-        $space = Space::find()
-            ->where(['contentcontainer_id' => $this->content->contentcontainer_id])
-            ->one();
-
         $users = $this->findSpaceMembers($this->content->contentcontainer_id);
+
         //Sending notification
         if (!empty($users)) {
-            $notification = VendorAdded::instance()->about($this);
+            $notification = VendorAdded::instance()
+                ->from($this->createdBy)
+                ->about($this);
             $notification->sendBulk($users);
         }
 
@@ -199,7 +195,12 @@ class VendorsContentContainer extends ContentActiveRecord implements Searchable
 
     }
 
-    public function findSpaceMembers ($spaceContainerId) {
+    /**
+     * @param $spaceContainerId integer the space content container id
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public function findSpaceMembers(int $spaceContainerId)
+    {
         $space = Space::find()
             ->where(['contentcontainer_id' => $spaceContainerId])
             ->one();
