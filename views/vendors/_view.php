@@ -13,6 +13,11 @@ if($container != null)
 else 
   $detail_url = '';
 
+if(strpos($detail_url, '?') !== false)
+  $idparam = "&id=";    
+else
+  $idparam = "?id=";         
+
 $current_vendor_type = 0;
 $first = true;
 $html = '';
@@ -39,9 +44,9 @@ if($vendors) {
     
     //$vendor_rating = VendorsEntry::display_vendor_rating($vendor['vendor_rating'], $vendor['user_rating'], $vendor['id'], $user_id);
     $vendor_rating = VendorsEntry::display_vendor_rating($vendor['vendor_rating']);
-    
+        
     $html .= '    <tr vendor-id="'.$vendor['id'].'">' . PHP_EOL; 
-    $html .= '      <td><a href="'.$detail_url .  "&id=" . $vendor['id'] .'">' . $vendor['vendor_name'] . '</a></td>' . PHP_EOL;
+    $html .= '      <td><a href="'.$detail_url .  $idparam . $vendor['id'] .'">' . $vendor['vendor_name'] . '</a></td>' . PHP_EOL;
     $html .= '      <td>' . $vendor['vendor_area'] . '</td>' . PHP_EOL;
     $html .= '      <td>' . $contact_info . '</td>' . PHP_EOL;
     $html .= '      <td>' . trim($vendor['firstname'] . ' ' . $vendor['lastname']) . '</td>' . PHP_EOL;
