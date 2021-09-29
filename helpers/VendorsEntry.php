@@ -3,6 +3,8 @@
 namespace humhub\modules\stepstone_vendors\helpers;
 use Yii;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
+use yii\web\UrlManager;
 
 class VendorsEntry {  
   
@@ -90,7 +92,7 @@ class VendorsEntry {
       
     }
     
-    $rating_stars = '<span><a class="vendor-rate-1 '.$check1.'" rate-id="1" ><span class="fa fa-star "></span></a><a class="vendor-rate-2 '.$check2.'" rate-id="2" ><span class="fa fa-star "></span></a><a class="vendor-rate-3 '.$check3.'" rate-id="3" ><span class="fa fa-star "></span></a><a class="vendor-rate-4 '.$check4.'" rate-id="4" ><span class="fa fa-star "></span></a><a class="vendor-rate-5 '.$check5.'" rate-id="5" ><span class="fa fa-star "></span></a>';
+    $rating_stars = '<span><span class="'.$check1.'" rate-id="1" ><span class="fa fa-star "></span></span><span class="'.$check2.'" rate-id="2" ><span class="fa fa-star "></span></span><span class="'.$check3.'" rate-id="3" ><span class="fa fa-star "></span></span><span class="'.$check4.'" rate-id="4" ><span class="fa fa-star "></span></span><span class="'.$check5.'" rate-id="5" ><span class="fa fa-star "></span></span>';
         
     return $rating_stars;
         
@@ -149,7 +151,7 @@ class VendorsEntry {
     }
     
     $rating_stars = '<span id="edit-rating" data-id="'.$vendor_id.'" user-id="'.$user_id.'" user-rating="'. $user_rating .'"><a class="vendor-rate-1 '.$check1.'" rate-id="1" ><span class="fa fa-star "></span></a><a class="vendor-rate-2 '.$check2.'" rate-id="2" ><span class="fa fa-star "></span></a><a class="vendor-rate-3 '.$check3.'" rate-id="3" ><span class="fa fa-star "></span></a><a class="vendor-rate-4 '.$check4.'" rate-id="4" ><span class="fa fa-star "></span></a><a class="vendor-rate-5 '.$check5.'" rate-id="5" ><span class="fa fa-star "></span></a>';
-        
+      
     return $rating_stars;
         
   }
@@ -220,15 +222,20 @@ class VendorsEntry {
   }
   
   public static function vendorMenu($id, $detail_url, $vendor_rate_url, $vendor_url, $edit_vendor_url) {
+    
+    if (\Yii::$app->urlManager->enablePrettyUrl) 
+      $id_param = "?id=";
+    else
+      $id_param = "&id=";
       
     ?>
       <div id="vendor-menu">
         <p><strong>Vendor Menu</strong></p>
         <ul id="vendor-menu-list">
-          <li><a href="<?php echo $detail_url . "&id=" . $id ?>"><i class="fas fa-list"></i></i> Stream</a></li>
-          <li><a href="<?php echo $vendor_rate_url . "&id=" . $id ?>"><i class="fas fa-star-half-alt"></i> Ratings</a></li>
+          <li><a href="<?php echo $detail_url . $id_param . $id ?>"><i class="fas fa-list"></i></i> Stream</a></li>
+          <li><a href="<?php echo $vendor_rate_url . $id_param . $id ?>"><i class="fas fa-star-half-alt"></i> Ratings</a></li>
           <?php if(Yii::$app->user->isAdmin()) { ?>
-            <li><a href="<?php echo $edit_vendor_url . "&id=" . $id ?>"><i class="fas fa-edit"></i> Edit Vendor</a></li>
+            <li><a href="<?php echo $edit_vendor_url . $id_param . $id ?>"><i class="fas fa-edit"></i> Edit Vendor</a></li>
           <?php } ?>
           <li><a href="<?php echo $vendor_url ?>"><i class="far fa-address-book"></i> Vendors</a></li>
         </ul>        
