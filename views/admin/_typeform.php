@@ -69,8 +69,13 @@ if(isset($model->type_id)) {
             echo '  <td class="sbty-name">' . $subtype['subtype_name'] . '</td>'  . PHP_EOL;
             //echo '  <td class="sbty-edit"><a href=""><span class="glyphicon glyphicon-pencil"></span></a></td>'  . PHP_EOL;
             //echo '  <td class="sbty-delete"><a href=""><span class="glyphicon glyphicon-trash"></span></a></td>'  . PHP_EOL;
-            echo '<td class="sbty-edit">' . Html::a( '<span class="glyphicon glyphicon-pencil"></span>' , Url::to("index.php?r=stepstone_vendors/admin/updatesubtype&subtype_id=" . $subtype['subtype_id'] . "&id=" . $model->type_id . "&name=" . $model->type_name)) . '</td>';
-            echo '<td class="sbty-delete">' . Html::a( '<span class="glyphicon glyphicon-trash"></span>' , Url::to("index.php?r=stepstone_vendors/admin/deletesubtype&subtype_id=" . $subtype['subtype_id'] . "&id=" . $model->type_id))  . '</td>';
+            if (Yii::$app->urlManager->enablePrettyUrl) { 
+              echo '<td class="sbty-edit">' . Html::a( '<span class="glyphicon glyphicon-pencil"></span>' , Url::to("updatesubtype?subtype_id=" . $subtype['subtype_id'] . "&id=" . $model->type_id . "&name=" . $model->type_name)) . '</td>';
+              echo '<td class="sbty-delete">' . Html::a( '<span class="glyphicon glyphicon-trash"></span>' , Url::to("deletesubtype?subtype_id=" . $subtype['subtype_id'] . "&id=" . $model->type_id))  . '</td>';
+            } else {
+              echo '<td class="sbty-edit">' . Html::a( '<span class="glyphicon glyphicon-pencil"></span>' , Url::to("index.php?r=stepstone_vendors/admin/updatesubtype&subtype_id=" . $subtype['subtype_id'] . "&id=" . $model->type_id . "&name=" . $model->type_name)) . '</td>';
+              echo '<td class="sbty-delete">' . Html::a( '<span class="glyphicon glyphicon-trash"></span>' , Url::to("index.php?r=stepstone_vendors/admin/deletesubtype&subtype_id=" . $subtype['subtype_id'] . "&id=" . $model->type_id))  . '</td>';
+            }
             echo '</tr>' . PHP_EOL;
             $count++;
           }
@@ -79,7 +84,12 @@ if(isset($model->type_id)) {
           </tbody>
           
           <div>
-            <a id="step-add-video-tag" href="<?php echo Url::base() ?>/index.php?r=stepstone_vendors%2Fadmin%2Faddsubtype&id=<?php echo $model->type_id ?>&name=<?php echo $model->type_name?>" class="btn btn-default">Add Subtype</a>&nbsp;&nbsp;            
+            <?php if (Yii::$app->urlManager->enablePrettyUrl) { ?>
+              <a id="step-add-video-tag" href="<?php echo Url::to("addsubtype?id={$model->type_id}&name={$model->type_name}") ?>" class="btn btn-default">Add Subtype</a>&nbsp;&nbsp; 
+            <?php } else { ?>  
+              <a id="step-add-video-tag" href="<?php echo Url::to("addsubtype&id={$model->type_id}&name={$model->type_name}") ?>" class="btn btn-default">Add Subtype</a>&nbsp;&nbsp; 
+            <?php } ?>  
+             <!--/index.php?r=stepstone_vendors%2Fadmin%2Faddsubtype&id=$model->type_id&name=$model->type_name-->  
           </div>
         </table>
 

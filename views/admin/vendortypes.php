@@ -41,11 +41,17 @@ use yii\widgets\Pjax;
                       'buttons' => [
                         'update'=>function($url,$model,$key)
                         {
-                            return Html::a( '<span class="glyphicon glyphicon-pencil"></span>' , Url::to("index.php?r=stepstone_vendors/admin/updatetype&id=$key")); 
+                            if (Yii::$app->urlManager->enablePrettyUrl)
+                              return Html::a( '<span class="glyphicon glyphicon-pencil"></span>' , Url::to("updatetype?id=$key")); 
+                            else
+                              return Html::a( '<span class="glyphicon glyphicon-pencil"></span>' , Url::to("index.php?r=stepstone_vendors/admin/updatetype&id=$key")); 
                         },
                         'delete'=>function($url,$model,$key)
                         {
-                            return Html::a( '<span class="glyphicon glyphicon-trash"></span>' , Url::to("index.php?r=stepstone_vendors/admin/delete-type&id=$key") ); //use Url::to() in order to change $url
+                            if (Yii::$app->urlManager->enablePrettyUrl)
+                              return Html::a( '<span class="glyphicon glyphicon-trash"></span>' , Url::to("delete-type?id=$key") ); //use Url::to() in order to change $url
+                            else
+                              return Html::a( '<span class="glyphicon glyphicon-trash"></span>' , Url::to("index.php?r=stepstone_vendors/admin/delete-type&id=$key") ); //use Url::to() in order to change $url
                         }],                                        
                     'template'=>'{update} {delete}',
                   ],
