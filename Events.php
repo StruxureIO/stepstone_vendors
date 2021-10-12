@@ -45,7 +45,8 @@ class Events
         $event->sender->addItem([
             'label' => 'Vendors',
             'icon' => '<i class="far fa-address-book"></i>',
-            'url' => Url::to(['/stepstone_vendors/index']),
+            //'url' => Url::to(['/stepstone_vendors/index']),
+            'url' => Url::to(['/s/welcome-space/stepstone_vendors/vendors']),
             'sortOrder' => 99999,
             'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'stepstone_vendors' && Yii::$app->controller->id == 'global'),
         ]);
