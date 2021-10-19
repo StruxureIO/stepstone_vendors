@@ -16,19 +16,19 @@ use yii\helpers\ArrayHelper;
     
       <?php $form = ActiveForm::begin(); ?>
     
-          <input type="hidden" name="Vendors[id]" value="<?php echo $model->id ?>">
+          <!--<input type="hidden" name="VendorsContentContainer[id]" value="< ?php echo $model->id ?>">-->
                               
           <?= $form->field($model, 'vendor_name')->textInput(['maxlength' => true]) ?>
           
-          <label class="control-label" for="Vendors[vendor_type]">Vendor Type</label>
+          <label class="control-label" for="VendorsContentContainer[vendor_type]">Vendor Type</label>
           <div id="vendor-select-row">
              <?= Html::activeDropDownList($model, 'vendor_type', $types, ['class' => 'form-control']) ?>             
           </div>
           
-          <label class="control-label" for="Vendors[vendor_type]">Vendor Subtype</label>
+          <label class="control-label" for="VendorsContentContainer[vendor_type]">Vendor Subtype</label>
           <div id="vendor-select-row">
              <?= Html::activeDropDownList($model, 'subtype', $subtypes, ['class' => 'form-control']) ?>             
-<!--            <select id="vendors-subtype" class="form-control" name="Vendors[subtype]">
+<!--            <select id="vendors-subtype" class="form-control" name="VendorsContentContainer[subtype]">
             </select>             -->
           </div>
             <!--<option value="2">Lenders</option>-->
@@ -40,10 +40,35 @@ use yii\helpers\ArrayHelper;
                     
           <?= $form->field($model, 'vendor_email')->textInput(['maxlength' => true]) ?>
           
-          <?= $form->field($model, 'vendor_area')->textInput(['maxlength' => true]) ?>
-                    
+          <input type="hidden" id="vendor-areas" name="VendorsContentContainer[areas]" value="">            
+          
+          <div class="form-group field-vendors-vendor_areas">
+            <label class="control-label" for="vendors-areas">Vendor Areas</label>
+            
+            <ul id="tag-list">
+              
+              <?php
+                $selected_areas = explode(',', $model->areas);      
+                foreach($areas as $area) {     
+                  
+                  if(in_array($area->area_id, $selected_areas))
+                    $checked = 'checked';      
+                  else
+                    $checked = '';      
+                  
+                  echo '<li><label class="switch"><input class="step-vendor-area" type="checkbox" '.$checked.' data-id="'.$area->area_id.'" ><span class="slider round"></span></label><span class="tag-label">'.$area->area_name.'</span></li>';                  
+                }
+              ?>  
+                            
+            </ul>  
+            
+
+          </div>            
+          
+          <!--< ?= $form->field($model, 'vendor_area')->textInput(['maxlength' => true]) ?>-->
+                                                  
           <?php if(!isset($user->username)) { ?>
-            <input type="hidden" id="vendor_recommended_user_id" name="Vendors[vendor_recommended_user_id]" value="<?php echo $current_user_id ?>">
+            <input type="hidden" id="vendor_recommended_user_id" name="VendorsContentContainer[vendor_recommended_user_id]" value="<?php echo $current_user_id ?>">
           <?php } else { ?>
             <div>
               <label class="control-label">Recommended by </label> <?= $user->username ?>            
@@ -104,4 +129,3 @@ $this->registerJs("
 
 ");
 ?>
-

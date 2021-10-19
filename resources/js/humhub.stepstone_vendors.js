@@ -14,4 +14,22 @@ humhub.module('template', function(module, require, $) {
         init: init,
         hello: hello
     });
+    
+    $(document).on("click", ".step-vendor-area", function () {
+      var vendor_areas = "";    
+    
+      $('.step-vendor-area').each(function() {   
+        var area_id = $(this).attr('data-id');      
+        var checked = $(this).is(':checked') 
+        if(checked) {
+          if(vendor_areas == '') 
+            vendor_areas = area_id;
+          else
+            vendor_areas += ',' + area_id;
+        }        
+      });
+      $('#vendor-areas').val(vendor_areas);              
+    });
+        
+    
 });

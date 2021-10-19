@@ -82,6 +82,17 @@ class Events
             'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'vendors' && Yii::$app->controller->id == 'admin'),
             'isVisible' => Yii::$app->user->can(ManageVendors::class)
         ]);
+        
+        $event->sender->addItem([
+            'label' => 'Vendor Areas',
+            'url' => Url::to(['/stepstone_vendors/admin/vendorareas']),
+            'group' => 'manage',
+            'icon' => '<i class="fas fa-map-marker-alt"></i>', 
+            'sortOrder' => 99802,
+            'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'vendors' && Yii::$app->controller->id == 'admin'),
+            'isVisible' => Yii::$app->user->can(ManageVendors::class)
+        ]);
+        
 
     }
 

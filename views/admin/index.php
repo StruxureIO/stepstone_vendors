@@ -1,6 +1,7 @@
 <?php 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use humhub\modules\stepstone_vendors\helpers\VendorsEntry;
 
 
 \humhub\modules\stepstone_vendors\assets\Assets::register($this);
@@ -35,7 +36,12 @@ $this->params['breadcrumbs'][] = $this->title;
                   ['class' => 'yii\grid\SerialColumn'],
                     'vendor_name',
                     'vendor_contact',
-                    'vendor_area',
+                    [
+                      'label' => 'Areas',
+                      'value' => function ($model) {
+                          return VendorsEntry::getVendorAreas($model->id);
+                      }
+                    ],
                   ['class' => 'yii\grid\ActionColumn',
                               'template'=>'{update} {delete}',
                   ],

@@ -200,7 +200,7 @@ class VendorsEntry {
         <table id="vendor-info">
           <thead id="vendor-titles">
             <tr>
-              <td class="vendor-area">Area</td>
+              <td class="vendor-area">Areas</td>
               <td class="vendor-contact">Contact Info</td>
               <td class="vendor-contributor">Listed By</td>
               <td class="vendor-rating">Rating</td>
@@ -208,7 +208,7 @@ class VendorsEntry {
           </thead>
           <tbody>
             <tr>
-              <td class="vendor-area"><?php echo $vendor->vendor_area ?></td>
+              <td class="vendor-area"><?php echo VendorsEntry::getVendorAreas($vendor->id) ?></td>
               <td class="vendor-contact"><?php echo $contact_info ?></td>
               <td class="vendor-contributor"><?php echo $firstname . " " . $lastname ?></td>
               <td class="vendor-rating"><?php echo $vendor_rating ?></td>
@@ -270,6 +270,27 @@ class VendorsEntry {
   
   }
   
+  public static function getVendorAreas($vendor_id) {
+    
+    $areas = array();
+    $vendor_areas = '';
+    $first = true;
+     
+    $connection = Yii::$app->getDb();
+    $command = $connection->createCommand("SELECT vendor_areas.area_name FROM vendor_area_list LEFT JOIN `vendor_areas` ON vendor_areas.area_id = vendor_area_list.area_id WHERE vendor_id = $vendor_id");
+    $areas = $command->queryAll();   
+    
+    foreach($areas as $area) {
+      if($first) {
+        $vendor_areas .= $area['area_name'];
+        $first = false;
+      } else {
+        $vendor_areas .= ', ' . $area['area_name'];
+      }            
+    }  
+    
+    return $vendor_areas;
+  }
     
 }
 

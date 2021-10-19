@@ -18,6 +18,7 @@ $this->params['breadcrumbs'][] = 'Add';
     <?= $this->render('_form', [
         'model' => $model, 
         'types' => $types,
+        'areas' => $areas,
         'user' => $user, 
         'current_user_id' => $current_user_id,
     ]) ?>

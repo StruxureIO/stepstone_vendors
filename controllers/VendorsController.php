@@ -20,6 +20,8 @@ use humhub\modules\stepstone_vendors\models\VendorsContentContainer;
 use humhub\modules\stepstone_vendors\models\VendorTypes;
 use humhub\modules\stepstone_vendors\models\VendorsRatings;
 use humhub\modules\stepstone_vendors\models\VendorSubTypes;
+use humhub\modules\stepstone_vendors\models\VendorAreas;
+use humhub\modules\stepstone_vendors\models\VendorAreaList;
 use humhub\modules\stepstone_vendors\widgets\WallEntry;
 
 class VendorsController extends ContentContainerController {
@@ -29,6 +31,8 @@ class VendorsController extends ContentContainerController {
   public $mUsers;
   public $mRatings;
   public $mSubtypes;
+  public $mAreas;
+  public $mAreaList;
     
   public $subLayout = "@stepstone_vendors/views/layouts/default";
   
@@ -68,8 +72,14 @@ class VendorsController extends ContentContainerController {
   public function actionIndex(){
     
     $this->subLayout = "@stepstone_vendors/views/layouts/default";    
+    
+    $connection = Yii::$app->getDb();
+    
+    $command = $connection->createCommand("select * from vendor_areas order by area_id limit 0, 6");    
+    
+    $areas = $command->queryAll();   
                     
-    return $this->render('index');
+    return $this->render('index', ['areas' => $areas]);
     
   }
   
@@ -85,16 +95,25 @@ class VendorsController extends ContentContainerController {
     
     $vendor_subtype = trim($req->get('vendor_subtype', ''));
             
-    $page = $req->get('page', 0);    
+    $page = $req->get('page', 0);
+
+    $location = $req->get('location', '');
+    if(!is_numeric($location))
+      $location = '';
     
     $vendor_ids = $req->get('vendor_ids', '');
     
     $vendor_ids = str_replace('"', '', $vendor_ids);    
     
     $user_id = \Yii::$app->user->identity->ID;
+    
+    if($location != '')
+      $search_location = " l.area_id = $location ";
+    else
+      $search_location = "";
         
     if($search_text != '')
-      $search_condition = " vendor_name like '%$search_text%' or vendor_contact like '%$search_text%' or vendor_area like '%$search_text%' ";
+      $search_condition = " vendor_name like '%$search_text%' or vendor_contact like '%$search_text%' ";
     
     if(!empty($vendor_subtype)) {
         $where = " WHERE v.subtype = $vendor_subtype ";      
@@ -110,26 +129,48 @@ class VendorsController extends ContentContainerController {
           $where = "";    
       }  
     }
+    
+    if($search_location != '') {
+      if($where != '')
+        $where .= " and ( $search_location ) ";
+      else 
+        $where .= " where $search_location ";
+    }
        
     $connection = Yii::$app->getDb();
     
-    $command = $connection->createCommand("select count(id) from vendors as v $where");
-        
-    $count = $command->queryOne();
+    //$command = $connection->createCommand("select count(id) from vendors as v $where");
     
-    $offset = $page * MAX_VENDOR_ITEMS;
-    $total_number_pages = ceil($count['count(id)'] / MAX_VENDOR_ITEMS);        
-        
-    $command = $connection->createCommand("select v.*, t.type_name, p.firstname, p.lastname, r.user_rating  
+    $command = $connection->createCommand("select count(id)   
 from vendors as v
 LEFT JOIN vendor_types as t on t.type_id = v.vendor_type 
 LEFT JOIN profile as p on p.user_id = v.vendor_recommended_user_id 
-LEFT JOIN vendors_ratings as r on r.vendor_id = v.id 
+LEFT JOIN vendor_area_list as l on l.vendor_id = v.id
+$where group by v.id");
+        
+    $count = $command->queryOne();
+        
+    $offset = $page * MAX_VENDOR_ITEMS;
+    if(isset($count['count(id)']))
+      $total_number_pages = ceil($count['count(id)'] / MAX_VENDOR_ITEMS);        
+    else
+      $total_number_pages = 0;
+        
+    $command = $connection->createCommand("select v.*, t.type_name, p.firstname, p.lastname  
+from vendors as v
+LEFT JOIN vendor_types as t on t.type_id = v.vendor_type 
+LEFT JOIN profile as p on p.user_id = v.vendor_recommended_user_id 
+LEFT JOIN vendor_area_list as l on l.vendor_id = v.id
 $where group by v.id order by t.type_name, vendor_name limit $offset, " . MAX_VENDOR_ITEMS);
           
-    $sql = $command->sql;
+    //$sql = $command->sql;
     
-    $vendors = $command->queryAll();   
+    //echo "<p>$sql</p>"; 
+    
+    if($count > 0)
+      $vendors = $command->queryAll();
+    else  
+      $vendors = null;
     
     return $this->renderPartial('_view', [
       'vendors' => $vendors,
@@ -137,12 +178,15 @@ $where group by v.id order by t.type_name, vendor_name limit $offset, " . MAX_VE
       'user_id' => $user_id,
       'total_number_pages' => $total_number_pages,
       'search_text' => $search_text,
+      'count' => $count,
     ]);   
     
   }
   
   public function actionAdd($cguid) {
     
+    Yii::$app->cache->flush();
+        
     $this->subLayout = "@stepstone_vendors/views/layouts/default";    
     
     $current_user_id = \Yii::$app->user->identity->ID;
@@ -155,6 +199,11 @@ $where group by v.id order by t.type_name, vendor_name limit $offset, " . MAX_VE
     $this->mSubtypes = new \humhub\modules\stepstone_vendors\models\VendorSubTypes();
     $subtypes = ArrayHelper::map($this->mSubtypes::find()->where(['type_id' => 2])->all(), 'subtype_id', 'subtype_name');   
     
+    $this->mAreas = new \humhub\modules\stepstone_vendors\models\VendorAreas();
+    $this->mAreaList = new \humhub\modules\stepstone_vendors\models\VendorAreaList();
+    
+    $areas = $this->mAreas::find()->all();          
+            
     if ($model->load(Yii::$app->request->post())) {
       
       $model->content->visibility = Content::VISIBILITY_PUBLIC;
@@ -166,9 +215,17 @@ $where group by v.id order by t.type_name, vendor_name limit $offset, " . MAX_VE
       
       if($model->validate() && $model->save()) {
         
+        $this->mAreaList::deleteAll(['vendor_id' => $model->id]);
+        $selected_areas = explode(',', $model->areas);      
+        foreach($selected_areas as $area) {
+          $new_area = new \humhub\modules\stepstone_vendors\models\VendorAreaList();
+          $new_area->vendor_id = $model->id;
+          $new_area->area_id = $area;
+          $new_area->save();
+        }
+                
         //$model->vendorAdded();      
                  
-        //return $this->redirect(['admin/index']);
         return $this->redirect(['vendors/index', 'cguid' => $cguid]);
       }
     }
@@ -176,6 +233,7 @@ $where group by v.id order by t.type_name, vendor_name limit $offset, " . MAX_VE
     return $this->render('add', [
       'model' => $model, 
       'types' => $types,
+      'areas' => $areas,
       'user' => array(), 
       'current_user_id' => $current_user_id,
       'subtypes'  => $subtypes,
