@@ -22,7 +22,6 @@ use humhub\modules\content\components\behaviors\CompatModuleManager;
  * @property string|null $vendor_contact
  * @property string|null $vendor_phone
  * @property string|null $vendor_email
- * @property string|null $vendor_area
  * @property int|null $vendor_recommended_user_id
  * @property int|null $vendor_rating
  */
@@ -101,7 +100,7 @@ class ContainerVendors extends ContentActiveRecord implements Searchable
             [['vendor_name', 'vendor_type'], 'required'],
             [['vendor_type', 'vendor_recommended_user_id', 'vendor_rating'], 'integer'],
             [['vendor_name'], 'string', 'max' => 100],
-            [['vendor_contact', 'vendor_email', 'vendor_area'], 'string', 'max' => 60],
+            [['vendor_contact', 'vendor_email'], 'string', 'max' => 60],
             [['vendor_phone'], 'string', 'max' => 30],
         ];
     }
@@ -118,7 +117,6 @@ class ContainerVendors extends ContentActiveRecord implements Searchable
             'vendor_contact' => 'Vendor Contact',
             'vendor_phone' => 'Vendor Phone',
             'vendor_email' => 'Vendor Email',
-            'vendor_area' => 'Vendor Area',
             'vendor_recommended_user_id' => 'Vendor Recommended User ID',
             'vendor_rating' => 'Vendor Rating',
         ];

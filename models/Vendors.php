@@ -20,14 +20,14 @@ use Yii;
  * @property string|null $vendor_contact
  * @property string|null $vendor_phone
  * @property string|null $vendor_email
- * @property string|null $vendor_area
  * @property int|null $vendor_recommended_user_id
  * @property int|null $vendor_rating
  * @property string $created_at
  * @property int $created_by
  * @property string $updated_at
  * @property int $updated_by
-*/
+ * @property string|null $areas
+ */
 //class Vendors extends \yii\db\ActiveRecord
 //class Vendors extends ContentActiveRecord implements Searchable
 class Vendors extends \yii\db\ActiveRecord
@@ -54,8 +54,9 @@ class Vendors extends \yii\db\ActiveRecord
             [['vendor_type', 'subtype', 'vendor_recommended_user_id', 'vendor_rating', 'created_by', 'updated_by'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['vendor_name'], 'string', 'max' => 100],
-            [['vendor_contact', 'vendor_email', 'vendor_area'], 'string', 'max' => 60],
+            [['vendor_contact', 'vendor_email'], 'string', 'max' => 60],
             [['vendor_phone'], 'string', 'max' => 30],
+            [['areas'], 'string'],            
         ];
     }
 
@@ -71,13 +72,13 @@ class Vendors extends \yii\db\ActiveRecord
             'vendor_contact' => 'Vendor Contact',
             'vendor_phone' => 'Vendor Phone',
             'vendor_email' => 'Vendor Email',
-            'vendor_area' => 'Vendor Area',
             'vendor_recommended_user_id' => 'Vendor Recommended User ID',
             'vendor_rating' => 'Vendor Rating',
             'created_at' => 'Created At',
             'created_by' => 'Created By',
             'updated_at' => 'Updated At',
             'updated_by' => 'Updated By',
+            'areas' => 'Areas',
         ];
     }
     

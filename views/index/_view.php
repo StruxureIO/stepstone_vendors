@@ -33,7 +33,8 @@ if($vendors) {
     
     $html .= '    <tr vendor-id="'.$vendor['id'].'">' . PHP_EOL; 
     $html .= '      <td>' . $vendor['vendor_name'] . '</td>' . PHP_EOL;
-    $html .= '      <td>' . $vendor['vendor_area'] . '</td>' . PHP_EOL;
+    //$html .= '      <td>' . $vendor['vendor_area'] . '</td>' . PHP_EOL;
+    $html .= '      <td></td>' . PHP_EOL;
     $html .= '      <td>' . $contact_info . '</td>' . PHP_EOL;
     $html .= '      <td>' . trim($vendor['firstname'] . ' ' . $vendor['lastname']) . '</td>' . PHP_EOL;
     $html .= '      <td>' . $vendor_rating . '</td>' . PHP_EOL;

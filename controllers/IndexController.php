@@ -48,7 +48,7 @@ class IndexController extends Controller {
     $user_id = \Yii::$app->user->identity->ID;
         
     if($search_text != '')
-      $search_condition = " vendor_name like '%$search_text%' or vendor_contact like '%$search_text%' or vendor_area like '%$search_text%' ";
+      $search_condition = " vendor_name like '%$search_text%' or vendor_contact like '%$search_text%' ";
         
     if(!empty($vendor_ids)) {
       $where = " WHERE v.vendor_type IN ($vendor_ids) ";

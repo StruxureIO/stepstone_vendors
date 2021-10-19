@@ -6,6 +6,7 @@ use humhub\modules\stepstone_vendors\helpers\VendorsEntry;
 
 <div class="panel-heading">
   <strong>Vendor</strong> Types
+  <input type="hidden" id="current-vendor-type" value="" >
 </div>
 
 <?php if($types) { ?>
@@ -14,7 +15,6 @@ use humhub\modules\stepstone_vendors\helpers\VendorsEntry;
       <div class="list-group-item">
         <!--<input id="ck-<?php echo $type->type_id ?>" type="checkbox" class="vendor-type pull-right" data-id="<?php echo $type->type_id ?>" > <label for="ck-<?php echo $type->type_id ?>"><?php echo $type->type_name ?></label>-->
         
-        <input type="hidden" id="current-vendor-type" value="" >
         <details>
           <summary><p><a class="vendor-list-type" data-id="<?php echo $type->type_id ?>"><?php echo $type->type_name ?></a></p></summary>
           <dl>

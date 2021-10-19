@@ -11,15 +11,15 @@ use yii\widgets\ActiveForm;
 <div class="type-search">
 
     <?php $form = ActiveForm::begin([
-        'action' => ['vendortypes'],
+        'action' => ['vendorareas'],
         'method' => 'get',
     ]); ?>
 
    
     <div class="form-group">
-        <input type="text" id="typesearch-type_name" class="form-control" name="TypesSearch[type_name]" style="display:inline-block;">      
+        <input type="text" id="areasearch-area_name" class="form-control" name="AreaSearch[area_name]" style="display:inline-block;">      
         <div id="vendors-admin-search-wraper">
-          <?= Html::submitButton('<i class="fa fa-search"></i>', ['id' => 'vendors-type-admin-search', 'class' => 'btn pull-right']) ?>
+          <?= Html::submitButton('<i class="fa fa-search"></i>', ['id' => 'vendors-area-admin-search', 'class' => 'btn pull-right']) ?>
           
         </div>  
     </div>
