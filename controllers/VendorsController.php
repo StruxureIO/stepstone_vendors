@@ -185,7 +185,7 @@ $where group by v.id order by t.type_name, vendor_name limit $offset, " . MAX_VE
   
   public function actionAdd($cguid) {
     
-    Yii::$app->cache->flush();
+    //Yii::$app->cache->flush();
         
     $this->subLayout = "@stepstone_vendors/views/layouts/default";    
     
