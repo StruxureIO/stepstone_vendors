@@ -168,7 +168,7 @@ class AdminController extends Controller
   
   public function actionAdd() {
     
-    Yii::$app->cache->flush();
+    //Yii::$app->cache->flush();
     
     $current_user_id = \Yii::$app->user->identity->ID;
         

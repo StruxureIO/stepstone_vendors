@@ -93,7 +93,7 @@ $where group by v.id order by t.type_name, vendor_name limit $offset, " . MAX_VE
   
   public function actionAdd() {
     
-    Yii::$app->cache->flush();
+    //Yii::$app->cache->flush();
     $current_user_id = \Yii::$app->user->identity->ID;
         
     $model = new \humhub\modules\stepstone_vendors\models\Vendors();
