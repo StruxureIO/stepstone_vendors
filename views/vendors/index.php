@@ -41,6 +41,7 @@ $container_guid = ($container) ? $container->guid : null;
           ?>
         </div>
         <input type="hidden" id="current-vendor-subtype" value="">
+        <input type="hidden" id="current-location" value="">
       </div>    
     </div>    
 
@@ -311,6 +312,8 @@ $this->registerJs("
   
     var vendor_id = $(this).attr('data-id');           
     
+    var location = $('#current-location').val();
+    
     $('#current-vendor-type').val(vendor_id);
     
     console.log('vendor_id', vendor_id);
@@ -321,15 +324,16 @@ $this->registerJs("
     
     $(this).addClass('selected-vendor');
     
-    load_vendors(0, vendor_id);
+    load_vendors(0, vendor_id, location);
   });
   
   $(document).on('click', '.vendor-subtype', function (e) {  
     e.stopImmediatePropagation();
-    var vendor_subtype = $(this).attr('data-id');           
+    var vendor_subtype = $(this).attr('data-id'); 
+    var location = $('#current-location').val();    
     console.log('vendor_subtype', vendor_subtype);
     $('#current-vendor-subtype').val(vendor_subtype);    
-    load_vendors_subtype(0, vendor_subtype, '');
+    load_vendors_subtype(0, vendor_subtype, location);
   });
   
   function load_vendors_subtype(page, vendor_subtype, location) {
@@ -361,6 +365,7 @@ $this->registerJs("
   $(document).on('click', '.area-filter', function (e) {  
     e.stopImmediatePropagation();
     var location = $(this).attr('data-id');    
+    $('#current-location').val(location);
     var vendor_subtype = $('#current-vendor-subtype').val();       
     var vendor_type = $('#current-vendor-type').val();
     
