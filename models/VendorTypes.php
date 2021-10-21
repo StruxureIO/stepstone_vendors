@@ -9,6 +9,7 @@ use Yii;
  *
  * @property int $type_id
  * @property string $type_name
+ * @property string icon
  */
 class VendorTypes extends \yii\db\ActiveRecord
 {
@@ -28,6 +29,7 @@ class VendorTypes extends \yii\db\ActiveRecord
         return [
             [['type_name'], 'required'],
             [['type_name'], 'string', 'max' => 60],
+            [['icon'], 'string', 'max' => 40],
         ];
     }
 
@@ -39,6 +41,7 @@ class VendorTypes extends \yii\db\ActiveRecord
         return [
             'type_id' => 'Type ID',
             'type_name' => 'Type Name',
+            'icon' => 'Icon',
         ];
     }
     

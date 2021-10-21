@@ -17,6 +17,7 @@ use humhub\modules\content\components\ContentContainerModule;
 use humhub\modules\space\models\Space;
 use humhub\modules\user\models\User;
 use humhub\modules\stepstone_vendors\models\VendorsContentContainer;
+use humhub\modules\stepstone_videos\widgets;
 
 class Module extends ContentContainerModule
 {
@@ -83,5 +84,14 @@ class Module extends ContentContainerModule
         }
         return [];
     }
+    
+    public static function onSidebarInit($event){
+      if (Yii::$app->hasModule('stepstone_vendors')) {
+
+        $event->sender->addWidget(widgets\Sidebar::className(), array(), array(
+            'sortOrder' => 100
+        ));
+      }
+    }    
     
 }

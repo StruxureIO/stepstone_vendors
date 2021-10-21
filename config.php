@@ -9,6 +9,7 @@ use humhub\modules\content\components\ContentActiveRecord;
 use humhub\modules\content\widgets\WallEntryAddons;
 use humhub\modules\content\widgets\WallEntryLinks;
 use humhub\modules\search\engine\Search;
+use humhub\modules\dashboard\widgets\Sidebar;
 
 return [
 	'id' => 'stepstone_vendors',
@@ -21,5 +22,6 @@ return [
 		['class' => AdminMenu::class, 'event' => AdminMenu::EVENT_INIT, 'callback' => [Events::class, 'onAdminMenuInit']],
     ['class' => Search::class, 'event' => Search::EVENT_SEARCH_ATTRIBUTES, 'callback' => [Events::class, 'onSearchAttributes']],
 	  ['class' => Search::class, 'event' => Search::EVENT_ON_REBUILD, 'callback' => [Events::class, 'onSearchRebuild']],
+    ['class' => Sidebar::class, 'event' => Sidebar::EVENT_INIT, 'callback' => [Events::class, 'addVendorDashboard']],      
 ],
 ];

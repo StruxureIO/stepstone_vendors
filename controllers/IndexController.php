@@ -77,7 +77,7 @@ LEFT JOIN profile as p on p.user_id = v.vendor_recommended_user_id
 LEFT JOIN vendors_ratings as r on r.vendor_id = v.id 
 $where group by v.id order by t.type_name, vendor_name limit $offset, " . MAX_VENDOR_ITEMS);
           
-    //$sql = $command->sql;
+    $sql = $command->sql;
     
     $vendors = $command->queryAll();   
     
@@ -87,6 +87,7 @@ $where group by v.id order by t.type_name, vendor_name limit $offset, " . MAX_VE
       'user_id' => $user_id,
       'total_number_pages' => $total_number_pages,
       'search_text' => $search_text,
+      'sql' => $sql,  
     ]);   
     
   }

@@ -83,26 +83,26 @@ class VendorsController extends ContentContainerController {
     
   }
   
-  public function actionAjaxView() {
+  public function actionAjaxView($vendor_ids, $location, $page, $search_text) {
     
     //Yii::$app->cache->flush();
     
     $search_condition = '';
     
-    $req = Yii::$app->request;
-    
-    $search_text = trim($req->get('search_text', ''));
-    
-    $vendor_subtype = trim($req->get('vendor_subtype', ''));
-            
-    $page = $req->get('page', 0);
-
-    $location = $req->get('location', '');
+//    $req = Yii::$app->request;
+//    
+//    $search_text = trim($req->get('search_text', ''));
+//    
+//    $vendor_subtype = trim($req->get('vendor_subtype', ''));
+//            
+//    $page = $req->get('page', 0);
+//
+//    $location = $req->get('location', '');
     if(!is_numeric($location))
       $location = '';
-    
-    $vendor_ids = $req->get('vendor_ids', '');
-    
+//    
+//    $vendor_ids = $req->get('vendor_ids', '');
+        
     $vendor_ids = str_replace('"', '', $vendor_ids);    
     
     $user_id = \Yii::$app->user->identity->ID;
