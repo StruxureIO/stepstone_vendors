@@ -63,8 +63,10 @@ $this->registerJs("
     if(new_icon != '') {
       var start = new_icon.indexOf('\"');
       var end = new_icon.lastIndexOf('\"');
-      var icon_class = new_icon.substring(start+1, end);
-      $(this).val(icon_class);      
+      if(start != -1) {      
+        var icon_class = new_icon.substring(start+1, end);
+        $(this).val(icon_class);      
+      }
     }
     
   });
