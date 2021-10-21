@@ -141,12 +141,13 @@ class VendorsController extends ContentContainerController {
     
     //$command = $connection->createCommand("select count(id) from vendors as v $where");
     
+    // removed group by to prevent sql error when getting the total records found
     $command = $connection->createCommand("select count(id)   
 from vendors as v
 LEFT JOIN vendor_types as t on t.type_id = v.vendor_type 
 LEFT JOIN profile as p on p.user_id = v.vendor_recommended_user_id 
 LEFT JOIN vendor_area_list as l on l.vendor_id = v.id
-$where group by v.id");
+$where");
         
     $count = $command->queryOne();
         
