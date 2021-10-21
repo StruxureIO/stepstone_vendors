@@ -25,11 +25,15 @@ use humhub\modules\stepstone_vendors\models\VendorSubTypes;
             <thead>
               <tr>
                 <td class="tb-tag-name"><strong>Subtype Name</strong></td>
+                <td class="type-table-space">&nbsp;</td>
+                <td class="tb-tag-name"><strong>Icon</strong></td>
               </tr>
             </thead>
             <tbody>
               <tr data-id="<?php echo $model->type_id ?>">
                 <td class="tb-type-name"><input class="step-vender-type" name="VendorSubTypes[subtype_name]" type="text" value="<?php echo $model->subtype_name ?>"></td>                
+                <td class="type-table-space">&nbsp;</td>
+                <td class="tb-type-name"><input class="step-vender-icon" name="VendorSubTypes[icon]" type="text" value="<?php echo $model->icon ?>"></td>                
               </tr>                              
             </tbody>
           </table>
@@ -48,4 +52,22 @@ use humhub\modules\stepstone_vendors\models\VendorSubTypes;
     
   </div>
 </div>
-
+<?php
+$this->registerJs("
+  
+	$(document).on('change', '.step-vender-icon', function (e) {						
+    e.stopImmediatePropagation();    
+    var new_icon = $(this).val();
+    //console.log('icon',new_icon);
+    
+    if(new_icon != '') {
+      var start = new_icon.indexOf('\"');
+      var end = new_icon.lastIndexOf('\"');
+      var icon_class = new_icon.substring(start+1, end);
+      $(this).val(icon_class);      
+    }
+    
+  });
+  
+");
+?>

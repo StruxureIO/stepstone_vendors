@@ -431,3 +431,12 @@ ul#tag-list li {
   margin-left: 12px;
   padding: 0 12px;
 }
+
+.type-table-space {
+  width: 50px;
+}
+
+.step-vender-icon,
+.step-vender-type {
+  width: 200px;
+}
