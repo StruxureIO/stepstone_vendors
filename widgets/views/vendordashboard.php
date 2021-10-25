@@ -122,34 +122,3 @@ use yii\web\UrlManager;
       </ul>
     </div>
 </div>
-<?php
-//$ajax_location = yii\helpers\Url::to(['ajax-locaiion']);
-//$csrf_param = Yii::$app->request->csrfParam;
-//$csrf_token = Yii::$app->request->csrfToken;
-?>
-
-<!--<script>
-$(document).ready(function(){
-
-  $(document).on("change", "#vendor-locations", function () {	
-    var location = jQuery("select#vendor-locations option").filter(":selected").val();      
-    console.log('location',location);
-    
-    $.ajax({
-      'type' : 'GET',
-      'url' : '< ?php echo $ajax_location ?>',
-      'dataType' : 'html',
-      'data' : {
-        '< ?php echo $csrf_param ?>' : '< ?php echo $csrf_token ?>',
-        'location' : location
-      },
-      'success' : function(data){
-        console.log('data',data);
-      }
-    });
-    
-  });	
-
-});  
-</script>   -->
-

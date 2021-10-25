@@ -21,13 +21,21 @@ class VendorDashboard extends Widget
      */
     public function run() {
       
-      //$connection = Yii::$app->getDb();
       
-      //$command = $connection->createCommand("select * from vendor_areas order by area_id");
+      $current_user_id = \Yii::$app->user->identity->ID;
+
+      $connection = Yii::$app->getDb();
+      
+      $command = $connection->createCommand("select vendor_location from profile where user_id = $current_user_id");
       
       //$sql = $command->sql;
 
-      //$areas = $command->queryAll();   
+      $area = $command->queryAll();   
+      
+      if(isset($area[0]['vendor_location']) && $area[0]['vendor_location'] != null )
+        $location = $area[0]['vendor_location'];
+      else
+        $location = 1;
                   
       $connection = Yii::$app->getDb();
       
@@ -35,7 +43,7 @@ class VendorDashboard extends Widget
 LEFT JOIN vendor_types as t on t.type_id = v.vendor_type 
 LEFT JOIN vendor_sub_type as s on s.subtype_id = v.subtype  
 LEFT JOIN vendor_area_list as a on a.vendor_id = v.id 
-where area_id = 1 
+where area_id = $location
 order by created_at desc limit 0, 4");
 
       //$sql = $command->sql;
@@ -46,15 +54,6 @@ order by created_at desc limit 0, 4");
       //return $this->render('vendordashboard', ['vendors' => $vendors, 'areas' => $areas]);
       return $this->render('vendordashboard', ['vendors' => $vendors]);
     }
-    
-    
-    public function actionAjaxlocation($loction) {
-      
-      echo "Ajax";
-      
-      die();
-
-    }
-    
+        
 }
 
