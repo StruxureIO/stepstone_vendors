@@ -22,7 +22,7 @@ use humhub\modules\stepstone_vendors\helpers\VendorsEntry;
             $subtypes = VendorsEntry::getSubTypes($type->type_id);                       
             if(count($subtypes) > 0) {
               foreach($subtypes as $subtype) { 
-                echo '<dt><span class="subtype-icon"><i class="' . $subtype['icon'] . ' fa-2x"></i></span> <a class="vendor-subtype" data-id="' . $subtype['subtype_id'] . '">' . $subtype['subtype_name'] . '</a></dt>';              
+                echo '<dt><span class="subtype-icon"><i class="' . $subtype['icon'] . '"></i></span> <a class="vendor-subtype" data-id="' . $subtype['subtype_id'] . '">' . $subtype['subtype_name'] . '</a></dt>';              
               }           
             }
           ?>
