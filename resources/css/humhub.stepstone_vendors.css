@@ -130,7 +130,7 @@ table#vendor-subtypes {
 }
 
 div.list-group-item details dl dt {
-  padding-left: 20px;
+  padding: 5px 0 5px 20px;
   font-weight: normal;
 }
 
@@ -439,4 +439,9 @@ ul#tag-list li {
 .step-vender-icon,
 .step-vender-type {
   width: 200px;
+}
+
+.subtype-icon {
+  width: 20px;
+  display: inline-block;
 }

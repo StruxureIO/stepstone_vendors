@@ -136,111 +136,6 @@ $this->registerJs("
     });
   }
   
-//	$(document).on('change', '.vendor-type', function (e) {						
-//    e.stopImmediatePropagation();    
-//    $('#vendors-search-text').val('');
-//    load_all_vendors(0);
-//  });
-  
-//  $(document).on('click', '.vendor-rate-1', function (e) {  
-//    e.stopImmediatePropagation();
-//    var user_id = $(this).parent().attr('user-id');      
-//    var vendor_id = $(this).parent().attr('data-id');      
-//    //console.log('vendor_id',vendor_id,'user_id',user_id);
-//    if($(this).hasClass('checked')) {
-//      $(this).removeClass('checked');
-//      $(this).siblings('.vendor-rate-2').removeClass('checked');        
-//      $(this).siblings('.vendor-rate-3').removeClass('checked');        
-//      $(this).siblings('.vendor-rate-4').removeClass('checked');        
-//      $(this).siblings('.vendor-rate-5').removeClass('checked');        
-//      update_user_rating(0, vendor_id, user_id);
-//    } else {
-//      $(this).addClass('checked');
-//      $(this).siblings('.vendor-rate-2').removeClass('checked');        
-//      $(this).siblings('.vendor-rate-3').removeClass('checked');        
-//      $(this).siblings('.vendor-rate-4').removeClass('checked');        
-//      $(this).siblings('.vendor-rate-5').removeClass('checked');        
-//      update_user_rating(1, vendor_id, user_id);
-//    }  
-//  });
-//  
-//  $(document).on('click', '.vendor-rate-2', function (e) {  
-//    e.stopImmediatePropagation();
-//    var user_id = $(this).parent().attr('user-id');      
-//    var vendor_id = $(this).parent().attr('data-id');      
-//    //console.log('vendor_id',vendor_id,'user_id',user_id);
-//    if($(this).hasClass('checked')) {
-//      $(this).removeClass('checked');
-//      $(this).siblings('.vendor-rate-3').removeClass('checked');        
-//      $(this).siblings('.vendor-rate-4').removeClass('checked');        
-//      $(this).siblings('.vendor-rate-5').removeClass('checked');        
-//      update_user_rating(1, vendor_id, user_id);
-//    } else { 
-//      $(this).siblings('.vendor-rate-1').addClass('checked');  
-//      $(this).addClass('checked');  
-//      $(this).siblings('.vendor-rate-3').removeClass('checked');        
-//      $(this).siblings('.vendor-rate-4').removeClass('checked');        
-//      $(this).siblings('.vendor-rate-5').removeClass('checked');        
-//      update_user_rating(2, vendor_id, user_id);
-//    }  
-//  });
-//  
-//  $(document).on('click', '.vendor-rate-3', function (e) {  
-//    e.stopImmediatePropagation();
-//    var user_id = $(this).parent().attr('user-id');      
-//    var vendor_id = $(this).parent().attr('data-id');      
-//    //console.log('vendor_id',vendor_id,'user_id',user_id);
-//    if($(this).hasClass('checked')) {
-//      $(this).removeClass('checked');
-//      $(this).siblings('.vendor-rate-4').removeClass('checked');        
-//      $(this).siblings('.vendor-rate-5').removeClass('checked');        
-//      update_user_rating(2, vendor_id, user_id);
-//    } else { 
-//      $(this).siblings('.vendor-rate-1').addClass('checked');  
-//      $(this).siblings('.vendor-rate-2').addClass('checked');  
-//      $(this).addClass('checked');  
-//      $(this).siblings('.vendor-rate-4').removeClass('checked');        
-//      $(this).siblings('.vendor-rate-5').removeClass('checked');        
-//      update_user_rating(3, vendor_id, user_id);
-//    }  
-//  });
-//  
-//  $(document).on('click', '.vendor-rate-4', function (e) {  
-//    e.stopImmediatePropagation();
-//    var user_id = $(this).parent().attr('user-id');      
-//    var vendor_id = $(this).parent().attr('data-id');      
-//    //console.log('vendor_id',vendor_id,'user_id',user_id);
-//    if($(this).hasClass('checked')) {
-//      $(this).removeClass('checked');
-//      $(this).siblings('.vendor-rate-5').removeClass('checked');        
-//      update_user_rating(3, vendor_id, user_id);
-//    } else { 
-//      $(this).siblings('.vendor-rate-1').addClass('checked');  
-//      $(this).siblings('.vendor-rate-2').addClass('checked');  
-//      $(this).siblings('.vendor-rate-3').addClass('checked');  
-//      $(this).addClass('checked');  
-//      $(this).siblings('.vendor-rate-5').removeClass('checked');        
-//      update_user_rating(4, vendor_id, user_id);
-//    }  
-//  });
-//  
-//  $(document).on('click', '.vendor-rate-5', function (e) {  
-//    e.stopImmediatePropagation();
-//    var user_id = $(this).parent().attr('user-id');      
-//    var vendor_id = $(this).parent().attr('data-id');      
-//    //console.log('vendor_id',vendor_id,'user_id',user_id);
-//    if($(this).hasClass('checked')) {
-//      $(this).removeClass('checked');
-//      update_user_rating(4, vendor_id, user_id);
-//    } else { 
-//      $(this).siblings('.vendor-rate-1').addClass('checked');  
-//      $(this).siblings('.vendor-rate-2').addClass('checked');  
-//      $(this).siblings('.vendor-rate-3').addClass('checked');  
-//      $(this).siblings('.vendor-rate-4').addClass('checked');  
-//      $(this).addClass('checked');  
-//      update_user_rating(5, vendor_id, user_id);
-//    }  
-//  });
   
   function update_user_rating(user_rating, vendor_id, user_id) {
     
@@ -327,14 +222,14 @@ $this->registerJs("
     load_vendors(0, vendor_id, location);
   });
   
-  $(document).on('click', '.vendor-subtype', function (e) {  
-    e.stopImmediatePropagation();
-    var vendor_subtype = $(this).attr('data-id'); 
-    var location = $('#current-location').val();    
-    console.log('vendor_subtype', vendor_subtype);
-    $('#current-vendor-subtype').val(vendor_subtype);    
-    load_vendors_subtype(0, vendor_subtype, location);
-  });
+//  $(document).on('click', '.vendor-subtype', function (e) {  
+//    e.stopImmediatePropagation();
+//    var vendor_subtype = $(this).attr('data-id'); 
+//    var location = $('#current-location').val();    
+//    console.log('vendor_subtype', vendor_subtype);
+//    $('#current-vendor-subtype').val(vendor_subtype);    
+//    load_vendors_subtype(0, vendor_subtype, location);
+//  });
   
   function load_vendors_subtype(page, vendor_subtype, location) {
   
@@ -349,6 +244,7 @@ $this->registerJs("
       'data' : {
         'cguid' : '$container_guid',
         '$csrf_param' : '$csrf_token',
+        'search_text' : '',
         'vendor_ids' : vendor_ids,
         'vendor_subtype' : vendor_subtype,
         'location' : location,

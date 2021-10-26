@@ -164,7 +164,7 @@ LEFT JOIN profile as p on p.user_id = v.vendor_recommended_user_id
 LEFT JOIN vendor_area_list as l on l.vendor_id = v.id
 $where group by v.id order by t.type_name, vendor_name limit $offset, " . MAX_VENDOR_ITEMS);
           
-    //$sql = $command->sql;
+    $sql = $command->sql;
     
     //echo "<p>$sql</p>"; 
     
@@ -180,6 +180,7 @@ $where group by v.id order by t.type_name, vendor_name limit $offset, " . MAX_VE
       'total_number_pages' => $total_number_pages,
       'search_text' => $search_text,
       'count' => $count,
+      'sql' => $sql,
     ]);   
     
   }
