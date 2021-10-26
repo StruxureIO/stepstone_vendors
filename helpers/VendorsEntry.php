@@ -161,7 +161,7 @@ class VendorsEntry {
     $subtypes = array();
      
     $connection = Yii::$app->getDb();
-    $command = $connection->createCommand("select subtype_id, subtype_name from vendor_sub_type where type_id = $type_id order by subtype_name");
+    $command = $connection->createCommand("select subtype_id, subtype_name, icon from vendor_sub_type where type_id = $type_id order by subtype_name");
     $subtypes = $command->queryAll();   
          
     return $subtypes;

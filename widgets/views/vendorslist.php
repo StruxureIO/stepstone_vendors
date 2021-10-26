@@ -13,16 +13,16 @@ use humhub\modules\stepstone_vendors\helpers\VendorsEntry;
   <?php foreach($types as $type) { ?>
     <div class="list-group">
       <div class="list-group-item">
-        <!--<input id="ck-<?php echo $type->type_id ?>" type="checkbox" class="vendor-type pull-right" data-id="<?php echo $type->type_id ?>" > <label for="ck-<?php echo $type->type_id ?>"><?php echo $type->type_name ?></label>-->
+        <!--<input id="ck-< ?php echo $type->type_id ?>" type="checkbox" class="vendor-type pull-right" data-id="< ?php echo $type->type_id ?>" > <label for="ck-< ?php echo $type->type_id ?>">< ?php echo $type->type_name ?></label>-->
         
         <details>
-          <summary><p><a class="vendor-list-type" data-id="<?php echo $type->type_id ?>"><?php echo $type->type_name ?></a></p></summary>
+          <summary><p><a class="vendor-list-type" data-id="<?php echo $type->type_id ?>"><i class="<?php echo $type->icon ?> fa-2x"></i> <?php echo $type->type_name ?></a></p></summary>
           <dl>
           <?php
             $subtypes = VendorsEntry::getSubTypes($type->type_id);                       
             if(count($subtypes) > 0) {
               foreach($subtypes as $subtype) { 
-                echo '<dt><a class="vendor-subtype" data-id="' . $subtype['subtype_id'] . '">' . $subtype['subtype_name'] . '</a></dt>';              
+                echo '<dt><span class="subtype-icon"><i class="' . $subtype['icon'] . ' fa-2x"></i></span> <a class="vendor-subtype" data-id="' . $subtype['subtype_id'] . '">' . $subtype['subtype_name'] . '</a></dt>';              
               }           
             }
           ?>
