@@ -83,60 +83,50 @@ class VendorsController extends ContentContainerController {
     
   }
   
-  public function actionAjaxView($vendor_ids, $location, $page, $search_text) {
+  
+  public function actionAjaxView($vendor_type_id, $location, $page, $search_text, $vendor_subtype = '') {
     
     //Yii::$app->cache->flush();
     
     $search_condition = '';
+    $and = false;
+    $where = '';
     
-//    $req = Yii::$app->request;
-//    
-//    $search_text = trim($req->get('search_text', ''));
-//    
-//    $vendor_subtype = trim($req->get('vendor_subtype', ''));
-//            
-//    $page = $req->get('page', 0);
-//
-//    $location = $req->get('location', '');
     if(!is_numeric($location))
-      $location = '';
-//    
-//    $vendor_ids = $req->get('vendor_ids', '');
+      $location = '1';
         
-    $vendor_ids = str_replace('"', '', $vendor_ids);    
+    //$vendor_ids = str_replace('"', '', $vendor_ids);    
     
     $user_id = \Yii::$app->user->identity->ID;
     
-    if($location != '')
-      $search_location = " l.area_id = $location ";
-    else
-      $search_location = "";
-        
-    if($search_text != '')
-      $search_condition = " vendor_name like '%$search_text%' or vendor_contact like '%$search_text%' ";
+    if($location != '') {
+      $where = " WHERE l.area_id = $location ";
+      $and = true;
+    }  
     
-    if(!empty($vendor_subtype)) {
-        $where = " WHERE v.subtype = $vendor_subtype ";      
-    } else {        
-      if(!empty($vendor_ids)) {
-        $where = " WHERE v.vendor_type IN ($vendor_ids) ";
-        if($search_text != '')
-          $where .= " and ( $search_condition ) ";
-      } else {
-        if($search_text != '')
-          $where = " where $search_condition ";    
-        else
-          $where = "";    
+    if(!empty($vendor_type_id)) {
+      if($and)
+        $where .= " and v.vendor_type = $vendor_type_id ";
+      else {
+        $where .= " WHERE v.vendor_type = $vendor_type_id ";
+        $and = true;
+      }  
+    } else if(!empty($vendor_subtype)) {
+      if($and)
+        $where .= " and v.subtype = $vendor_subtype ";
+      else {
+        $where .= " WHERE v.subtype = $vendor_subtype ";      
+        $and = true;
       }  
     }
     
-    if($search_location != '') {
-      if($where != '')
-        $where .= " and ( $search_location ) ";
-      else 
-        $where .= " where $search_location ";
-    }
-       
+    if($search_text != '') {
+      if($and)
+        $where .= " and (vendor_name like '%$search_text%' or vendor_contact like '%$search_text%') ";
+      else
+        $where .= " WHERE vendor_name like '%$search_text%' or vendor_contact like '%$search_text%' ";
+    }    
+    
     $connection = Yii::$app->getDb();
     
     //$command = $connection->createCommand("select count(id) from vendors as v $where");
@@ -148,7 +138,9 @@ LEFT JOIN vendor_types as t on t.type_id = v.vendor_type
 LEFT JOIN profile as p on p.user_id = v.vendor_recommended_user_id 
 LEFT JOIN vendor_area_list as l on l.vendor_id = v.id
 $where");
-        
+    
+    //$sql = $command->sql;
+            
     $count = $command->queryOne();
         
     $offset = $page * MAX_VENDOR_ITEMS;
@@ -164,10 +156,8 @@ LEFT JOIN profile as p on p.user_id = v.vendor_recommended_user_id
 LEFT JOIN vendor_area_list as l on l.vendor_id = v.id
 $where group by v.id order by t.type_name, vendor_name limit $offset, " . MAX_VENDOR_ITEMS);
           
-    $sql = $command->sql;
-    
-    //echo "<p>$sql</p>"; 
-    
+    //$sql = $command->sql;
+        
     if($count > 0)
       $vendors = $command->queryAll();
     else  
@@ -180,11 +170,10 @@ $where group by v.id order by t.type_name, vendor_name limit $offset, " . MAX_VE
       'total_number_pages' => $total_number_pages,
       'search_text' => $search_text,
       'count' => $count,
-      'sql' => $sql,
     ]);   
     
   }
-  
+    
   public function actionAdd($cguid) {
     
     //Yii::$app->cache->flush();
@@ -243,39 +232,7 @@ $where group by v.id order by t.type_name, vendor_name limit $offset, " . MAX_VE
     ]);
         
   }
-  
-  
-//  public function actionAdd2($cguid) {
-//    
-//    //Yii::$app->cache->flush();
-//    $current_user_id = \Yii::$app->user->identity->ID;
-//        
-//    $model = new \humhub\modules\stepstone_vendors\models\VendorsContentContainer($this->contentContainer);
-//          
-//    $this->mTypes = new \humhub\modules\stepstone_vendors\models\VendorTypes();
-//    $types = ArrayHelper::map($this->mTypes::find()->all(),'type_id','type_name');
-//    
-//    $submit_url = $this->contentContainer->createUrl('/stepstone_vendors/vendors/add');    
-//
-//    if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->save()) {
-//      $model->vendorAdded();      
-//                  
-//      return $this->redirect(['vendors', 'cguid' => $cguid]);
-//      //return $this->htmlRedirect($this->contentContainer->createUrl('/stepstone_vendors/vendors'));
-//      //return $this->redirect(["videos/adminindex", 'cguid' => $cguid]);
-//    }
-//
-//    return $this->render('add', [
-//      'model' => $model, 
-//      'types' => $types,
-//      'user' => array(), 
-//      'current_user_id' => $current_user_id,
-//      //'cguid' => $cguid, 
-//      'submit_url' => $submit_url,
-//    ]);
-//        
-//  }
-  
+    
   public function actionAjaxRating() {
     
     $total_rating = 0;
