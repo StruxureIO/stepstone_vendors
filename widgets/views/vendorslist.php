@@ -16,7 +16,7 @@ use humhub\modules\stepstone_vendors\helpers\VendorsEntry;
         <!--<input id="ck-< ?php echo $type->type_id ?>" type="checkbox" class="vendor-type pull-right" data-id="< ?php echo $type->type_id ?>" > <label for="ck-< ?php echo $type->type_id ?>">< ?php echo $type->type_name ?></label>-->
         
         <details>
-          <summary class="vendor-list-type" data-id="<?php echo $type->type_id ?>"><i class="<?php echo $type->icon ?> fa-2x"></i> <?php echo $type->type_name ?></summary>
+          <summary class="vendor-list-type" data-id="<?php echo $type->type_id ?>"><i class="<?php echo $type->icon ?>"></i> <?php echo $type->type_name ?></summary>
           <dl>
           <?php
             $subtypes = VendorsEntry::getSubTypes($type->type_id);                       
