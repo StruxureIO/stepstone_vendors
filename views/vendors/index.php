@@ -36,12 +36,15 @@ $container_guid = ($container) ? $container->guid : null;
         <div id="location-filters">
           <?php 
             foreach($areas as $area) { 
-              echo "<a class='area-filter' data-id='{$area['area_id']}'>{$area['area_name']}</a>";
+              if($area['area_id'] == 1)
+                echo "<a class='area-filter selected-location' data-id='{$area['area_id']}'>{$area['area_name']}</a>";
+              else  
+                echo "<a class='area-filter' data-id='{$area['area_id']}'>{$area['area_name']}</a>";
             } 
           ?>
         </div>
         <input type="hidden" id="current-vendor-subtype" value="">
-        <input type="hidden" id="current-location" value="">
+        <input type="hidden" id="current-location" value="1">
       </div>    
     </div>    
 
@@ -69,14 +72,10 @@ $this->registerJs("
   
   load_all_vendors(0);
   
-  function load_vendors(page, vendor_id, location = '') {
+  function load_vendors(page, vendor_type_id, location = '') {
   
     $('#ajaxloader').show();
-    
-    var selected_vendors = new Array(vendor_id);
-    
-    var vendor_ids = JSON.stringify(selected_vendors.join());
-  
+      
     var search_text = '';
       
     $.ajax({
@@ -86,7 +85,7 @@ $this->registerJs("
       'data' : {
         'cguid' : '$container_guid',
         '$csrf_param' : '$csrf_token',
-        'vendor_ids' : vendor_ids,  
+        'vendor_type_id' : vendor_type_id,  
         'location' : location,
         'page' : page,
         'search_text' : search_text
@@ -123,7 +122,7 @@ $this->registerJs("
       'data' : {
         'cguid' : '$container_guid',
         '$csrf_param' : '$csrf_token',
-        'vendor_ids' : vendor_ids,  
+        'vendor_type_id' : '',  
         'location' : location,
         'page' : page,
         'search_text' : search_text
@@ -135,29 +134,7 @@ $this->registerJs("
       }
     });
   }
-  
-  
-  function update_user_rating(user_rating, vendor_id, user_id) {
     
-    $('#ajaxloader').show();
-    $.ajax({
-      'type' : 'GET',
-      'url' : '$ajax_rating',
-      'dataType' : 'html',
-      'data' : {
-        'cguid' : '$container_guid',
-        '$csrf_param' : '$csrf_token',
-        'user_rating' : user_rating,  
-        'vendor_id' : vendor_id,
-        'user_id' : user_id
-      },
-      'success' : function(data){
-        $('#ajaxloader').hide();
-      }
-    });
-
-  }
-  
   $(document).on('click', '#step-vendors-prev, #step-vendors-next', function (e) {  
     e.stopImmediatePropagation();
     var page = $(this).attr('data-page-id');       
@@ -183,6 +160,10 @@ $this->registerJs("
     var search_text = $('#vendors-search-text').val();
     console.log('search_text', search_text);
     
+    var location = $('#current-location').val();
+    var vendor_type_id = $('#current-vendor-type').val();
+    var vendor_subtype = $('#current-vendor-subtype').val();       
+    
     $('#ajaxloader').show();
     $.ajax({
       'type' : 'GET',
@@ -192,8 +173,9 @@ $this->registerJs("
         'cguid' : '$container_guid',
         '$csrf_param' : '$csrf_token',
         'search_text' : search_text,
-        'vendor_ids' : '',  
-        'location' : '',
+        'vendor_type_id' : vendor_type_id,  
+        'vendor_subtype' : vendor_subtype,
+        'location' : location,
         'page' : 0
       },
       'success' : function(data){
@@ -205,13 +187,15 @@ $this->registerJs("
   
   $(document).on('click', '.vendor-list-type', function (e) {  
   
-    var vendor_id = $(this).attr('data-id');           
+    var vendor_type_id = $(this).attr('data-id');           
     
     var location = $('#current-location').val();
     
-    $('#current-vendor-type').val(vendor_id);
+    $('#current-vendor-type').val(vendor_type_id);
     
-    console.log('vendor_id', vendor_id);
+    $('#current-vendor-subtype').val('');
+    
+    console.log('vendor_type_id', vendor_type_id);
     
     jQuery('a.vendor-list-type').each(function() {  
       $(this).removeClass('selected-vendor');
@@ -219,24 +203,24 @@ $this->registerJs("
     
     $(this).addClass('selected-vendor');
     
-    load_vendors(0, vendor_id, location);
+    load_vendors(0, vendor_type_id, location);
   });
   
-//  $(document).on('click', '.vendor-subtype', function (e) {  
-//    e.stopImmediatePropagation();
-//    var vendor_subtype = $(this).attr('data-id'); 
-//    var location = $('#current-location').val();    
-//    console.log('vendor_subtype', vendor_subtype);
-//    $('#current-vendor-subtype').val(vendor_subtype);    
-//    load_vendors_subtype(0, vendor_subtype, location);
-//  });
+  $(document).on('click', '.vendor-subtype', function (e) {  
+    e.stopImmediatePropagation();
+    
+    var vendor_subtype = $(this).attr('data-id'); 
+    var location = $('#current-location').val();    
+    console.log('vendor_subtype', vendor_subtype);
+    $('#current-vendor-subtype').val(vendor_subtype); 
+    $('#current-vendor-type').val('');
+    load_vendors_subtype(0, vendor_subtype, location);
+  });
   
   function load_vendors_subtype(page, vendor_subtype, location) {
   
     $('#ajaxloader').show();
-    
-    var vendor_ids = 0;
-    
+        
     $.ajax({
       'type' : 'GET',
       'url' : '$ajax_view',
@@ -245,7 +229,7 @@ $this->registerJs("
         'cguid' : '$container_guid',
         '$csrf_param' : '$csrf_token',
         'search_text' : '',
-        'vendor_ids' : vendor_ids,
+        'vendor_type_id' : '',
         'vendor_subtype' : vendor_subtype,
         'location' : location,
         'page' : page
@@ -260,16 +244,24 @@ $this->registerJs("
 
   $(document).on('click', '.area-filter', function (e) {  
     e.stopImmediatePropagation();
+
+    $('.area-filter').each(function() {  
+      $('.area-filter').removeClass('selected-location');            
+    });
+
+    $(this).addClass('selected-location');            
+
     var location = $(this).attr('data-id');    
     $('#current-location').val(location);
     var vendor_subtype = $('#current-vendor-subtype').val();       
     var vendor_type = $('#current-vendor-type').val();
     
     console.log('location ', location);
-    load_vendors(0, vendor_type, location);
-    //load_vendors_subtype(0, vendor_subtype, location);
+    if(vendor_subtype != '')
+      load_vendors_subtype(0, vendor_subtype, location)
+    else  
+      load_vendors(0, vendor_type, location);
   });
-
 
 ");
 ?>
