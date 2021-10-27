@@ -134,9 +134,15 @@ div.list-group-item details dl dt {
   font-weight: normal;
 }
 
-a.vendor-subtype,
-a.vendor-list-type {
+
+.vendor-subtype,
+summary.vendor-list-type {
   cursor: pointer;
+}
+
+summary.vendor-list-type {
+  font-size: 14px;
+  line-height: 15px;
 }
 
 div.container.vendor-layout {
@@ -415,7 +421,7 @@ ul#tag-list li {
   text-align: left;
 }
 
-.area-filter {
+a.area-filter {
   border: 1px solid #000;
   border-top-left-radius: 18px;
   border-bottom-left-radius: 18px;
@@ -430,6 +436,11 @@ ul#tag-list li {
   line-height: 32px;
   margin-left: 12px;
   padding: 0 12px;
+}
+
+a.area-filter.selected-location {
+  color: #fff;
+  background-color: #000;  
 }
 
 .type-table-space {
