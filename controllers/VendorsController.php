@@ -508,7 +508,8 @@ LEFT JOIN profile ON vendors_ratings.user_id = profile.user_id where vendor_id =
           $new_area->save();
         }
                         
-        return $this->redirect(['vendors/detail', 'cguid' => $cguid, 'id' => $id]);
+        //return $this->redirect(['vendors/detail', 'cguid' => $cguid, 'id' => $id]);
+        return $this->redirect(['vendors/rate-vendor?id=' . $model->id, 'cguid' => $cguid]);
         
       }
     }

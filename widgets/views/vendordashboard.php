@@ -59,6 +59,12 @@ use yii\web\UrlManager;
         margin-right: 20px;
       }
       
+      #user-profile-link {
+        font-size: 12px;
+        color: #78BE20;
+        margin-left: 10px;
+      }
+      
       
     </style>
 
@@ -67,7 +73,7 @@ use yii\web\UrlManager;
     <div style="clear:both;"></div>
 
     <div class="panel-heading">
-      <span id="vendor-dashboard-title"><strong>New Vendors</strong></span>
+      <span id="vendor-dashboard-title"><strong>New Vendors</strong></span> <a href="<?php echo Url::base() ?>/user/account/edit" id="user-profile-link">Change Location</a>
 <!--      <select id="vendor-locations">
         <option value="0">Filter by location</option>
         < ?php 
