@@ -9,7 +9,7 @@ use humhub\modules\content\helpers\ContentContainerHelper;
 $container = ContentContainerHelper::getCurrent();
 
 if($container != null)
-  $detail_url = $container->createUrl('/stepstone_vendors/vendors/detail');
+  $detail_url = $container->createUrl('/stepstone_vendors/vendors/rate-vendor');
 else 
   $detail_url = '';
 
@@ -69,7 +69,42 @@ if($vendors) {
   $html = '<p id="no-vendors-founds">No vendors found</p>';  
 }
 
-$data = array('html' => $html);
+if(isset($vendor)) {
+
+switch($title_text) {
+  case 'all-vendors':
+    $title = 'All Vendors';
+    break;
+  
+  case 'area-search':
+    $area_name = VendorsEntry::getAreaName($vendor['area_id']);
+    $title = "All $area_name Vendors";
+    break;
+  
+  case 'type-search':
+    $title = "All " . $vendor['type_name'];
+    break;
+
+  case 'subtype-search':
+    $title = "All " . $vendor['subtype_name'];
+    break;
+  
+  case 'area-type-search':
+    $area_name = VendorsEntry::getAreaName($vendor['area_id']);
+    $title = "All $area_name " . $vendor['type_name'];
+    break;
+  
+  case 'area-subtype-search':
+    $area_name = VendorsEntry::getAreaName($vendor['area_id']);
+    $title = "All $area_name " . $vendor['subtype_name'];
+    break;
+}
+
+} else {
+  $title = '';
+}
+
+$data = array('html' => $html, 'title' => $title );
 echo json_encode($data);
 
 die();

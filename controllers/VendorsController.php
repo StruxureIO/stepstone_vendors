@@ -88,7 +88,11 @@ class VendorsController extends ContentContainerController {
     
     //Yii::$app->cache->flush();
     
-    $search_condition = '';
+    $location_search = false;
+    $type_search = false;
+    $subtype_search = false;
+    $text_search = false;
+    $title_text = '';
     $and = false;
     $where = '';
     
@@ -102,6 +106,7 @@ class VendorsController extends ContentContainerController {
     if($location != '') {
       $where = " WHERE l.area_id = $location ";
       $and = true;
+      $location_search = true;
     }  
     
     if(!empty($vendor_type_id)) {
@@ -111,6 +116,7 @@ class VendorsController extends ContentContainerController {
         $where .= " WHERE v.vendor_type = $vendor_type_id ";
         $and = true;
       }  
+      $type_search = true;
     } else if(!empty($vendor_subtype)) {
       if($and)
         $where .= " and v.subtype = $vendor_subtype ";
@@ -118,6 +124,7 @@ class VendorsController extends ContentContainerController {
         $where .= " WHERE v.subtype = $vendor_subtype ";      
         $and = true;
       }  
+      $subtype_search = true;
     }
     
     if($search_text != '') {
@@ -125,6 +132,7 @@ class VendorsController extends ContentContainerController {
         $where .= " and (vendor_name like '%$search_text%' or vendor_contact like '%$search_text%') ";
       else
         $where .= " WHERE vendor_name like '%$search_text%' or vendor_contact like '%$search_text%' ";
+      $text_search = true;
     }    
     
     $connection = Yii::$app->getDb();
@@ -137,6 +145,7 @@ from vendors as v
 LEFT JOIN vendor_types as t on t.type_id = v.vendor_type 
 LEFT JOIN profile as p on p.user_id = v.vendor_recommended_user_id 
 LEFT JOIN vendor_area_list as l on l.vendor_id = v.id
+LEFT JOIN vendor_sub_type as s on s.subtype_id = v.subtype
 $where");
     
     //$sql = $command->sql;
@@ -149,11 +158,12 @@ $where");
     else
       $total_number_pages = 0;
         
-    $command = $connection->createCommand("select v.*, t.type_name, p.firstname, p.lastname  
+    $command = $connection->createCommand("select v.*, t.type_name, s.subtype_name, l.area_id, p.firstname, p.lastname  
 from vendors as v
 LEFT JOIN vendor_types as t on t.type_id = v.vendor_type 
 LEFT JOIN profile as p on p.user_id = v.vendor_recommended_user_id 
 LEFT JOIN vendor_area_list as l on l.vendor_id = v.id
+LEFT JOIN vendor_sub_type as s on s.subtype_id = v.subtype
 $where group by v.id order by t.type_name, vendor_name limit $offset, " . MAX_VENDOR_ITEMS);
           
     //$sql = $command->sql;
@@ -163,6 +173,20 @@ $where group by v.id order by t.type_name, vendor_name limit $offset, " . MAX_VE
     else  
       $vendors = null;
     
+    
+    if($location_search && $location != 1 && $subtype_search)
+      $title_text = 'area-subtype-search';
+    else if($location_search && $location != 1 && $type_search)
+      $title_text = 'area-type-search';
+    else if($subtype_search)
+      $title_text = 'subtype-search';
+    else if($type_search)
+      $title_text = 'type-search';
+    else if($location_search && $location != 1)
+      $title_text = 'area-search';
+    else if($location_search && $location == 1)
+      $title_text = 'all-vendors';
+
     return $this->renderPartial('_view', [
       'vendors' => $vendors,
       'page' => $page,
@@ -170,6 +194,7 @@ $where group by v.id order by t.type_name, vendor_name limit $offset, " . MAX_VE
       'total_number_pages' => $total_number_pages,
       'search_text' => $search_text,
       'count' => $count,
+      'title_text' => $title_text,
     ]);   
     
   }
@@ -217,7 +242,8 @@ $where group by v.id order by t.type_name, vendor_name limit $offset, " . MAX_VE
                 
         //$model->vendorAdded();      
                  
-        return $this->redirect(['vendors/index', 'cguid' => $cguid]);
+        //return $this->redirect(['vendors/index', 'cguid' => $cguid]);
+        return $this->redirect(['vendors/rate-vendor?id=' . $model->id, 'cguid' => $cguid]);
       }
     }
 
@@ -453,10 +479,14 @@ LEFT JOIN profile ON vendors_ratings.user_id = profile.user_id where vendor_id =
     $this->mTypes = new \humhub\modules\stepstone_vendors\models\VendorTypes();
     $this->mUsers = new \humhub\modules\user\models\User();
     $this->mSubtypes = new \humhub\modules\stepstone_vendors\models\VendorSubTypes();
+    $this->mAreas = new \humhub\modules\stepstone_vendors\models\VendorAreas();
+    $this->mAreaList = new \humhub\modules\stepstone_vendors\models\VendorAreaList();
 
     $model = $this->mVendors::find()->where(['id' => $id])->one();      
     
     $types = ArrayHelper::map($this->mTypes::find()->all(),'type_id','type_name');
+    
+    $areas = $this->mAreas::find()->all();                  
     
     $subtypes = ArrayHelper::map($this->mSubtypes::find()->where(['type_id' => $model->vendor_type])->all(), 'subtype_id', 'subtype_name');   
     
@@ -469,6 +499,15 @@ LEFT JOIN profile ON vendors_ratings.user_id = profile.user_id where vendor_id =
                         
       if($model->validate() && $model->save()) {
         
+        $this->mAreaList::deleteAll(['vendor_id' => $model->id]);
+        $selected_areas = explode(',', $model->areas);      
+        foreach($selected_areas as $area) {
+          $new_area = new \humhub\modules\stepstone_vendors\models\VendorAreaList();
+          $new_area->vendor_id = $model->id;
+          $new_area->area_id = $area;
+          $new_area->save();
+        }
+                        
         return $this->redirect(['vendors/detail', 'cguid' => $cguid, 'id' => $id]);
         
       }
@@ -477,6 +516,7 @@ LEFT JOIN profile ON vendors_ratings.user_id = profile.user_id where vendor_id =
     return $this->render('update', [
       'model' => $model,
       'types' => $types,
+      'areas' => $areas,
       'user' => $user, 
       'subtypes' => $subtypes,
       'current_user_id' => $current_user_id,
