@@ -221,22 +221,24 @@ class VendorsEntry {
     <?php    
   }
   
-  public static function vendorMenu($id, $detail_url, $vendor_rate_url, $vendor_url, $edit_vendor_url) {
+  public static function vendorMenu($id, $detail_url, $vendor_rate_url, $vendor_url, $edit_vendor_url, $vendor_recommended_user_id) {
     
     if (\Yii::$app->urlManager->enablePrettyUrl) 
       $id_param = "?id=";
     else
       $id_param = "&id=";
-      
+    
+    $current_user_id = \Yii::$app->user->identity->ID;
+    
     ?>
       <div id="vendor-menu">
         <p><strong>Vendor Menu</strong></p>
         <ul id="vendor-menu-list">
-          <li><a href="<?php echo $detail_url . $id_param . $id ?>"><i class="fas fa-list"></i></i> Stream</a></li>
+          <!--<li><a href="< ?php echo $detail_url . $id_param . $id ?>"><i class="fas fa-list"></i></i> Stream</a></li>-->
           <li><a href="<?php echo $vendor_rate_url . $id_param . $id ?>"><i class="fas fa-star-half-alt"></i> Ratings</a></li>
-          <?php if(Yii::$app->user->isAdmin()) { ?>
+          <?php if($vendor_recommended_user_id == $current_user_id) { ?> 
             <li><a href="<?php echo $edit_vendor_url . $id_param . $id ?>"><i class="fas fa-edit"></i> Edit Vendor</a></li>
-          <?php } ?>
+          <?php } ?>  
           <li><a href="<?php echo $vendor_url ?>"><i class="far fa-address-book"></i> Vendors</a></li>
         </ul>        
       </div>  
@@ -291,6 +293,20 @@ class VendorsEntry {
     
     return $vendor_areas;
   }
+  
+  public static function getAreaName($area_id) {
+    
+    $connection = Yii::$app->getDb();
+    $command = $connection->createCommand("Select area_name from vendor_areas where area_id = $area_id");    
+    $area = $command->queryOne();
+    
+    if(isset($area['area_name']))
+      return $area['area_name'];
+    else
+      return '';
+    
+  }
+  
     
 }
 

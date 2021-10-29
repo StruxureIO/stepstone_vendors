@@ -12,7 +12,7 @@ if($container != null) {
   $detail_url = $container->createUrl('/stepstone_vendors/vendors/detail');
   $vendor_rate_url = $container->createUrl('/stepstone_vendors/vendors/rate-vendor');
   $vendor_url = $container->createUrl('/stepstone_vendors/vendors');
-  $edit_vendor_url = $container->createUrl('/stepstone_vendors/admin/update');  
+  $edit_vendor_url = $container->createUrl('/stepstone_vendors/vendors/update');  
 } else {
   $detail_url = '';
   $vendor_rate_url = '';
@@ -56,7 +56,7 @@ $user_id = \Yii::$app->user->identity->ID;
   <div class="row">
     
     <div class="col-md-2"> 
-      <?php VendorsEntry::vendorMenu($vendor->id, $detail_url, $vendor_rate_url, $vendor_url, $edit_vendor_url) ?>
+      <?php VendorsEntry::vendorMenu($vendor->id, $detail_url, $vendor_rate_url, $vendor_url, $edit_vendor_url, $vendor->vendor_recommended_user_id) ?>
     </div>
     
     <div class="col-md-8"> 
