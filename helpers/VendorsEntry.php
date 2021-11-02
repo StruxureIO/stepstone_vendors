@@ -234,7 +234,7 @@ class VendorsEntry {
       <div id="vendor-menu">
         <p><strong>Vendor Menu</strong></p>
         <ul id="vendor-menu-list">
-          <!--<li><a href="< ?php echo $detail_url . $id_param . $id ?>"><i class="fas fa-list"></i></i> Stream</a></li>-->
+          <li><a href="<?php echo $detail_url . $id_param . $id ?>"><i class="fas fa-list"></i></i> Stream</a></li>
           <li><a href="<?php echo $vendor_rate_url . $id_param . $id ?>"><i class="fas fa-star-half-alt"></i> Ratings</a></li>
           <?php if($vendor_recommended_user_id == $current_user_id) { ?> 
             <li><a href="<?php echo $edit_vendor_url . $id_param . $id ?>"><i class="fas fa-edit"></i> Edit Vendor</a></li>
