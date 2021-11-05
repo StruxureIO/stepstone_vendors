@@ -6,7 +6,7 @@ use humhub\modules\stepstone_vendors\widgets\VendorsWidget;
 <div class="container">
     <div class="row">
       
-      <div class="col-md-3"> <!--menu column-->
+      <div class="col-md-2"> <!--menu column-->
         <div class="panel panel-default left-navigation">
           
            <?= VendorsWidget::widget(); ?> 
@@ -14,7 +14,7 @@ use humhub\modules\stepstone_vendors\widgets\VendorsWidget;
         </div>  
       </div>  
       
-    <div class="col-md-9 videos-inner-row">
+    <div class="col-md-10">
       
       <?= $content ?>
       

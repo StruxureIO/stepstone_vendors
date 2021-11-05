@@ -5,7 +5,7 @@ use humhub\modules\stepstone_vendors\helpers\VendorsEntry;
 ?>
 
 <div class="panel-heading">
-  <strong>Vendor</strong> Types
+  <strong>Vendor</strong> types
   <input type="hidden" id="current-vendor-type" value="" >
 </div>
 
@@ -38,10 +38,10 @@ use humhub\modules\stepstone_vendors\helpers\VendorsEntry;
 <?php if(!empty($container_guid)) { ?>
 <hr>
 
-  <p id="vendor-button-row">
+  <div id="vendor-button-row">
     <!--<a class="btn btn-default" href="< ?php echo Url::base() ? >/index.php?r=stepstone_vendors%2Fvendors%2Fadd&cguid=<?php echo $container_guid ?>">Add Vendor</a>-->
     <a class="btn btn-default" href="<?php echo $add_url ?>">Add Vendor</a>
         
-  </p>
+</div>
 <?php } ?>
 
