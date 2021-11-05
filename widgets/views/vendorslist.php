@@ -17,16 +17,18 @@ use humhub\modules\stepstone_vendors\helpers\VendorsEntry;
         
         <details>
           <summary class="vendor-list-type" data-id="<?php echo $type->type_id ?>"><i class="<?php echo $type->icon ?>"></i> <?php echo $type->type_name ?></summary>
-          <dl>
           <?php
             $subtypes = VendorsEntry::getSubTypes($type->type_id);                       
             if(count($subtypes) > 0) {
+              echo '<dl>';
+
               foreach($subtypes as $subtype) { 
                 echo '<dt><span class="subtype-icon"><i class="' . $subtype['icon'] . '"></i></span> <span class="vendor-subtype" data-id="' . $subtype['subtype_id'] . '">' . $subtype['subtype_name'] . '</span></dt>';              
               }           
             }
+            echo '</dl>';
           ?>
-         </dl>
+         
         </details>        
                 
       </a>
