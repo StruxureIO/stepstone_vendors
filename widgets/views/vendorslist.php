@@ -12,7 +12,7 @@ use humhub\modules\stepstone_vendors\helpers\VendorsEntry;
 <?php if($types) { ?>
   <?php foreach($types as $type) { ?>
     <div class="list-group">
-      <div class="list-group-item">
+      <a class="list-group-item">
         <!--<input id="ck-< ?php echo $type->type_id ?>" type="checkbox" class="vendor-type pull-right" data-id="< ?php echo $type->type_id ?>" > <label for="ck-< ?php echo $type->type_id ?>">< ?php echo $type->type_name ?></label>-->
         
         <details>
@@ -29,7 +29,7 @@ use humhub\modules\stepstone_vendors\helpers\VendorsEntry;
          </dl>
         </details>        
                 
-      </div>
+      </a>
     </div>       
   <?php } ?>
 <?php } ?>
