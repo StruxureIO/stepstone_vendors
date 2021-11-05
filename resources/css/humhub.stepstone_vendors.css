@@ -3,9 +3,6 @@ textarea:focus, input:focus{
   outline: none;
 }
 
-div.panel.panel-default {
-  padding: 10px;
-}
 
 #vendors-admin-search-wraper {
   position: relative;
@@ -138,11 +135,6 @@ div.list-group-item details dl dt {
 .vendor-subtype,
 summary.vendor-list-type {
   cursor: pointer;
-}
-
-summary.vendor-list-type {
-  font-size: 14px;
-  line-height: 15px;
 }
 
 div.container.vendor-layout {
