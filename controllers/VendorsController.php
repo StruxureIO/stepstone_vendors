@@ -203,7 +203,7 @@ $where group by v.id order by t.type_name, vendor_name limit $offset, " . MAX_VE
 
         $current_user_id = \Yii::$app->user->identity->ID;
 
-        //$model = new \humhub\modules\stepstone_vendors\models\VendorsContentContainer();
+
         $model = new \humhub\modules\stepstone_vendors\models\VendorsContentContainer($this->contentContainer);
         $this->mTypes = new \humhub\modules\stepstone_vendors\models\VendorTypes();
         $types = ArrayHelper::map($this->mTypes::find()->all(), 'type_id', 'type_name');
@@ -239,7 +239,7 @@ $where group by v.id order by t.type_name, vendor_name limit $offset, " . MAX_VE
                 //$model->vendorAdded();
 
                 //return $this->redirect(['vendors/index', 'cguid' => $cguid]);
-                return $this->redirect(['vendors/rate-vendor?id=' . $model->id, 'cguid' => $cguid]);
+                return $this->redirect(['vendors/detail?id=' . $model->id, 'cguid' => $cguid]);
             }
         }
 
@@ -292,7 +292,7 @@ $where group by v.id order by t.type_name, vendor_name limit $offset, " . MAX_VE
         if ($rating) {
             $total_rating = intval(ceil($rating[0]['vendor_rating']));
 
-            $mVendors = new \humhub\modules\stepstone_vendors\models\VendorsContentContainer();
+            $mVendors = new \humhub\modules\stepstone_vendors\models\VendorsContentContainer($this->contentContainer);
             $vendors = $mVendors::find()->where(['id' => $vendor_id])->one();
 
             if ($vendors) {
@@ -343,7 +343,7 @@ $where group by v.id order by t.type_name, vendor_name limit $offset, " . MAX_VE
 
         $this->subLayout = "@stepstone_vendors/views/layouts/detail-view";
 
-        $mVendors = new \humhub\modules\stepstone_vendors\models\VendorsContentContainer();
+        $mVendors = new \humhub\modules\stepstone_vendors\models\VendorsContentContainer($this->contentContainer);
         $vendor = $mVendors::find()->where(['id' => $id])->one();
 
         $mSubtypes = new \humhub\modules\stepstone_vendors\models\VendorSubTypes();
@@ -390,7 +390,7 @@ LEFT JOIN profile ON vendors_ratings.user_id = profile.user_id where vendor_id =
 
         $user_id = \Yii::$app->user->identity->ID;
 
-        $mVendors = new \humhub\modules\stepstone_vendors\models\VendorsContentContainer();
+        $mVendors = new \humhub\modules\stepstone_vendors\models\VendorsContentContainer($this->contentContainer);
         $vendor = $mVendors::find()->where(['id' => $id])->one();
 
         $mSubtypes = new \humhub\modules\stepstone_vendors\models\VendorSubTypes();
@@ -460,7 +460,7 @@ LEFT JOIN profile ON vendors_ratings.user_id = profile.user_id where vendor_id =
         if ($rating) {
             $total_rating = intval(ceil($rating[0]['vendor_rating']));
 
-            $mVendors = new \humhub\modules\stepstone_vendors\models\VendorsContentContainer();
+            $mVendors = new \humhub\modules\stepstone_vendors\models\VendorsContentContainer($this->contentContainer);
             $vendors = $mVendors::find()->where(['id' => $vendor_id])->one();
 
             if ($vendors) {
@@ -482,7 +482,8 @@ LEFT JOIN profile ON vendors_ratings.user_id = profile.user_id where vendor_id =
 
         $current_user_id = \Yii::$app->user->identity->ID;
 
-        $this->mVendors = new \humhub\modules\stepstone_vendors\models\Vendors();
+        //$this->mVendors = new \humhub\modules\stepstone_vendors\models\Vendors();
+        $this->mVendors = new \humhub\modules\stepstone_vendors\models\VendorsContentContainer($this->contentContainer);
         $this->mTypes = new \humhub\modules\stepstone_vendors\models\VendorTypes();
         $this->mUsers = new \humhub\modules\user\models\User();
         $this->mSubtypes = new \humhub\modules\stepstone_vendors\models\VendorSubTypes();
@@ -515,8 +516,8 @@ LEFT JOIN profile ON vendors_ratings.user_id = profile.user_id where vendor_id =
                     $new_area->save();
                 }
 
-                //return $this->redirect(['vendors/detail', 'cguid' => $cguid, 'id' => $id]);
-                return $this->redirect(['vendors/rate-vendor?id=' . $model->id, 'cguid' => $cguid]);
+                return $this->redirect(['vendors/detail', 'cguid' => $cguid, 'id' => $id]);
+                //return $this->redirect(['vendors/rate-vendor?id=' . $model->id, 'cguid' => $cguid]);
 
             }
         }
