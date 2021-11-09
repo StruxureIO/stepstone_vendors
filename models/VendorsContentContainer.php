@@ -27,6 +27,7 @@ use Yii;
 use yii\db\ActiveQuery;
 use yii\helpers\Url;
 use yii\helpers\VarDumper;
+use humhub\modules\content\helpers\ContentContainerHelper;
 
 //use humhub\modules\content\widgets\richtext\RichText;
 //use humhub\modules\content\components\behaviors\CompatModuleManager;
@@ -181,14 +182,18 @@ class VendorsContentContainer extends ContentActiveRecord implements Searchable
 
     public function afterSave($insert, $changedAttributes)
     {
-        $users = $this->findSpaceMembers($this->content->contentcontainer_id);
+        
+        if($this->content->contentcontainer_id != null) {
+                   
+          $users = $this->findSpaceMembers($this->content->contentcontainer_id);
 
-        //Sending notification
-        if (!empty($users)) {
-            $notification = VendorAdded::instance()
-                ->from($this->createdBy)
-                ->about($this);
-            $notification->sendBulk($users);
+          //Sending notification
+          if (!empty($users)) {
+              $notification = VendorAdded::instance()
+                  ->from($this->createdBy)
+                  ->about($this);
+              $notification->sendBulk($users);
+          }
         }
 
         $this->vendorAdded();
