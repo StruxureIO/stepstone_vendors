@@ -11,7 +11,6 @@ $container_guid = ($container) ? $container->guid : null;
 
 ?>
 
-<div class="container-fluid">
 
   <div class="panel panel-default">
 
@@ -61,7 +60,6 @@ $container_guid = ($container) ? $container->guid : null;
 
   </div>
 
-</div>
 <?php
 $ajax_rating = yii\helpers\Url::to(['ajax-rating']);
 $ajax_view = yii\helpers\Url::to(['ajax-view']);

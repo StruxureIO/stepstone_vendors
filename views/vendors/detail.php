@@ -30,7 +30,6 @@ if ($container != null) {
 
 ?>
 
-<div class="container-fluid">
 
     <div class="panel panel-default">
 
@@ -74,4 +73,3 @@ if ($container != null) {
 
     </div>
 
-</div>

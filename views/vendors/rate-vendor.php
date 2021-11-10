@@ -41,7 +41,6 @@ $user_id = \Yii::$app->user->identity->ID;
 
 ?>
 
-<div class="container-fluid">
 
   <div class="panel panel-default">
         
@@ -132,7 +131,6 @@ $user_id = \Yii::$app->user->identity->ID;
   
   
     
-</div>    
 <?php
 $ajax_rating = yii\helpers\Url::to(['ajax-rating']);
 $ajax_review = yii\helpers\Url::to(['ajax-review']);

@@ -7,7 +7,6 @@ Assets::register($this);
 
 ?>
 
-<div class="container-fluid">
 
   <div class="panel panel-default">
     
@@ -36,7 +35,6 @@ Assets::register($this);
         
   </div>
 
-</div>
 <?php
 $ajax_rating = yii\helpers\Url::to(['ajax-rating']);
 $ajax_view = yii\helpers\Url::to(['ajax-view']);
