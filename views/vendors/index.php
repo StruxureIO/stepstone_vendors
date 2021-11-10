@@ -30,8 +30,7 @@ $container_guid = ($container) ? $container->guid : null;
       <div class="col-md-3"></div>
     </div>
 
-    <div class="row">
-      <div class="col-md-12">
+    <div class="row text-center">
         <div id="location-filters">
           <?php
             foreach($areas as $area) {
@@ -44,7 +43,6 @@ $container_guid = ($container) ? $container->guid : null;
         </div>
         <input type="hidden" id="current-vendor-subtype" value="">
         <input type="hidden" id="current-location" value="1">
-      </div>
     </div>
 
 

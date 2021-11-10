@@ -52,6 +52,7 @@ textarea:focus, input:focus{
 
 .vendor-heading {
   font-size: 14px;
+  font-weight: 600;
 }
 
 table#vendors-table tbody tr {
@@ -63,13 +64,19 @@ table#vendors-table tbody tr {
 }
 
 #vendors-table tr {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #ededed;
 }
 
 #vendors-table td {
   padding: 20px 10px;
   width: 20%;
 }
+
+#vendors-table td a {
+  font-size: 16px;  
+  font-weight: 600;
+}
+
 
 table#vendors-table a:not(.checked) span.fa.fa-star {
   color: #ccc;
@@ -405,30 +412,33 @@ ul#tag-list li {
 }
 
 #location-filters {
-  height: 33px;
-  margin: 14px 40px 2px; 
-  text-align: left;
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 18px;
+  height: 40px;
+  line-height: 38px;
+  margin-right:15px;
+  margin-left:15px;
 }
 
 a.area-filter {
-  border: 1px solid #000;
-  border-top-left-radius: 18px;
-  border-bottom-left-radius: 18px;
-  border-top-right-radius: 18px;
-  border-bottom-right-radius: 18px;
+  color: #003450;
   cursor: pointer;
-  display: inline-block;  
-  font-size: 16px;
-  font-weight: 400;
-  height: 33px;
-  line-height: 32px;
-  margin-left: 12px;
-  padding: 0 12px;
+  border: 1px solid #003450;
+  border-radius: 20px;
+  font-size: 12px;
+  margin-right: 12px;
+  padding: 8px 14px;
+  white-space: nowrap;
+}
+
+a.area-filter:hover {
+  background-color: #f7f7f7;
 }
 
 a.area-filter.selected-location {
-  color: #fff;
-  background-color: #000;  
+  background-color: #003450;
+  color:#f7f7f7;
 }
 
 .type-table-space {
@@ -455,3 +465,5 @@ div.vendor_type {
   box-shadow: 0 0 0;
   -webkit-box-shadow: 0 0 0;
 }
+
+
