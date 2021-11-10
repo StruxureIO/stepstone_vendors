@@ -13,9 +13,8 @@ class VendorsEntry {
     $html = '  <thead>' . PHP_EOL; 
     $html .= '    <tr class="vendor-heading">' . PHP_EOL; 
     $html .= '      <td>'.$type_name.'</td>' . PHP_EOL; 
-    $html .= '      <td>Area</td>' . PHP_EOL; 
     $html .= '      <td>Contact Info</td>' . PHP_EOL; 
-    $html .= '      <td>Recommended by</td>' . PHP_EOL; 
+    $html .= '      <td>Area</td>' . PHP_EOL; 
     $html .= '      <td>Rating</td>' . PHP_EOL; 
     $html .= '    </tr>' . PHP_EOL; 
     $html .= '  </thead>' . PHP_EOL; 

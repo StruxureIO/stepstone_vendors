@@ -15,7 +15,7 @@ use humhub\modules\stepstone_vendors\helpers\VendorsEntry;
   <?php foreach($types as $type) { ?>
         
     <div class="panel panel-default list-group vendor_type">
-          <a class="collapsed  list-group-item" data-toggle="collapse" data-parent="#accordion" href="#<?= $type->type_id ?>Type" aria-expanded="true" aria-controls="<?= $type->type_id ?>Type">
+          <a data-id="<?php echo $type->type_id ?>" class="vendor-list-type collapsed  list-group-item" data-toggle="collapse" data-parent="#accordion" href="#<?= $type->type_id ?>Type" aria-expanded="true" aria-controls="<?= $type->type_id ?>Type">
             <i class="<?= $type->icon ?>"></i><?= $type->type_name ?>
           </a>
       <div id="<?= $type->type_id ?>Type" class="panel-collapse collapse list-group" role="tabpanel" aria-labelledby="headingOne">
@@ -47,3 +47,4 @@ use humhub\modules\stepstone_vendors\helpers\VendorsEntry;
         
 </div>
 <?php } ?> 
+

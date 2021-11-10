@@ -38,7 +38,7 @@ if($vendors) {
 
       $html .= VendorsEntry::display_vender_thead($vendor['type_name']);
       $current_vendor_type = $vendor['vendor_type'];
-      $html .= '  <tbody>' . PHP_EOL;
+      $html .= '  <tbody class="vendors-body">' . PHP_EOL;
     }
 
     $contact_info = VendorsEntry::contact_info($vendor['vendor_contact'], $vendor['vendor_phone'], $vendor['vendor_email'] );
@@ -48,10 +48,9 @@ if($vendors) {
 
     $html .= '    <tr vendor-id="'.$vendor['id'].'">' . PHP_EOL;
     $html .= '      <td><a href="'.$detail_url .  $idparam . $vendor['id'] .'">' . $vendor['vendor_name'] . '</a></td>' . PHP_EOL;
-    $html .= '      <td>' . VendorsEntry::getVendorAreas($vendor['id']) . '</td>' . PHP_EOL;
     $html .= '      <td>' . $contact_info . '</td>' . PHP_EOL;
-    $html .= '      <td>' . trim($vendor['firstname'] . ' ' . $vendor['lastname']) . '</td>' . PHP_EOL;
-    $html .= '      <td>' . $vendor_rating . '</td>' . PHP_EOL;
+    $html .= '      <td>' . VendorsEntry::getVendorAreas($vendor['id']) . '</td>' . PHP_EOL;
+    $html .= '      <td>' . $vendor_rating . '</br><span class="added-by">(Added by: '. trim($vendor['firstname'] . ' ' . $vendor['lastname']) .')</span></td>' . PHP_EOL;
     $html .= '    </tr>' . PHP_EOL;
   }
 
