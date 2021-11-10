@@ -10,40 +10,40 @@ use humhub\modules\stepstone_vendors\helpers\VendorsEntry;
 </div>
 
 <?php if($types) { ?>
+  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
   <?php foreach($types as $type) { ?>
-    <div class="list-group">
-      <a class="list-group-item">
-        <!--<input id="ck-< ?php echo $type->type_id ?>" type="checkbox" class="vendor-type pull-right" data-id="< ?php echo $type->type_id ?>" > <label for="ck-< ?php echo $type->type_id ?>">< ?php echo $type->type_name ?></label>-->
         
-        <details>
-          <summary class="vendor-list-type" data-id="<?php echo $type->type_id ?>"><i class="<?php echo $type->icon ?>"></i> <?php echo $type->type_name ?></summary>
+    <div class="panel panel-default list-group vendor_type">
+          <a class="collapsed  list-group-item" data-toggle="collapse" data-parent="#accordion" href="#<?= $type->type_id ?>Type" aria-expanded="true" aria-controls="<?= $type->type_id ?>Type">
+            <i class="<?= $type->icon ?>"></i><?= $type->type_name ?>
+          </a>
+      <div id="<?= $type->type_id ?>Type" class="panel-collapse collapse list-group" role="tabpanel" aria-labelledby="headingOne">
+
           <?php
             $subtypes = VendorsEntry::getSubTypes($type->type_id);                       
             if(count($subtypes) > 0) {
-              echo '<dl>';
-
               foreach($subtypes as $subtype) { 
-                echo '<dt><span class="subtype-icon"><i class="' . $subtype['icon'] . '"></i></span> <span class="vendor-subtype" data-id="' . $subtype['subtype_id'] . '">' . $subtype['subtype_name'] . '</span></dt>';              
+                echo '<a class="list-group-item vendor-subtype" href="#" data-id="' . $subtype['subtype_id'] . '"> '. $subtype['subtype_name'].' </a>';              
               }           
             }
-            echo '</dl>';
           ?>
-         
-        </details>        
-                
-      </a>
-    </div>       
+
+
+
+      </div>
+    </div> <!-- panel -->
+
+    <?php } ?>
+  </div> <!-- panel-group -->
+
   <?php } ?>
-<?php } ?>
 
-
-<?php if(!empty($container_guid)) { ?>
+  <?php if(!empty($container_guid)) { ?>
 <hr>
 
   <div id="vendor-button-row">
-    <!--<a class="btn btn-default" href="< ?php echo Url::base() ? >/index.php?r=stepstone_vendors%2Fvendors%2Fadd&cguid=<?php echo $container_guid ?>">Add Vendor</a>-->
     <a class="btn btn-default" href="<?php echo $add_url ?>">Add Vendor</a>
         
 </div>
-<?php } ?>
-
+<?php } ?> 

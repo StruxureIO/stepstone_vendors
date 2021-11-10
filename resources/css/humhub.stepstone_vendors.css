@@ -3,7 +3,6 @@ textarea:focus, input:focus{
   outline: none;
 }
 
-
 #vendors-admin-search-wraper {
   position: relative;
 }
@@ -35,6 +34,7 @@ textarea:focus, input:focus{
 
 #vendor-button-row {
   text-align: center;
+  padding-bottom:1em;
 }
 
 #alwrap {
@@ -196,7 +196,6 @@ table#vendor-info {
 #vendor-menu {
   background-color: #fff;
   border: 1px solid #000;
-  font-family: 'Chalkboard';
   padding: 10px;
 }
 
@@ -268,7 +267,6 @@ table#vendor-info tbody tr td {
 }
 
 .rating-section-title {
-  font-family: 'Chalkboard';
   font-size: 18px;
 }
 
@@ -303,7 +301,6 @@ table#vendor-info tbody tr td {
   color: #FFFFFF;  
   cursor: pointer;
   display: inline-block;
-  font-family: Chalkboard;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -421,7 +418,6 @@ a.area-filter {
   border-bottom-right-radius: 18px;
   cursor: pointer;
   display: inline-block;  
-  font-family: 'Chalkboard';
   font-size: 16px;
   font-weight: 400;
   height: 33px;
@@ -447,4 +443,15 @@ a.area-filter.selected-location {
 .subtype-icon {
   width: 20px;
   display: inline-block;
+}
+
+.panel-collapse .list-group-item{
+  padding-left:40px;
+  font-weight: lighter;
+  background:#EDEDED;
+}
+
+div.vendor_type {
+  box-shadow: 0 0 0;
+  -webkit-box-shadow: 0 0 0;
 }
