@@ -60,9 +60,9 @@ if($vendors) {
 
   $html .= '<div id="vendors-page-navigation">' . PHP_EOL;
   if($page > 0)
-    $html .= '  <a id="step-vendors-prev" data-page-id="'. ($page-1) .'" data-search-text="'.$search_text.'">< Previous</a>' . PHP_EOL;
+    $html .= '  <a class="btn-comment-submit btn-sm btn btn-default" id="step-vendors-prev" data-page-id="'. ($page-1) .'" data-search-text="'.$search_text.'">< Previous</a>' . PHP_EOL;
   if($page < $total_number_pages-1)
-    $html .= '  <a id="step-vendors-next" data-page-id="'. ($page+1) .'" data-search-text="'.$search_text.'">Next ></a>' . PHP_EOL;
+    $html .= '  <a class="btn-comment-submit btn-sm btn btn-default" id="step-vendors-next" data-page-id="'. ($page+1) .'" data-search-text="'.$search_text.'">Next ></a>' . PHP_EOL;
   $html .= '</div>' . PHP_EOL;
 
 } else {
