@@ -13,7 +13,7 @@ use humhub\modules\stream\widgets\StreamViewer;
 <?= StreamViewer::widget([
     'streamAction' => '/stepstone_vendors/stream/stream',
     'streamFilterNavigation' => ContentInfoStreamFilterNavigation::class,
-    'messageStreamEmpty' => Yii::t('StepstoneVendorsModule.base', 'Sees there are no entries available, create some first to see this example work!'),
+    'messageStreamEmpty' => Yii::t('StepstoneVendorsModule.base', 'There are no comments about this vendor, start the conversation!'),
 ])?>
 HTML;
 

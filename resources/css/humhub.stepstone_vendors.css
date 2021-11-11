@@ -153,35 +153,30 @@ div.vendor-layout div.panel.panel-default {
 }
 
 #vendor-header {
-  border: 1px solid #000;
   min-height: 200px;
   width: 100%;
-}
-
-#header-top {
-  height: 50%;
-  padding: 65px 90px 0;
+  padding: 4px;
 }
 
 #header-bottom {
   height: 50%;
-  background-color: #E7E7E7;  
   padding: 10px 90px;
 }
 
 h1#vendor_name {
-  font-weight: 700;
-  font-size: 25px;
-  font-family: 'open sans';
-  display: inline-block;
+  font-size: 30px;
+  font-weight: 100;
+  margin-bottom: 7px;
+  color: #fff;
+  white-space: nowrap;
+  display: inline;
+  padding-right: 10px;
 }
 
 span#vendor_subtype {
-  margin-left: 30px;  
-  position: relative;
-  top: 1px;
-  font-family: 'open sans';
-  color: #000;  
+  font-size: 16px;
+  font-weight: 400;
+  margin-top: 0;
 }
 
 table#vendor-info {
@@ -197,14 +192,10 @@ table#vendor-info {
 
 #vendor-titles {
   height: 30px;
+  font-weight: 700;
 }
 
-#latest-ratings,
-#vendor-menu {
-  background-color: #fff;
-  border: 1px solid #000;
-  padding: 10px;
-}
+
 
 ul#vendor-menu-list {
   padding-left: 10px;
@@ -228,13 +219,7 @@ table#vendor-info tbody tr td {
   vertical-align: top;
 }
 
-#rating-container {
-  background-color: #fff;
-  border: 1px solid #000;
-  margin-bottom: 21px;
-  min-height: 100px;
-  padding-top: 21px;
-}
+
 
 .rating-box {
   font-family: 'open sans';
@@ -264,12 +249,11 @@ table#vendor-info tbody tr td {
 }
 
 .rating-line-1 {
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
 
 .rating-line-2 {
-  font-size: 12px;
-  line-height: 16.34px;
+  font-size: 14px;
   margin-bottom: 0;  
 }
 
@@ -277,47 +261,30 @@ table#vendor-info tbody tr td {
   font-size: 18px;
 }
 
-#submit-new-rating {
-  background-color: #fff;
-  border: 1px solid #000;
-  min-height: 100px;  
-}
+
 
 #submit-new-rating {
   margin-bottom: 21px;
 }
 
 #rating-row {
-  padding: 40px 0 25px;
+  padding: 0 0 15px;
 }
 
 #vendor-user-review {
-  border-radius: 5px;
   min-height: 114px;
   width: 100%;
+  width: 100%;
+  margin: 3px 0 0;
+  padding: 8px 30px 10px 8px;
+  border-radius: 4px;
+  border: solid 1px #c5c5c5;
 }
 
 #submit-row {
   margin-top: 12px;
 }
 
-#submit-review {
-  background-color: #111;
-  border: none;
-  border-radius: 4px;
-  color: #FFFFFF;  
-  cursor: pointer;
-  display: inline-block;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 16px;
-  overflow: hidden;
-  padding: 8px 16px;
-  vertical-align: middle;
-  text-align: center;
-  text-decoration: none;
-  white-space: nowrap;
-}
 
 .switch {
   position: relative;
@@ -478,4 +445,45 @@ div.vendor_type {
 
 .vendor-rating-stars{
   color:#a5a5a5;
+}
+
+.img-vendor-data{
+  position: absolute;
+  height: 100px;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  padding-left: 80px;
+  padding-top: 55px;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  color: #fff;
+  pointer-events: none;
+  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 1%, rgba(0, 0, 0, 0.38) 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(1%, rgba(0, 0, 0, 0)), color-stop(100%, rgba(0, 0, 0, 0.38)));
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 1%, rgba(0, 0, 0, 0.38) 100%);
+  background: -o-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 1%, rgba(0, 0, 0, 0.38) 100%);
+  background: -ms-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 1%, rgba(0, 0, 0, 0.38) 100%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 1%, rgba(0, 0, 0, 0.38) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#94000000', GradientType=0);
+}
+
+.img-vendor-header-background {
+  width: 100%;
+  max-height: 192px;
+  border-radius: 3px;
+  min-height: 110px;
+}
+
+#edit-rating a:hover{
+  cursor: pointer;
+  color:#EDAE49;
+}
+
+#edit-rating a {
+  font-size:1.5em;
+}
+
+#vendor-page-title {
+  font-weight: 700;
 }

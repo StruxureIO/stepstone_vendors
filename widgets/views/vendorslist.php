@@ -43,7 +43,7 @@ use humhub\modules\stepstone_vendors\helpers\VendorsEntry;
 <hr>
 
   <div id="vendor-button-row">
-    <a class="btn btn-default" href="<?php echo $add_url ?>">Add Vendor</a>
+    <a class="btn-sm btn btn-default" href="<?php echo $add_url ?>">Add Vendor</a>
         
 </div>
 <?php } ?> 

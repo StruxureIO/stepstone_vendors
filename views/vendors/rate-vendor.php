@@ -58,73 +58,77 @@ $user_id = \Yii::$app->user->identity->ID;
       <?php VendorsEntry::vendorMenu($vendor->id, $detail_url, $vendor_rate_url, $vendor_url, $edit_vendor_url, $vendor->vendor_recommended_user_id) ?>
     </div>
     
-    <div class="col-md-8"> 
-      <p class="rating-section-title">Ratings</p>
-      <p><?php //echo "user_id $user_id rating_user_id $rating_user_id $review" ?></p>
-      <p><?php //print_r($user_rating) ?></p>
-        <div id="rating-container">
-          
-          <?php 
-          if($ratings) {
-            $count = 0;
-            foreach($ratings as $rating) {
+    <div class="col-md-7 layout-content-container"> 
+      <div class="panel panel-default">
+        <div class="panel-heading"><strong>Ratings</strong></div>
+          <hr>
+        <?php //echo "user_id $user_id rating_user_id $rating_user_id $review" ?>
+        <?php //print_r($user_rating) ?>
+          <div class="panel-body" id="rating-container">
+            
+            <?php 
+            if($ratings) {
+              $count = 0;
+              foreach($ratings as $rating) {
 
-              $rating_stars = VendorsEntry::display_vendor_rating($rating['user_rating']);
+                $rating_stars = VendorsEntry::display_vendor_rating($rating['user_rating']);
 
-              $name = '';
-              if(!empty($rating['firstname']))
-                $name .= $rating['firstname'] . " "; 
-              if(!empty($rating['lastname']))
-                $name .= $rating['lastname']; 
+                $name = '';
+                if(!empty($rating['firstname']))
+                  $name .= $rating['firstname'] . " "; 
+                if(!empty($rating['lastname']))
+                  $name .= $rating['lastname']; 
 
-              $date = date("m/d/Y", strtotime($rating['rating_date']));
+                $date = date("m/d/Y", strtotime($rating['rating_date']));
 
-              echo "<div class='rating-box'>" . PHP_EOL;
-              if($count != 0)
-                echo "  <hr class='rating-divider'>" . PHP_EOL;
-              echo "  <div class='rating-line-1'>$rating_stars <span class='rating-box-name'>" . $name . " <span class='rating-box-date'>($date)</span></div>". PHP_EOL;
-              if(!empty($rating['review']))
-                echo "  <p class='rating-line-2'>" . $rating['review'] .  "</p>". PHP_EOL;                        
+                echo "<div class='rating-box'>" . PHP_EOL;
+                if($count != 0)
+                  echo "  <hr class='rating-divider'>" . PHP_EOL;
+                echo "  <div class='rating-line-1'>$rating_stars <span class='rating-box-name'>" . $name . " <span class='rating-box-date'>($date)</span></div>". PHP_EOL;
+                if(!empty($rating['review']))
+                  echo "  <p class='rating-line-2'>" . $rating['review'] .  "</p>". PHP_EOL;                        
+                echo "</div>" . PHP_EOL;
+                $count++;
+
+              }
+              
+            } else {
+              echo "<div class='no-rating-box'>" . PHP_EOL;
+              echo "No ratings were found for this vendor. Be the first to submit a rating." . PHP_EOL;
               echo "</div>" . PHP_EOL;
-              $count++;
-
             }
             
-          } else {
-            echo "<div class='no-rating-box'>" . PHP_EOL;
-            echo "No ratings were found for this vendor. Be the first to submit a rating." . PHP_EOL;
-            echo "</div>" . PHP_EOL;
-          }
-          
-          ?>
+            ?>
 
-        </div>
-      
-        <p class="rating-section-title">Rate Vendor</p>
-        
-      
-        <div id="submit-new-rating">
-          <div class="rating-box">
-            
-            
-            <?php  echo '  <div id="rating-row">' . VendorsEntry::display_vendor_user_rating($current_user_rating, $vendor->id, $user_id) . '</div>'. PHP_EOL; ?>
-            <div id="review-row">
-              <textarea id="vendor-user-review" placeholder="Review of Vendor"><?php echo $review ?></textarea>
-            </div>
-            
-            <div id="submit-row">
-              <a id="submit-review">Submit</a>
-            </div>
-            
           </div>
-          <!--display_vendor_rating($rating['user_rating'])-->
+          </div>
           
+          <div class="panel panel-default">
+            <div class="panel-heading"><strong>Rate</strong> vendor</div>          
+            <hr>
+            <div class="panel-body" id="submit-new-rating">
+              <div class="rating-box">
+                
+                
+                <?php  echo '  <div id="rating-row">' . VendorsEntry::display_vendor_user_rating($current_user_rating, $vendor->id, $user_id) . '</div>'. PHP_EOL; ?>
+                <div id="review-row">
+                  <textarea id="vendor-user-review" placeholder="Review of Vendor"><?php echo $review ?></textarea>
+                </div>
+                
+                <div id="submit-row">
+                  <a class="btn btn-primary" id="submit-review">Submit</a>
+                </div>
+                
+              </div>
+            <!--display_vendor_rating($rating['user_rating'])-->
+          </div>
+            
 
-        </div>
+      </div>
     </div>
     
-    <div class="col-md-2"> 
-      <div id="latest-ratings">
+    <div class="col-md-3"> 
+      <div class="panel panel-default" id="latest-ratings">
         <?php VendorsEntry::latestRatings($latest_ratings) ?>        
       </div>
     </div>
