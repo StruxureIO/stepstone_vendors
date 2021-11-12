@@ -11,7 +11,6 @@ $container_guid = ($container) ? $container->guid : null;
 
 ?>
 
-<div class="container-fluid">
 
   <div class="panel panel-default">
 
@@ -31,8 +30,7 @@ $container_guid = ($container) ? $container->guid : null;
       <div class="col-md-3"></div>
     </div>
 
-    <div class="row">
-      <div class="col-md-12">
+    <div class="row text-center">
         <div id="location-filters">
           <?php
             foreach($areas as $area) {
@@ -46,7 +44,6 @@ $container_guid = ($container) ? $container->guid : null;
         <input type="hidden" id="current-vendor-subtype" value="">
         <input type="hidden" id="current-location" value="1">
       </div>
-    </div>
 
 
     <div class="panel-body">
@@ -61,7 +58,6 @@ $container_guid = ($container) ? $container->guid : null;
 
   </div>
 
-</div>
 <?php
 $ajax_rating = yii\helpers\Url::to(['ajax-rating']);
 $ajax_view = yii\helpers\Url::to(['ajax-view']);

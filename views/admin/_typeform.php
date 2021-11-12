@@ -17,7 +17,6 @@ if(isset($model->type_id)) {
 }
 
 ?>
-<div class="container-fluid">
   <div class="panel panel-default">
     <div class="panel-heading"><strong><?= Html::encode($this->title) ?></strong></div>
       <div id="vendor-type-form">
@@ -104,7 +103,6 @@ if(isset($model->type_id)) {
     
     
   </div>
-</div>
 <?php
 $this->registerJs("
   

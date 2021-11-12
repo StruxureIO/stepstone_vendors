@@ -10,7 +10,6 @@ use humhub\modules\stepstone_vendors\models\VendorSubTypes;
 /* @var $form yii\widgets\ActiveForm */
 
 ?>
-<div class="container-fluid">
   <div class="panel panel-default">
     <div class="panel-heading"><strong><?= Html::encode($this->title) ?></strong></div>
       <div id="vendor-type-form">
@@ -47,5 +46,4 @@ use humhub\modules\stepstone_vendors\models\VendorSubTypes;
     
     
   </div>
-</div>
 

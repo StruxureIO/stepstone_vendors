@@ -3,9 +3,9 @@ textarea:focus, input:focus{
   outline: none;
 }
 
-div.panel.panel-default {
+/*div.panel.panel-default {
   padding: 10px;
-}
+}*/
 
 #vendors-admin-search-wraper {
   position: relative;
@@ -38,6 +38,7 @@ div.panel.panel-default {
 
 #vendor-button-row {
   text-align: center;
+  padding-bottom:1em;
 }
 
 #alwrap {
@@ -54,7 +55,8 @@ div.panel.panel-default {
 }
 
 .vendor-heading {
-  font-size: 14px;
+  font-size: 13px !important;
+  font-weight: bold !important;
 }
 
 table#vendors-table tbody tr {
@@ -66,13 +68,19 @@ table#vendors-table tbody tr {
 }
 
 #vendors-table tr {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #ededed;
 }
 
 #vendors-table td {
   padding: 20px 10px;
   width: 20%;
 }
+
+#vendors-table td a {
+  font-size: 16px;  
+  font-weight: 600;
+}
+
 
 table#vendors-table a:not(.checked) span.fa.fa-star {
   color: #ccc;
@@ -140,10 +148,10 @@ summary.vendor-list-type {
   cursor: pointer;
 }
 
-summary.vendor-list-type {
+/*summary.vendor-list-type {
   font-size: 14px;
   line-height: 15px;
-}
+}*/
 
 div.container.vendor-layout {
   font-family: 'open sans';
@@ -154,35 +162,35 @@ div.vendor-layout div.panel.panel-default {
 }
 
 #vendor-header {
-  border: 1px solid #000;
   min-height: 200px;
   width: 100%;
+  padding: 4px;
 }
 
-#header-top {
+/*#header-top {
   height: 50%;
   padding: 65px 90px 0;
-}
+}*/
 
 #header-bottom {
   height: 50%;
-  background-color: #E7E7E7;  
   padding: 10px 90px;
 }
 
 h1#vendor_name {
-  font-weight: 700;
-  font-size: 25px;
-  font-family: 'open sans';
-  display: inline-block;
+  font-size: 30px;
+  font-weight: 100;
+  margin-bottom: 7px;
+  color: #fff;
+  white-space: nowrap;
+  display: inline;
+  padding-right: 10px;
 }
 
 span#vendor_subtype {
-  margin-left: 30px;  
-  position: relative;
-  top: 1px;
-  font-family: 'open sans';
-  color: #000;  
+  font-size: 16px;
+  font-weight: 400;
+  margin-top: 0;
 }
 
 table#vendor-info {
@@ -198,15 +206,19 @@ table#vendor-info {
 
 #vendor-titles {
   height: 30px;
+  font-weight: 700;
 }
 
+/*#similar-vendors,
 #latest-ratings,
 #vendor-menu {
   background-color: #fff;
   border: 1px solid #000;
   font-family: 'Chalkboard';
+  margin-bottom: 15px;
   padding: 10px;
-}
+}*/
+
 
 ul#vendor-menu-list {
   padding-left: 10px;
@@ -230,13 +242,14 @@ table#vendor-info tbody tr td {
   vertical-align: top;
 }
 
-#rating-container {
+/*#rating-container {
   background-color: #fff;
   border: 1px solid #000;
   margin-bottom: 21px;
   min-height: 100px;
   padding-top: 21px;
-}
+}*/
+
 
 .rating-box {
   font-family: 'open sans';
@@ -266,45 +279,48 @@ table#vendor-info tbody tr td {
 }
 
 .rating-line-1 {
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
 
 .rating-line-2 {
-  font-size: 12px;
-  line-height: 16.34px;
+  font-size: 14px;
   margin-bottom: 0;  
 }
 
 .rating-section-title {
-  font-family: 'Chalkboard';
   font-size: 18px;
 }
 
-#submit-new-rating {
+/*#submit-new-rating {
   background-color: #fff;
   border: 1px solid #000;
   min-height: 100px;  
-}
+}*/
+
 
 #submit-new-rating {
   margin-bottom: 21px;
 }
 
 #rating-row {
-  padding: 40px 0 25px;
+  padding: 0 0 15px;
 }
 
 #vendor-user-review {
-  border-radius: 5px;
   min-height: 114px;
   width: 100%;
+  width: 100%;
+  margin: 3px 0 0;
+  padding: 8px 30px 10px 8px;
+  border-radius: 4px;
+  border: solid 1px #c5c5c5;
 }
 
 #submit-row {
   margin-top: 12px;
 }
 
-#submit-review {
+/*#submit-review {
   background-color: #111;
   border: none;
   border-radius: 4px;
@@ -321,7 +337,7 @@ table#vendor-info tbody tr td {
   text-align: center;
   text-decoration: none;
   white-space: nowrap;
-}
+}*/
 
 .switch {
   position: relative;
@@ -416,31 +432,33 @@ ul#tag-list li {
 }
 
 #location-filters {
-  height: 33px;
-  margin: 14px 40px 2px; 
-  text-align: left;
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 18px;
+  height: 40px;
+  line-height: 38px;
+  margin-right:15px;
+  margin-left:15px;
 }
 
 a.area-filter {
-  border: 1px solid #000;
-  border-top-left-radius: 18px;
-  border-bottom-left-radius: 18px;
-  border-top-right-radius: 18px;
-  border-bottom-right-radius: 18px;
+  color: #003450;
   cursor: pointer;
-  display: inline-block;  
-  font-family: 'Chalkboard';
-  font-size: 16px;
-  font-weight: 400;
-  height: 33px;
-  line-height: 32px;
-  margin-left: 12px;
-  padding: 0 12px;
+  border: 1px solid #003450;
+  border-radius: 20px;
+  font-size: 12px;
+  margin-right: 12px;
+  padding: 8px 14px;
+  white-space: nowrap;
+}
+
+a.area-filter:hover {
+  background-color: #f7f7f7;
 }
 
 a.area-filter.selected-location {
-  color: #fff;
-  background-color: #000;  
+  background-color: #003450;
+  color:#f7f7f7;
 }
 
 .type-table-space {
@@ -456,3 +474,73 @@ a.area-filter.selected-location {
   width: 20px;
   display: inline-block;
 }
+
+.panel-collapse .list-group-item{
+  padding-left:40px;
+  font-weight: lighter;
+  background:#EDEDED;
+}
+
+div.vendor_type {
+  box-shadow: 0 0 0;
+  -webkit-box-shadow: 0 0 0;
+}
+
+
+.added-by {
+  color:#a5a5a5;
+  font-size:11px;
+}
+
+.vendors-body tr:hover{
+  background-color: #f5f5f5;
+}
+
+.vendor-rating-stars{
+  color:#a5a5a5;
+}
+
+.img-vendor-data{
+  position: absolute;
+  height: 100px;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  padding-left: 80px;
+  padding-top: 55px;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  color: #fff;
+  pointer-events: none;
+  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 1%, rgba(0, 0, 0, 0.38) 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(1%, rgba(0, 0, 0, 0)), color-stop(100%, rgba(0, 0, 0, 0.38)));
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 1%, rgba(0, 0, 0, 0.38) 100%);
+  background: -o-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 1%, rgba(0, 0, 0, 0.38) 100%);
+  background: -ms-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 1%, rgba(0, 0, 0, 0.38) 100%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 1%, rgba(0, 0, 0, 0.38) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#94000000', GradientType=0);
+}
+
+.img-vendor-header-background {
+  width: 100%;
+  max-height: 192px;
+  border-radius: 3px;
+  min-height: 110px;
+}
+
+#edit-rating a:hover{
+  cursor: pointer;
+  color:#EDAE49;
+}
+
+#edit-rating a {
+  font-size:1.5em;
+}
+
+#vendor-page-title {
+  font-weight: 700;
+}
+
+ul#sim-vendor-list li {
+  list-style: none;
+}  

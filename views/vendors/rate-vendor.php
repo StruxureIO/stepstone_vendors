@@ -41,7 +41,6 @@ $user_id = \Yii::$app->user->identity->ID;
 
 ?>
 
-<div class="container-fluid">
 
   <div class="panel panel-default">
         
@@ -59,11 +58,13 @@ $user_id = \Yii::$app->user->identity->ID;
       <?php VendorsEntry::vendorMenu($vendor->id, $detail_url, $vendor_rate_url, $vendor_url, $edit_vendor_url, $vendor->vendor_recommended_user_id) ?>
     </div>
     
-    <div class="col-md-8"> 
-      <p class="rating-section-title">Ratings</p>
-      <p><?php //echo "user_id $user_id rating_user_id $rating_user_id $review" ?></p>
-      <p><?php //print_r($user_rating) ?></p>
-        <div id="rating-container">
+    <div class="col-md-7 layout-content-container"> 
+      <div class="panel panel-default">
+        <div class="panel-heading"><strong>Ratings</strong></div>
+          <hr>
+        <?php //echo "user_id $user_id rating_user_id $rating_user_id $review" ?>
+        <?php //print_r($user_rating) ?>
+          <div class="panel-body" id="rating-container">
           
           <?php 
           if($ratings) {
@@ -100,39 +101,40 @@ $user_id = \Yii::$app->user->identity->ID;
           ?>
 
         </div>
-      
-        <p class="rating-section-title">Rate Vendor</p>
-        
-      
-        <div id="submit-new-rating">
-          <div class="rating-box">
-            
-            
-            <?php  echo '  <div id="rating-row">' . VendorsEntry::display_vendor_user_rating($current_user_rating, $vendor->id, $user_id) . '</div>'. PHP_EOL; ?>
-            <div id="review-row">
-              <textarea id="vendor-user-review" placeholder="Review of Vendor"><?php echo $review ?></textarea>
-            </div>
-            
-            <div id="submit-row">
-              <a id="submit-review">Submit</a>
-            </div>
-            
           </div>
-          <!--display_vendor_rating($rating['user_rating'])-->
           
+          <div class="panel panel-default">
+            <div class="panel-heading"><strong>Rate</strong> vendor</div>          
+            <hr>
+            <div class="panel-body" id="submit-new-rating">
+              <div class="rating-box">
+                
+                
+                <?php  echo '  <div id="rating-row">' . VendorsEntry::display_vendor_user_rating($current_user_rating, $vendor->id, $user_id) . '</div>'. PHP_EOL; ?>
+                <div id="review-row">
+                  <textarea id="vendor-user-review" placeholder="Review of Vendor"><?php echo $review ?></textarea>
+                </div>
+                
+                <div id="submit-row">
+                  <a class="btn btn-primary" id="submit-review">Submit</a>
+                </div>
+                
+              </div>
+            <!--display_vendor_rating($rating['user_rating'])-->
+          </div>
 
+            
         </div>
     </div>
     
-    <div class="col-md-2"> 
-      <div id="latest-ratings">
+    <div class="col-md-3"> 
+      <div class="panel panel-default" id="latest-ratings">
         <?php VendorsEntry::latestRatings($latest_ratings) ?>        
       </div>
     </div>
   
   
     
-</div>    
 <?php
 $ajax_rating = yii\helpers\Url::to(['ajax-rating']);
 $ajax_review = yii\helpers\Url::to(['ajax-review']);
