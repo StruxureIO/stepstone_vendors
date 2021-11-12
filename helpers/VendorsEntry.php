@@ -208,6 +208,7 @@ class VendorsEntry {
           <h1 class="profile" id="vendor_name"><?php echo $vendor->vendor_name ?></h1>            
           <span class="profile" id="vendor_subtype"><?php $subtype_name ?></span>
         </div>
+    </div>
       
       <div id="header-bottom">
         <table id="vendor-info">
