@@ -30,7 +30,6 @@ if ($container != null) {
 
 ?>
 
-<div class="container-fluid">
 
     <div class="panel panel-default">
 
@@ -45,7 +44,8 @@ if ($container != null) {
             <?php VendorsEntry::vendorMenu($vendor->id, $detail_url, $vendor_rate_url, $vendor_url, $edit_vendor_url, $vendor->vendor_recommended_user_id) ?>
         </div>
 
-        <div class="col-md-8">
+        <div class="col-md-7">
+            <div id="comments-title">Comments</div>
             <?php
             Yii::error(\yii\helpers\VarDumper::dumpAsString($vendor->id));
             if (!Yii::$app->user->isGuest) {
@@ -58,20 +58,25 @@ if ($container != null) {
             echo StreamViewer::widget([
                 'contentContainer' => $contentContainer,
                 'streamAction' => '/stepstone_vendors/vendors/stream',
-                'messageStreamEmpty' => Yii::t('StepstoneVendorsModule.base', 'Sees there are no entries available, create some first to see this example work!'),
+                'messageStreamEmpty' => Yii::t('StepstoneVendorsModule.base', 'There are no comments about this vendor, <strong>start the conversation!</strong>'),
                 'streamFilterNavigation' => false,
             ])
             ?>
         </div>
 
-        <div class="col-md-2">
+        <div class="col-md-3">
 
-            <div id="latest-ratings">
+            <div class="panel panel-default" id="latest-ratings">
                 <?php VendorsEntry::latestRatings($latest_ratings) ?>
             </div>
+          
+            <div class="panel panel-default" id="similar-vendors">
+                <?php VendorsEntry::similarVendors($vendor->subtype, $area, $vendor->id) ?>
+            </div>
+          
         </div>
 
 
     </div>
 
-</div>
+

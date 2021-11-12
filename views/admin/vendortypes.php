@@ -9,7 +9,6 @@ use yii\widgets\Pjax;
 
 ?>
 
-<div class="container-fluid">
   <div class="panel panel-default">
     <div class="panel-heading"><strong>Vendor</strong> Types</div>
     
@@ -62,4 +61,3 @@ use yii\widgets\Pjax;
     
     </div>
   </div>
-</div>

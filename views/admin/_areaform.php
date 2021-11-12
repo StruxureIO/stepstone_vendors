@@ -10,7 +10,6 @@ use yii\widgets\ActiveForm;
 
 
 ?>
-<div class="container-fluid">
   <div class="panel panel-default">
     <div class="panel-heading"><strong><?= Html::encode($this->title) ?></strong></div>
       <div id="vendor-type-form">
@@ -46,5 +45,4 @@ use yii\widgets\ActiveForm;
     
     
   </div>
-</div>
 

@@ -11,7 +11,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-<div class="container-fluid">
   <div class="panel panel-default">
     <div class="panel-heading"><strong>Vendors</strong> </div>
         
@@ -52,4 +51,3 @@ $this->params['breadcrumbs'][] = $this->title;
         
     </div>
   </div>
-</div>

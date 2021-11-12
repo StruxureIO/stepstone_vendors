@@ -5,6 +5,7 @@ use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\web\UrlManager;
+use humhub\modules\content\helpers\ContentContainerHelper;
 
 class VendorsEntry {  
   
@@ -13,9 +14,8 @@ class VendorsEntry {
     $html = '  <thead>' . PHP_EOL; 
     $html .= '    <tr class="vendor-heading">' . PHP_EOL; 
     $html .= '      <td>'.$type_name.'</td>' . PHP_EOL; 
-    $html .= '      <td>Area</td>' . PHP_EOL; 
     $html .= '      <td>Contact Info</td>' . PHP_EOL; 
-    $html .= '      <td>Recommended by</td>' . PHP_EOL; 
+    $html .= '      <td>Area</td>' . PHP_EOL; 
     $html .= '      <td>Rating</td>' . PHP_EOL; 
     $html .= '    </tr>' . PHP_EOL; 
     $html .= '  </thead>' . PHP_EOL; 
@@ -92,7 +92,7 @@ class VendorsEntry {
       
     }
     
-    $rating_stars = '<span><span class="'.$check1.'" rate-id="1" ><span class="fa fa-star "></span></span><span class="'.$check2.'" rate-id="2" ><span class="fa fa-star "></span></span><span class="'.$check3.'" rate-id="3" ><span class="fa fa-star "></span></span><span class="'.$check4.'" rate-id="4" ><span class="fa fa-star "></span></span><span class="'.$check5.'" rate-id="5" ><span class="fa fa-star "></span></span>';
+    $rating_stars = '<span class="vendor-rating-stars"><span class="'.$check1.'" rate-id="1" ><span class="fa fa-star "></span></span><span class="'.$check2.'" rate-id="2" ><span class="fa fa-star "></span></span><span class="'.$check3.'" rate-id="3" ><span class="fa fa-star "></span></span><span class="'.$check4.'" rate-id="4" ><span class="fa fa-star "></span></span><span class="'.$check5.'" rate-id="5" ><span class="fa fa-star "></span></span>';
         
     return $rating_stars;
         
@@ -191,10 +191,23 @@ class VendorsEntry {
     
     
     ?>
-    <div id="vendor-header">
-      <div id="header-top">
-        <h1 id="vendor_name"><?php echo $vendor->vendor_name ?></h1><span id="vendor_subtype"><?php echo $subtypes->subtype_name ?></span>
-      </div>
+
+  <div id="vendor-header" class="panel-profile-header">
+
+    <div id="header-top" class="image-upload-container profile-banner-image-container">
+       <?php
+          if(isset($subtypes->subtype_name))
+            $subtype_name = $subtypes->subtype_name;
+          else 
+            $subtype_name = '';
+        ?>
+        <!-- profile image output-->
+        <img class="img-vendor-header-background" src="/themes/TheBlackSheepHubTheme/img/default_banner.jpg" alt="" style="width:100%;">
+        <!-- show user name and title -->
+        <div class="img-vendor-data">
+          <h1 class="profile" id="vendor_name"><?php echo $vendor->vendor_name ?></h1>            
+          <span class="profile" id="vendor_subtype"><?php $subtype_name ?></span>
+        </div>
       
       <div id="header-bottom">
         <table id="vendor-info">
@@ -217,6 +230,7 @@ class VendorsEntry {
         </table>
       </div>
     </div>
+  </div>
 
     <?php    
   }
@@ -231,42 +245,53 @@ class VendorsEntry {
     $current_user_id = \Yii::$app->user->identity->ID;
     
     ?>
-      <div id="vendor-menu">
-        <p><strong>Vendor Menu</strong></p>
-        <ul id="vendor-menu-list">
-          <li><a href="<?php echo $detail_url . $id_param . $id ?>"><i class="fas fa-list"></i></i> Stream</a></li>
-          <li><a href="<?php echo $vendor_rate_url . $id_param . $id ?>"><i class="fas fa-star-half-alt"></i> Ratings</a></li>
+      <div id="vendor-menu" class="panel panel-default left-navigation">
+      <div class="panel-heading"><strong>Vendor</strong>&nbsp;menu</div>
+        <div id="vendor-menu-list" class="list-group">
+          <a class="list-group-item" href="<?php echo $detail_url . $id_param . $id ?>"><i class="fas fa-list"></i></i> Stream</a>
+          <a class="list-group-item" href="<?php echo $vendor_rate_url . $id_param . $id ?>"><i class="fas fa-star-half-alt"></i> Ratings</a>
           <?php if($vendor_recommended_user_id == $current_user_id) { ?> 
-            <li><a href="<?php echo $edit_vendor_url . $id_param . $id ?>"><i class="fas fa-edit"></i> Edit Vendor</a></li>
+            <li><a class="list-group-item" href="<?php echo $edit_vendor_url . $id_param . $id ?>"><i class="fas fa-edit"></i> Edit Vendor</a>
           <?php } ?>  
-          <li><a href="<?php echo $vendor_url ?>"><i class="far fa-address-book"></i> Vendors</a></li>
-        </ul>        
+          <a class="list-group-item" href="<?php echo $vendor_url ?>"><i class="far fa-address-book"></i> Vendors</a></li>
+          </div>        
       </div>  
+
+      <script>
+        // Set active current menu item
+        $(function() {
+          $('#vendor-menu-list a').removeClass('active');
+          $('#vendor-menu-list a[href^="' + location.pathname + '"]').addClass('active');
+        });
+      </script>
+      
     <?php
+
+
+
+
   }
+  
   
   public static function latestRatings($ratings) {
     
     ?>
-      <p><strong>Latest Ratings</strong></p>
-      <ul id="vendor-menu-list">
-        <?php 
-          foreach($ratings as $rating) {
-            $name = '';
-            if(!empty($rating['firstname']))
-              $name .= $rating['firstname'] . " "; 
-            if(!empty($rating['lastname']))
-              $name .= $rating['lastname']; 
-            $date = date("m/d/Y", strtotime($rating['rating_date']));
-            echo "<li>" . PHP_EOL;
-            echo "  <div>" . VendorsEntry::display_vendor_rating($rating['user_rating']) .  "</div>". PHP_EOL;
-            echo "  <div> <span class='rator-name'>" . $name . " <span class='rating-date'>($date)</span></div>". PHP_EOL;
-            echo "</li>" . PHP_EOL;
-          }
-        ?>
-        <li></li>
-        <li></li>
-      </ul>
+      <div class="panel-heading"><strong>Latest</strong>&nbsp;ratings</div>
+        <div class="panel-body">
+          <?php 
+            foreach($ratings as $rating) {
+              $name = '';
+              if(!empty($rating['firstname']))
+                $name .= $rating['firstname'] . " "; 
+              if(!empty($rating['lastname']))
+                $name .= $rating['lastname']; 
+              $date = date("m/d/Y", strtotime($rating['rating_date']));
+              echo "  <div>" . VendorsEntry::display_vendor_rating($rating['user_rating']) .  "</div>". PHP_EOL;
+              echo "  <div> <span class='rator-name'>" . $name . " <span class='rating-date'>($date)</span></div>". PHP_EOL;
+            }
+          ?>
+       </div> <!-- <panel-content -->
+     
 
     <?php
   
@@ -306,6 +331,63 @@ class VendorsEntry {
       return '';
     
   }
+  
+  public static function similarVendors($subtype, $area, $current_vendor) {
+    
+    $container = ContentContainerHelper::getCurrent();
+    
+    if($container != null)
+      $detail_url = $container->createUrl('/stepstone_vendors/vendors/detail');
+    else
+      $detail_url = '';
+
+    if(strpos($detail_url, '?') !== false)
+      $idparam = "&id=";
+    else
+      $idparam = "?id=";
+    
+    $connection = Yii::$app->getDb();
+    
+    if(empty($subtype)) {
+      
+      $command = $connection->createCommand("select v.*
+      from vendors as v 
+      LEFT JOIN vendor_area_list as l on l.vendor_id = v.id 
+      where l.area_id = $area order by vendor_name");
+            
+    } else {
+      
+      $command = $connection->createCommand("select v.*
+      from vendors as v 
+      LEFT JOIN vendor_area_list as l on l.vendor_id = v.id 
+      where l.area_id = $area and subtype = $subtype order by vendor_name");      
+      
+    }
+    
+    $sql = $command->sql;
+                
+    $similar_vendors = $command->queryAll();
+              
+    ?>
+      
+      <p><strong>Similar Vendors</strong></p>
+      
+        <?php 
+          if($similar_vendors) {
+            echo "<ul id='sim-vendor-list'>" . PHP_EOL;
+            foreach($similar_vendors as $similar_vendor) {
+              if($similar_vendor['id'] != $current_vendor)
+                echo "<li><a href='" . $detail_url .  $idparam . $similar_vendor['id'] . '&area=' . $area ."'>" . $similar_vendor['vendor_name'] ."</a></li>" . PHP_EOL;
+            }
+            echo "</ul>" . PHP_EOL;
+          }
+        ?>  
+      
+      
+    <?php  
+    
+  }
+  
   
     
 }

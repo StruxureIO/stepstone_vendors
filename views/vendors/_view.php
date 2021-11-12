@@ -47,7 +47,7 @@ if($vendors) {
     $vendor_rating = VendorsEntry::display_vendor_rating($vendor['vendor_rating']);
 
     $html .= '    <tr vendor-id="'.$vendor['id'].'">' . PHP_EOL;
-    $html .= '      <td><a href="'.$detail_url .  $idparam . $vendor['id'] .'">' . $vendor['vendor_name'] . '</a></td>' . PHP_EOL;
+    $html .= '      <td><a href="'.$detail_url .  $idparam . $vendor['id'] . '&area=' . $location .'">' . $vendor['vendor_name'] . '</a></td>' . PHP_EOL;
     $html .= '      <td>' . VendorsEntry::getVendorAreas($vendor['id']) . '</td>' . PHP_EOL;
     $html .= '      <td>' . $contact_info . '</td>' . PHP_EOL;
     $html .= '      <td>' . trim($vendor['firstname'] . ' ' . $vendor['lastname']) . '</td>' . PHP_EOL;

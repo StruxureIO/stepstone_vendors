@@ -50,7 +50,7 @@ class Vendors extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['vendor_name', 'vendor_type', 'subtype', 'created_at', 'created_by', 'updated_at', 'updated_by'], 'required'],
+            [['vendor_name', 'vendor_type', 'created_at', 'created_by', 'updated_at', 'updated_by'], 'required'],
             [['vendor_type', 'subtype', 'vendor_recommended_user_id', 'vendor_rating', 'created_by', 'updated_by'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['vendor_name'], 'string', 'max' => 100],

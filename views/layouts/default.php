@@ -14,7 +14,7 @@ use humhub\modules\stepstone_vendors\widgets\VendorsWidget;
         </div>  
       </div>  
       
-    <div class="col-md-9 videos-inner-row">
+    <div class="col-md-9">
       
       <?= $content ?>
       
