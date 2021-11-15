@@ -231,7 +231,6 @@ class VendorsEntry {
         </table>
       </div>
     </div>
-  </div>
 
     <?php    
   }
