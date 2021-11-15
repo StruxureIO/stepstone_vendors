@@ -235,7 +235,7 @@ class VendorsEntry {
     <?php    
   }
   
-  public static function vendorMenu($id, $detail_url, $vendor_rate_url, $vendor_url, $edit_vendor_url, $vendor_recommended_user_id) {
+  public static function vendorMenu($id, $detail_url, $vendor_rate_url, $vendor_url, $edit_vendor_url, $vendor_recommended_user_id, $area = 1) {
     
     if (\Yii::$app->urlManager->enablePrettyUrl) 
       $id_param = "?id=";
@@ -248,10 +248,10 @@ class VendorsEntry {
       <div id="vendor-menu" class="panel panel-default left-navigation">
       <div class="panel-heading"><strong>Vendor</strong>&nbsp;menu</div>
         <div id="vendor-menu-list" class="list-group">
-          <a class="list-group-item" href="<?php echo $detail_url . $id_param . $id ?>"><i class="fas fa-list"></i></i> Stream</a>
-          <a class="list-group-item" href="<?php echo $vendor_rate_url . $id_param . $id ?>"><i class="fas fa-star-half-alt"></i> Ratings</a>
+          <a class="list-group-item" href="<?php echo $detail_url . $id_param . $id . "&area=" . $area ?>"><i class="fas fa-list"></i></i> Stream</a>
+          <a class="list-group-item" href="<?php echo $vendor_rate_url . $id_param . $id . "&area=" . $area ?>"><i class="fas fa-star-half-alt"></i> Ratings</a>
           <?php if($vendor_recommended_user_id == $current_user_id) { ?> 
-            <li><a class="list-group-item" href="<?php echo $edit_vendor_url . $id_param . $id ?>"><i class="fas fa-edit"></i> Edit Vendor</a>
+            <li><a class="list-group-item" href="<?php echo $edit_vendor_url . $id_param . $id . "&area=" . $area ?>"><i class="fas fa-edit"></i> Edit Vendor</a>
           <?php } ?>  
           <a class="list-group-item" href="<?php echo $vendor_url ?>"><i class="far fa-address-book"></i> Vendors</a></li>
           </div>        
@@ -335,6 +335,9 @@ class VendorsEntry {
   public static function similarVendors($subtype, $area, $current_vendor) {
     
     $container = ContentContainerHelper::getCurrent();
+    
+    if(empty($area) || $area == 0)
+      $area = 1;
     
     if($container != null)
       $detail_url = $container->createUrl('/stepstone_vendors/vendors/detail');

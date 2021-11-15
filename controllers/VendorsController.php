@@ -385,7 +385,7 @@ LEFT JOIN profile ON vendors_ratings.user_id = profile.user_id where vendor_id =
 
     }
 
-    public function actionRateVendor($id, $cguid)
+    public function actionRateVendor($id, $cguid, $area)
     {
 
         $this->subLayout = "@stepstone_vendors/views/layouts/detail-view";
@@ -428,6 +428,7 @@ LEFT JOIN profile ON vendors_ratings.user_id = profile.user_id where vendor_id =
             'latest_ratings' => $latest_ratings,
             'user_rating' => $user_rating,
             'cguid' => $cguid,
+            'area' => $area,
         ]);
 
 
@@ -477,7 +478,7 @@ LEFT JOIN profile ON vendors_ratings.user_id = profile.user_id where vendor_id =
 
     }
 
-    public function actionUpdate($id, $cguid)
+    public function actionUpdate($id, $cguid, $area)
     {
 
         //Yii::$app->cache->flush();
@@ -518,7 +519,7 @@ LEFT JOIN profile ON vendors_ratings.user_id = profile.user_id where vendor_id =
                     $new_area->save();
                 }
 
-                return $this->redirect(['vendors/detail', 'cguid' => $cguid, 'id' => $id, 'area' => 1]);
+                return $this->redirect(['vendors/detail', 'cguid' => $cguid, 'id' => $id, 'area' => $area]);
                 //return $this->redirect(['vendors/rate-vendor?id=' . $model->id, 'cguid' => $cguid]);
 
             }
