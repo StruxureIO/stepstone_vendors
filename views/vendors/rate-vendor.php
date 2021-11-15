@@ -55,7 +55,7 @@ $user_id = \Yii::$app->user->identity->ID;
   <div class="row">
     
     <div class="col-md-2"> 
-      <?php VendorsEntry::vendorMenu($vendor->id, $detail_url, $vendor_rate_url, $vendor_url, $edit_vendor_url, $vendor->vendor_recommended_user_id) ?>
+      <?php VendorsEntry::vendorMenu($vendor->id, $detail_url, $vendor_rate_url, $vendor_url, $edit_vendor_url, $vendor->vendor_recommended_user_id, $area) ?>
     </div>
     
     <div class="col-md-7 layout-content-container"> 
@@ -128,9 +128,15 @@ $user_id = \Yii::$app->user->identity->ID;
     </div>
     
     <div class="col-md-3"> 
+      
       <div class="panel panel-default" id="latest-ratings">
         <?php VendorsEntry::latestRatings($latest_ratings) ?>        
       </div>
+      
+      <div class="panel panel-default" id="similar-vendors">
+          <?php VendorsEntry::similarVendors($vendor->subtype, $area, $vendor->id) ?>
+      </div>
+      
     </div>
   
   
