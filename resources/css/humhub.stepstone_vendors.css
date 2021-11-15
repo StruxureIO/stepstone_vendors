@@ -142,6 +142,9 @@ div.list-group-item details dl dt {
   font-weight: normal;
 }
 
+div#vendor-menu-list.list-group li {
+  list-style: none;
+}
 
 .vendor-subtype,
 summary.vendor-list-type {
