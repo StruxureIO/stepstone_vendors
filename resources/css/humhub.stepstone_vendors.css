@@ -487,3 +487,7 @@ div.vendor_type {
 #vendor-page-title {
   font-weight: 700;
 }
+
+.panel-danger {
+  display: none;
+}

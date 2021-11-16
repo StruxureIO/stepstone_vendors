@@ -250,9 +250,9 @@ class VendorsEntry {
           <a class="list-group-item" href="<?php echo $detail_url . $id_param . $id ?>"><i class="fas fa-list"></i></i> Stream</a>
           <a class="list-group-item" href="<?php echo $vendor_rate_url . $id_param . $id ?>"><i class="fas fa-star-half-alt"></i> Ratings</a>
           <?php if($vendor_recommended_user_id == $current_user_id) { ?> 
-            <li><a class="list-group-item" href="<?php echo $edit_vendor_url . $id_param . $id ?>"><i class="fas fa-edit"></i> Edit Vendor</a>
+            <a class="list-group-item" href="<?php echo $edit_vendor_url . $id_param . $id ?>"><i class="fas fa-edit"></i> Edit Vendor</a>
           <?php } ?>  
-          <a class="list-group-item" href="<?php echo $vendor_url ?>"><i class="far fa-address-book"></i> Vendors</a></li>
+          <a class="list-group-item" href="<?php echo $vendor_url ?>"><i class="far fa-address-book"></i> Vendors</a>
           </div>        
       </div>  
 
