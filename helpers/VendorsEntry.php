@@ -35,7 +35,7 @@ class VendorsEntry {
       $contact_info .= $vendor_phone . '<br>';
     
     if(!empty($vendor_email))
-      $contact_info .= $vendor_email;
+      $contact_info .= '<a class="mail-to-link" href="mailto:'.$vendor_email.'">' . $vendor_email . '</a>';
     
     return $contact_info;
     
@@ -187,7 +187,7 @@ class VendorsEntry {
     if(!empty($vendor->vendor_phone))
       $contact_info .= $vendor->vendor_phone . '<br>';
     if(!empty($vendor->vendor_email))
-      $contact_info .= $vendor->vendor_email . '<br>';
+      $contact_info .= '<a href="mailto:' . $vendor->vendor_email.'">'.$vendor->vendor_email . '</a><br>';
     
     
     ?>
@@ -372,9 +372,11 @@ class VendorsEntry {
     $similar_vendors = $command->queryAll();
               
     ?>
+      <div class="panel-heading">
+        <strong>Similar</strong> vendors
+      </div>
       
-      <p><strong>Similar Vendors</strong></p>
-      
+      <div class="panel-body">
         <?php 
           if($similar_vendors) {
             echo "<ul id='sim-vendor-list'>" . PHP_EOL;
@@ -385,6 +387,7 @@ class VendorsEntry {
             echo "</ul>" . PHP_EOL;
           }
         ?>  
+      </div>
       
       
     <?php  
