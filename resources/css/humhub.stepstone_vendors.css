@@ -547,3 +547,17 @@ div.vendor_type {
 ul#sim-vendor-list li {
   list-style: none;
 }  
+
+a.mail-to-link {
+  color: #555 !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+}
+
+a.mail-to-link:hover {
+  color: #2589BD !important;
+}
+
+#sim-vendor-list {
+  padding-left: 0;
+}
