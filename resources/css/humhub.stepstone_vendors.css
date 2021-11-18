@@ -3,9 +3,6 @@ textarea:focus, input:focus{
   outline: none;
 }
 
-/*div.panel.panel-default {
-  padding: 10px;
-}*/
 
 #vendors-admin-search-wraper {
   position: relative;
@@ -151,10 +148,6 @@ summary.vendor-list-type {
   cursor: pointer;
 }
 
-/*summary.vendor-list-type {
-  font-size: 14px;
-  line-height: 15px;
-}*/
 
 div.container.vendor-layout {
   font-family: 'open sans';
@@ -169,11 +162,6 @@ div.vendor-layout div.panel.panel-default {
   width: 100%;
   padding: 4px;
 }
-
-/*#header-top {
-  height: 50%;
-  padding: 65px 90px 0;
-}*/
 
 #header-bottom {
   height: 50%;
@@ -212,17 +200,6 @@ table#vendor-info {
   font-weight: 700;
 }
 
-/*#similar-vendors,
-#latest-ratings,
-#vendor-menu {
-  background-color: #fff;
-  border: 1px solid #000;
-  font-family: 'Chalkboard';
-  margin-bottom: 15px;
-  padding: 10px;
-}*/
-
-
 ul#vendor-menu-list {
   padding-left: 10px;
 }
@@ -244,15 +221,6 @@ ul#vendor-menu-list li {
 table#vendor-info tbody tr td {
   vertical-align: top;
 }
-
-/*#rating-container {
-  background-color: #fff;
-  border: 1px solid #000;
-  margin-bottom: 21px;
-  min-height: 100px;
-  padding-top: 21px;
-}*/
-
 
 .rating-box {
   font-family: 'open sans';
@@ -294,13 +262,6 @@ table#vendor-info tbody tr td {
   font-size: 18px;
 }
 
-/*#submit-new-rating {
-  background-color: #fff;
-  border: 1px solid #000;
-  min-height: 100px;  
-}*/
-
-
 #submit-new-rating {
   margin-bottom: 21px;
 }
@@ -322,25 +283,6 @@ table#vendor-info tbody tr td {
 #submit-row {
   margin-top: 12px;
 }
-
-/*#submit-review {
-  background-color: #111;
-  border: none;
-  border-radius: 4px;
-  color: #FFFFFF;  
-  cursor: pointer;
-  display: inline-block;
-  font-family: Chalkboard;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 16px;
-  overflow: hidden;
-  padding: 8px 16px;
-  vertical-align: middle;
-  text-align: center;
-  text-decoration: none;
-  white-space: nowrap;
-}*/
 
 .switch {
   position: relative;

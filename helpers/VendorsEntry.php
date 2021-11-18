@@ -192,6 +192,7 @@ class VendorsEntry {
     
     ?>
 
+
   <div id="vendor-header" class="panel-profile-header">
 
     <div id="header-top" class="image-upload-container profile-banner-image-container">
@@ -248,6 +249,7 @@ class VendorsEntry {
       <div id="vendor-menu" class="panel panel-default left-navigation">
       <div class="panel-heading"><strong>Vendor</strong>&nbsp;menu</div>
         <div id="vendor-menu-list" class="list-group">
+
           <a class="list-group-item" href="<?php echo $detail_url . $id_param . $id . "&area=" . $area ?>"><i class="fas fa-list"></i></i> Stream</a>
           <a class="list-group-item" href="<?php echo $vendor_rate_url . $id_param . $id . "&area=" . $area ?>"><i class="fas fa-star-half-alt"></i> Ratings</a>
           <?php if($vendor_recommended_user_id == $current_user_id) { ?> 

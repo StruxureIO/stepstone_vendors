@@ -38,7 +38,7 @@ if($vendors) {
 
       $html .= VendorsEntry::display_vender_thead($vendor['type_name']);
       $current_vendor_type = $vendor['vendor_type'];
-      $html .= '  <tbody>' . PHP_EOL;
+      $html .= '  <tbody class="vendors-body">' . PHP_EOL;
     }
 
     $contact_info = VendorsEntry::contact_info($vendor['vendor_contact'], $vendor['vendor_phone'], $vendor['vendor_email'] );
@@ -50,8 +50,8 @@ if($vendors) {
     $html .= '      <td><a href="'.$detail_url .  $idparam . $vendor['id'] . '&area=' . $location .'">' . $vendor['vendor_name'] . '</a></td>' . PHP_EOL;
     $html .= '      <td>' . VendorsEntry::getVendorAreas($vendor['id']) . '</td>' . PHP_EOL;
     $html .= '      <td>' . $contact_info . '</td>' . PHP_EOL;
-    $html .= '      <td>' . trim($vendor['firstname'] . ' ' . $vendor['lastname']) . '</td>' . PHP_EOL;
-    $html .= '      <td>' . $vendor_rating . '</td>' . PHP_EOL;
+    $html .= '      <td>' . VendorsEntry::getVendorAreas($vendor['id']) . '</td>' . PHP_EOL;
+    $html .= '      <td class="vendor-rating-stars">' . $vendor_rating . '</br><span class="added-by">(Added by: '. trim($vendor['firstname'] . ' ' . $vendor['lastname']) .')</span></td>' . PHP_EOL;
     $html .= '    </tr>' . PHP_EOL;
   }
 
@@ -61,9 +61,9 @@ if($vendors) {
 
   $html .= '<div id="vendors-page-navigation">' . PHP_EOL;
   if($page > 0)
-    $html .= '  <a id="step-vendors-prev" data-page-id="'. ($page-1) .'" data-search-text="'.$search_text.'">< Previous</a>' . PHP_EOL;
+    $html .= '  <a class="btn-comment-submit btn-sm btn btn-default" id="step-vendors-prev" data-page-id="'. ($page-1) .'" data-search-text="'.$search_text.'">< Previous</a>' . PHP_EOL;
   if($page < $total_number_pages-1)
-    $html .= '  <a id="step-vendors-next" data-page-id="'. ($page+1) .'" data-search-text="'.$search_text.'">Next ></a>' . PHP_EOL;
+    $html .= '  <a class="btn-comment-submit btn-sm btn btn-default" id="step-vendors-next" data-page-id="'. ($page+1) .'" data-search-text="'.$search_text.'">Next ></a>' . PHP_EOL;
   $html .= '</div>' . PHP_EOL;
 
 } else {

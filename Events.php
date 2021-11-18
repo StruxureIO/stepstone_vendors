@@ -124,7 +124,7 @@ class Events
     public static function addVendorDashboard($event){
       
       if (Yii::$app->hasModule('stepstone_vendors')) {      
-        $event->sender->addWidget(widgets\VendorDashboard::class, [], ['sortOrder' => 100]);
+        $event->sender->addWidget(widgets\VendorDashboard::class, [], ['sortOrder' => 102]);
       }  
     }
     

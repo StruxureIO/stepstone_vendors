@@ -65,40 +65,42 @@ $user_id = \Yii::$app->user->identity->ID;
         <?php //echo "user_id $user_id rating_user_id $rating_user_id $review" ?>
         <?php //print_r($user_rating) ?>
           <div class="panel-body" id="rating-container">
+
           
           <?php 
           if($ratings) {
             $count = 0;
             foreach($ratings as $rating) {
 
-              $rating_stars = VendorsEntry::display_vendor_rating($rating['user_rating']);
+                $rating_stars = VendorsEntry::display_vendor_rating($rating['user_rating']);
 
-              $name = '';
-              if(!empty($rating['firstname']))
-                $name .= $rating['firstname'] . " "; 
-              if(!empty($rating['lastname']))
-                $name .= $rating['lastname']; 
+                $name = '';
+                if(!empty($rating['firstname']))
+                  $name .= $rating['firstname'] . " "; 
+                if(!empty($rating['lastname']))
+                  $name .= $rating['lastname']; 
 
-              $date = date("m/d/Y", strtotime($rating['rating_date']));
+                $date = date("m/d/Y", strtotime($rating['rating_date']));
 
-              echo "<div class='rating-box'>" . PHP_EOL;
-              if($count != 0)
-                echo "  <hr class='rating-divider'>" . PHP_EOL;
-              echo "  <div class='rating-line-1'>$rating_stars <span class='rating-box-name'>" . $name . " <span class='rating-box-date'>($date)</span></div>". PHP_EOL;
-              if(!empty($rating['review']))
-                echo "  <p class='rating-line-2'>" . $rating['review'] .  "</p>". PHP_EOL;                        
+                echo "<div class='rating-box'>" . PHP_EOL;
+                if($count != 0)
+                  echo "  <hr class='rating-divider'>" . PHP_EOL;
+                echo "  <div class='rating-line-1'>$rating_stars <span class='rating-box-name'>" . $name . " <span class='rating-box-date'>($date)</span></div>". PHP_EOL;
+                if(!empty($rating['review']))
+                  echo "  <p class='rating-line-2'>" . $rating['review'] .  "</p>". PHP_EOL;                        
+                echo "</div>" . PHP_EOL;
+                $count++;
+
+              }
+              
+            } else {
+              echo "<div class='no-rating-box'>" . PHP_EOL;
+              echo "No ratings were found for this vendor. Be the first to submit a rating." . PHP_EOL;
               echo "</div>" . PHP_EOL;
-              $count++;
-
             }
             
-          } else {
-            echo "<div class='no-rating-box'>" . PHP_EOL;
-            echo "No ratings were found for this vendor. Be the first to submit a rating." . PHP_EOL;
-            echo "</div>" . PHP_EOL;
-          }
-          
-          ?>
+            ?>
+
 
         </div>
           </div>
@@ -122,7 +124,6 @@ $user_id = \Yii::$app->user->identity->ID;
               </div>
             <!--display_vendor_rating($rating['user_rating'])-->
           </div>
-
             
         </div>
     </div>
