@@ -106,9 +106,9 @@ use yii\web\UrlManager;
               $vendor_type = '';
 
               if (\Yii::$app->urlManager->enablePrettyUrl)
-                $vendor_link = Url::base() . "/s/welcome-space/stepstone_vendors/vendors/detail?id=" . $vendor['id'];
+                $vendor_link = Url::base() . "/s/welcome-space/stepstone_vendors/vendors/detail?id=" . $vendor['id'] . "&area=1";
               else
-                $watch_link = Url::base() ."/index.php?r=stepstone_vendors%2Findex%2Fvendors&id=" . $vendor['id'];
+                $vendor_link = Url::base() ."/index.php?r=stepstone_vendors%2Findex%2Fvendors&id=" . $vendor['id'] . "&area=1";
 
               if($vendor['subicon'] != null)
                 $icon = $vendor['subicon'];
@@ -123,6 +123,7 @@ use yii\web\UrlManager;
             ?>
             <li class="activity-entry">
               <a href="<?php echo $vendor_link; /*$vendor_link*/ ?>" class="new-vendor-link">
+
                 <div class="vendor-list-left">
                   <i class="<?php echo $icon ?>"></i>
                 </div>

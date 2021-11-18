@@ -55,7 +55,7 @@ $user_id = \Yii::$app->user->identity->ID;
   <div class="row">
     
     <div class="col-md-2"> 
-      <?php VendorsEntry::vendorMenu($vendor->id, $detail_url, $vendor_rate_url, $vendor_url, $edit_vendor_url, $vendor->vendor_recommended_user_id) ?>
+      <?php VendorsEntry::vendorMenu($vendor->id, $detail_url, $vendor_rate_url, $vendor_url, $edit_vendor_url, $vendor->vendor_recommended_user_id, $area) ?>
     </div>
     
     <div class="col-md-7 layout-content-container"> 
@@ -65,11 +65,12 @@ $user_id = \Yii::$app->user->identity->ID;
         <?php //echo "user_id $user_id rating_user_id $rating_user_id $review" ?>
         <?php //print_r($user_rating) ?>
           <div class="panel-body" id="rating-container">
-            
-            <?php 
-            if($ratings) {
-              $count = 0;
-              foreach($ratings as $rating) {
+
+          
+          <?php 
+          if($ratings) {
+            $count = 0;
+            foreach($ratings as $rating) {
 
                 $rating_stars = VendorsEntry::display_vendor_rating($rating['user_rating']);
 
@@ -100,7 +101,8 @@ $user_id = \Yii::$app->user->identity->ID;
             
             ?>
 
-          </div>
+
+        </div>
           </div>
           
           <div class="panel panel-default">
@@ -123,14 +125,19 @@ $user_id = \Yii::$app->user->identity->ID;
             <!--display_vendor_rating($rating['user_rating'])-->
           </div>
             
-
-      </div>
+        </div>
     </div>
     
     <div class="col-md-3"> 
+      
       <div class="panel panel-default" id="latest-ratings">
         <?php VendorsEntry::latestRatings($latest_ratings) ?>        
       </div>
+      
+      <div class="panel panel-default" id="similar-vendors">
+          <?php VendorsEntry::similarVendors($vendor->subtype, $area, $vendor->id) ?>
+      </div>
+      
     </div>
   
   

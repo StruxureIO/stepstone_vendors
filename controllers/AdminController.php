@@ -7,6 +7,7 @@ use humhub\modules\stepstone_vendors\models;
 use humhub\modules\stepstone_vendors\models\VendorSubTypes;
 use humhub\modules\stepstone_vendors\models\VendorAreas;
 use humhub\modules\stepstone_vendors\models\VendorAreaList;
+use humhub\modules\content\models\Content;
 use Yii;
 use yii\helpers\ArrayHelper;
 
@@ -207,6 +208,9 @@ class AdminController extends Controller
     $model = $this->findVenderModel($id);
     $model->delete();
     
+    $content = $this->findContentModel($id);
+    $content->delete();
+    
     $this->mAreaList = new \humhub\modules\stepstone_vendors\models\VendorAreaList();    
     $this->mAreaList::deleteAll(['vendor_id' => $id]);    
 
@@ -223,7 +227,19 @@ class AdminController extends Controller
     }
 
     throw new NotFoundHttpException('The requested page does not exist.');
+  }
+  
+  protected function findContentModel($id){
+
+    $mContent = new \humhub\modules\content\models\Content();
+
+    if(($model = $mContent::findOne(['object_id' => $id, 'object_model' => 'humhub\\modules\\stepstone_vendors\\models\\VendorsContentContainer'])) !== null) {
+      return $model;
+    }
+
+    throw new NotFoundHttpException('The requested page does not exist.');
   }     
+  
   
   public function actionAddsubtype($id, $name) {
     

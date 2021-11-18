@@ -43,8 +43,8 @@ $container_guid = ($container) ? $container->guid : null;
         </div>
         <input type="hidden" id="current-vendor-subtype" value="">
         <input type="hidden" id="current-location" value="1">
-    </div>
 
+      </div>
 
     <div class="panel-body">
 

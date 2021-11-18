@@ -190,6 +190,7 @@ $where group by v.id order by t.type_name, vendor_name limit $offset, " . MAX_VE
             'search_text' => $search_text,
             'count' => $count,
             'title_text' => $title_text,
+            'location' => $location,
         ]);
 
     }
@@ -239,7 +240,7 @@ $where group by v.id order by t.type_name, vendor_name limit $offset, " . MAX_VE
                 //$model->vendorAdded();
 
                 //return $this->redirect(['vendors/index', 'cguid' => $cguid]);
-                return $this->redirect(['vendors/detail?id=' . $model->id, 'cguid' => $cguid]);
+                return $this->redirect(['vendors/detail', 'cguid' => $cguid, 'id' => $model->id, 'area' => 1 ]);
             }
         }
 
@@ -335,7 +336,7 @@ $where group by v.id order by t.type_name, vendor_name limit $offset, " . MAX_VE
 
     }
 
-    public function actionDetail($id, $cguid)
+    public function actionDetail($id, $area, $cguid)
     {
 
         $contentContainer = $this->contentContainer;
@@ -377,13 +378,14 @@ LEFT JOIN profile ON vendors_ratings.user_id = profile.user_id where vendor_id =
             'cguid' => $cguid,
             'contentContainer' => $contentContainer,
             'canCreatePosts' => $canCreatePosts,
+            'area' => $area,
 
         ]);
 
 
     }
 
-    public function actionRateVendor($id, $cguid)
+    public function actionRateVendor($id, $cguid, $area)
     {
 
         $this->subLayout = "@stepstone_vendors/views/layouts/detail-view";
@@ -426,6 +428,7 @@ LEFT JOIN profile ON vendors_ratings.user_id = profile.user_id where vendor_id =
             'latest_ratings' => $latest_ratings,
             'user_rating' => $user_rating,
             'cguid' => $cguid,
+            'area' => $area,
         ]);
 
 
@@ -475,7 +478,7 @@ LEFT JOIN profile ON vendors_ratings.user_id = profile.user_id where vendor_id =
 
     }
 
-    public function actionUpdate($id, $cguid)
+    public function actionUpdate($id, $cguid, $area)
     {
 
         //Yii::$app->cache->flush();
@@ -516,7 +519,7 @@ LEFT JOIN profile ON vendors_ratings.user_id = profile.user_id where vendor_id =
                     $new_area->save();
                 }
 
-                return $this->redirect(['vendors/detail', 'cguid' => $cguid, 'id' => $id]);
+                return $this->redirect(['vendors/detail', 'cguid' => $cguid, 'id' => $id, 'area' => $area]);
                 //return $this->redirect(['vendors/rate-vendor?id=' . $model->id, 'cguid' => $cguid]);
 
             }

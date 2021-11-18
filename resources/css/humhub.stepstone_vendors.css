@@ -3,6 +3,7 @@ textarea:focus, input:focus{
   outline: none;
 }
 
+
 #vendors-admin-search-wraper {
   position: relative;
 }
@@ -138,11 +139,15 @@ div.list-group-item details dl dt {
   font-weight: normal;
 }
 
+div#vendor-menu-list.list-group li {
+  list-style: none;
+}
 
 .vendor-subtype,
 summary.vendor-list-type {
   cursor: pointer;
 }
+
 
 div.container.vendor-layout {
   font-family: 'open sans';
@@ -195,8 +200,6 @@ table#vendor-info {
   font-weight: 700;
 }
 
-
-
 ul#vendor-menu-list {
   padding-left: 10px;
 }
@@ -218,8 +221,6 @@ ul#vendor-menu-list li {
 table#vendor-info tbody tr td {
   vertical-align: top;
 }
-
-
 
 .rating-box {
   font-family: 'open sans';
@@ -261,8 +262,6 @@ table#vendor-info tbody tr td {
   font-size: 18px;
 }
 
-
-
 #submit-new-rating {
   margin-bottom: 21px;
 }
@@ -284,7 +283,6 @@ table#vendor-info tbody tr td {
 #submit-row {
   margin-top: 12px;
 }
-
 
 .switch {
   position: relative;
@@ -488,6 +486,20 @@ div.vendor_type {
   font-weight: 700;
 }
 
-.panel-danger {
-  display: none;
+ul#sim-vendor-list li {
+  list-style: none;
+}  
+
+a.mail-to-link {
+  color: #555 !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+}
+
+a.mail-to-link:hover {
+  color: #2589BD !important;
+}
+
+#sim-vendor-list {
+  padding-left: 0;
 }
