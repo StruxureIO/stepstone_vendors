@@ -209,7 +209,8 @@ class AdminController extends Controller
     $model->delete();
     
     $content = $this->findContentModel($id);
-    $content->delete();
+    if($content !== false)
+      $content->delete();
     
     $this->mAreaList = new \humhub\modules\stepstone_vendors\models\VendorAreaList();    
     $this->mAreaList::deleteAll(['vendor_id' => $id]);    
@@ -237,7 +238,8 @@ class AdminController extends Controller
       return $model;
     }
 
-    throw new NotFoundHttpException('The requested page does not exist.');
+    return false;
+    //throw new NotFoundHttpException('The requested page does not exist.');
   }     
   
   
