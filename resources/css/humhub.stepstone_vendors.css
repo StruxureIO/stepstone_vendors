@@ -545,9 +545,11 @@ div.vendor_type {
 }
 
 ul#sim-vendor-list li {
-  list-style: none;
-  padding: 6px 15px;
   border-left: 3px solid transparent;  
+  color: #555;  
+  font-size: 12px;
+  list-style: none;
+  padding: 6px 15px;  
 }  
 
 ul#sim-vendor-list li:hover {
