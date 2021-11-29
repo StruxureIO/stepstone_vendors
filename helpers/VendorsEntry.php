@@ -378,7 +378,6 @@ class VendorsEntry {
         <strong>Similar</strong> vendors
       </div>
       
-      <div class="panel-body">
         <?php 
           if($similar_vendors) {
             echo "<ul id='sim-vendor-list'>" . PHP_EOL;
@@ -389,7 +388,6 @@ class VendorsEntry {
             echo "</ul>" . PHP_EOL;
           }
         ?>  
-      </div>
       
       
     <?php  
