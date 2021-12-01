@@ -21,3 +21,9 @@ use humhub\modules\stepstone_vendors\widgets\VendorsWidget;
     </div>       
   </div>
 </div>
+
+<script>
+      $(document).ready(function(){
+        $("a[href$='/s/welcome-space/stepstone_vendors/vendors']").parent().addClass('active');
+      });
+</script>
