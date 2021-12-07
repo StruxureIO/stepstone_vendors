@@ -206,7 +206,7 @@ class VendorsEntry {
         <!-- show user name and title -->
         <div class="img-vendor-data">
           <h1 class="profile" id="vendor_name"><?php echo $vendor->vendor_name ?></h1>            
-          <span class="profile" id="vendor_subtype"><?php $subtype_name ?></span>
+          <span class="profile" id="vendor_subtype"><?php echo $subtype_name ?></span>
         </div>
     </div>
       
@@ -367,13 +367,13 @@ class VendorsEntry {
       
     }
     
-    $sql = $command->sql;
+    //$sql = $command->sql;
                 
     $similar_vendors = $command->queryAll();
               
     ?>
       <div class="panel-heading">
-        <strong>Similar</strong> vendors
+        <strong>Similar</strong> vendors 
       </div>
       
         <?php 
