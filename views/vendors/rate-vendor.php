@@ -44,7 +44,7 @@ $user_id = \Yii::$app->user->identity->ID;
 
   <div class="panel panel-default">
         
-    <?php VendorsEntry::vendorDetailHeader($vendor, $subtypes, $profile); ?>
+    <?php VendorsEntry::vendorDetailHeader($vendor, $subtypes, $profile, $type); ?>
     
   </div>    
   

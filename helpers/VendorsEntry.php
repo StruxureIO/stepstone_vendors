@@ -167,7 +167,7 @@ class VendorsEntry {
     return $subtypes;
   }
   
-  public static function vendorDetailHeader($vendor, $subtypes, $profile) {
+  public static function vendorDetailHeader($vendor, $subtypes, $profile, $type) {
     
     if(!empty($profile['firstname']))
       $firstname = $profile['firstname'];
@@ -199,7 +199,7 @@ class VendorsEntry {
           if(isset($subtypes->subtype_name))
             $subtype_name = $subtypes->subtype_name;
           else 
-            $subtype_name = '';
+            $subtype_name = $type->type_name;
         ?>
         <!-- profile image output-->
         <img class="img-vendor-header-background" src="/themes/TheBlackSheepHubTheme/img/default_banner.jpg" alt="" style="width:100%;">

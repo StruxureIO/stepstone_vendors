@@ -346,6 +346,9 @@ $where group by v.id order by t.type_name, vendor_name limit $offset, " . MAX_VE
 
         $mVendors = new \humhub\modules\stepstone_vendors\models\VendorsContentContainer($this->contentContainer);
         $vendor = $mVendors::find()->where(['id' => $id])->one();
+        
+        $mTypes = new \humhub\modules\stepstone_vendors\models\VendorTypes();
+        $type = $mTypes::find()->where(['type_id' => $vendor->vendor_type])->one();
 
         $mSubtypes = new \humhub\modules\stepstone_vendors\models\VendorSubTypes();
         $subtypes = $mSubtypes::find()->where(['subtype_id' => $vendor['subtype']])->one();
@@ -379,6 +382,7 @@ LEFT JOIN profile ON vendors_ratings.user_id = profile.user_id where vendor_id =
             'contentContainer' => $contentContainer,
             'canCreatePosts' => $canCreatePosts,
             'area' => $area,
+            'type' => $type,
 
         ]);
 
@@ -394,6 +398,9 @@ LEFT JOIN profile ON vendors_ratings.user_id = profile.user_id where vendor_id =
 
         $mVendors = new \humhub\modules\stepstone_vendors\models\VendorsContentContainer($this->contentContainer);
         $vendor = $mVendors::find()->where(['id' => $id])->one();
+        
+        $mTypes = new \humhub\modules\stepstone_vendors\models\VendorTypes();
+        $type = $mTypes::find()->where(['type_id' => $vendor->vendor_type])->one();        
 
         $mSubtypes = new \humhub\modules\stepstone_vendors\models\VendorSubTypes();
         $subtypes = $mSubtypes::find()->where(['subtype_id' => $vendor['subtype']])->one();
@@ -429,6 +436,7 @@ LEFT JOIN profile ON vendors_ratings.user_id = profile.user_id where vendor_id =
             'user_rating' => $user_rating,
             'cguid' => $cguid,
             'area' => $area,
+            'type' => $type,
         ]);
 
 

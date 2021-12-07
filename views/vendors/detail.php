@@ -33,7 +33,7 @@ if ($container != null) {
 
     <div class="panel panel-default">
 
-        <?php VendorsEntry::vendorDetailHeader($vendor, $subtypes, $profile); ?>
+        <?php VendorsEntry::vendorDetailHeader($vendor, $subtypes, $profile, $type); ?>
 
     </div>
 
