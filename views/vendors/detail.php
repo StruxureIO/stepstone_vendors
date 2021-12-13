@@ -78,5 +78,3 @@ if ($container != null) {
 
 
     </div>
-
-

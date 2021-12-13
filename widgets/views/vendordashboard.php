@@ -9,7 +9,7 @@ use yii\web\UrlManager;
 
 ?>
 
-<div class="panel panel-default panel-video" id="panel-video">
+<div class="panel panel-default panel-vendors" id="panel-vendors">
 
     <style>
 
@@ -17,26 +17,31 @@ use yii\web\UrlManager;
         float: left;
       }
 
+      #vendors-widget {
+        padding-left: 0px;
+        margin-left: 0px;
+      }
+
       ul#vendors-widget li {
         list-style: none;
-        padding: 11px 0;
+        padding: 11px 15px;
       }
 
       .vendor-list-left {
         float: left;
         text-align: center;
         text-align: -moz-center;
-        width: 33px;
       }
 
       .vendor-list-right {
         float: left;
-        padding-left: 18px;
+        padding-left: 10px;
       }
 
       .vendor-name {
         font-size: 14px;
         font-weight: 700;
+        color: black;
       }
 
       .vendor-type {
@@ -65,6 +70,11 @@ use yii\web\UrlManager;
         margin-left: 10px;
       }
 
+      #panel-vendors .panel-body {
+        padding:0px;
+        margin:0px;
+      }
+
 
     </style>
 
@@ -73,7 +83,10 @@ use yii\web\UrlManager;
     <div style="clear:both;"></div>
 
     <div class="panel-heading">
-      <span id="vendor-dashboard-title"><strong>New Vendors</strong></span> <a href="<?php echo Url::base() ?>/user/account/edit" id="user-profile-link">Change Location</a>
+      <span id="vendor-dashboard-title">
+        <strong>New</strong>&nbsp;vendors
+        </span> 
+        <a href="<?php echo Url::base() ?>/user/account/edit" id="user-profile-link">Change Location</a>
 <!--      <select id="vendor-locations">
         <option value="0">Filter by location</option>
         < ?php
@@ -84,11 +97,8 @@ use yii\web\UrlManager;
         ?>
       </select>-->
     </div>
-    <div style="clear:both"></div>
-    <hr>
-
     <div class="panel-body">
-      <ul id="vendors-widget">
+      <ul id="vendors-widget" class="media-list activities">
         <?php if($vendors) { ?>
           <?php foreach($vendors as $vendor) { ?>
             <?php
@@ -111,10 +121,11 @@ use yii\web\UrlManager;
                 $vendor_type = $vendor['type_name'];
 
             ?>
-            <li>
-              <a href="<?php echo $vendor_link ?>" class="new-vendor-link">
+            <li class="activity-entry">
+              <a href="<?php echo $vendor_link; /*$vendor_link*/ ?>" class="new-vendor-link">
+
                 <div class="vendor-list-left">
-                  <i class="<?php echo $icon ?> fa-2x"></i>
+                  <i class="<?php echo $icon ?>"></i>
                 </div>
                 <div class="vendor-list-right">
                   <div class="vendor-name"><?php echo $vendor['vendor_name'] ?></div>

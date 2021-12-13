@@ -43,6 +43,7 @@ $container_guid = ($container) ? $container->guid : null;
         <input type="hidden" id="current-location" value="0">
       </div>
 
+    </div>
 
     <div class="panel-body">
 
