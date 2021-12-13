@@ -71,7 +71,7 @@ if ($container != null) {
             </div>
           
             <div class="panel panel-default" id="similar-vendors">
-                <?php VendorsEntry::similarVendors($vendor->subtype, $area, $vendor->id) ?>
+                <?php VendorsEntry::similarVendors($vendor->subtype, $area, $vendor->id, $vendor->vendor_type) ?>
             </div>
           
         </div>
