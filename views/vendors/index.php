@@ -32,12 +32,10 @@ $container_guid = ($container) ? $container->guid : null;
 
     <div class="row text-center">
         <div id="location-filters">
+          <a class="area-filter selected-location" data-id="0">All</a>
           <?php
             foreach($areas as $area) {
-              if($area['area_id'] == 1)
-                echo "<a class='area-filter selected-location' data-id='{$area['area_id']}'>{$area['area_name']}</a>";
-              else
-                echo "<a class='area-filter' data-id='{$area['area_id']}'>{$area['area_name']}</a>";
+              echo "<a class='area-filter' data-id='{$area['area_id']}'>{$area['area_name']}</a>";
             }
           ?>
         </div>
@@ -95,7 +93,7 @@ $this->registerJs("
 
   }
 
-  function load_all_vendors(page, search_text = '', location = '') {
+  function load_all_vendors(page, search_text = '', location = '0') {
     $('#ajaxloader').show();
 
     //console.log('search_text', search_text);
