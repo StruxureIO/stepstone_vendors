@@ -68,7 +68,7 @@ if($vendors) {
   $html .= '</div>' . PHP_EOL;
 
 } else {
-  $html = '<p id="no-vendors-founds">No vendors found</p>';
+  $html .= '<p id="no-vendors-founds">No vendors found</p>';
 }
 
 if(isset($vendor)) {
