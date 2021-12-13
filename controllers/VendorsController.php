@@ -92,13 +92,13 @@ class VendorsController extends ContentContainerController
         $where = '';
 
         if (!is_numeric($location))
-            $location = '1';
+            $location = '0';
 
         //$vendor_ids = str_replace('"', '', $vendor_ids);
 
         $user_id = \Yii::$app->user->identity->ID;
 
-        if ($location != '') {
+        if ($location != '' && $location != '0') {
             $where = " WHERE l.area_id = $location ";
             $and = true;
             $location_search = true;
@@ -169,17 +169,17 @@ $where group by v.id order by t.type_name, vendor_name limit $offset, " . MAX_VE
             $vendors = null;
 
 
-        if ($location_search && $location != 1 && $subtype_search)
+        if ($location_search && $location != 0 && $subtype_search)
             $title_text = 'area-subtype-search';
-        else if ($location_search && $location != 1 && $type_search)
+        else if ($location_search && $location != 0 && $type_search)
             $title_text = 'area-type-search';
         else if ($subtype_search)
             $title_text = 'subtype-search';
         else if ($type_search)
             $title_text = 'type-search';
-        else if ($location_search && $location != 1)
+        else if ($location_search && $location != 0)
             $title_text = 'area-search';
-        else if ($location_search && $location == 1)
+        else if ($location_search && $location == 0)
             $title_text = 'all-vendors';
 
         return $this->renderPartial('_view', [

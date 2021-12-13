@@ -22,6 +22,7 @@ else
 $current_vendor_type = 0;
 $first = true;
 $html = '';
+$title = '';
 
 //$html .= "<p>$sql</p>";
 
