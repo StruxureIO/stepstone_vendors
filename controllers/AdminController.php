@@ -140,6 +140,10 @@ class AdminController extends Controller
             
       $model->updated_at = date('Y-m-d H:i:s');
       $model->updated_by = \Yii::$app->user->identity->ID;
+      
+      // hardcoded to set subtype to null if attorneys vendor type is selected
+      if($model->vendor_type == 4)
+        $model->subtype = NULL;      
                         
       if($model->validate() && $model->save()) {
         

@@ -332,12 +332,12 @@ class VendorsEntry {
     
   }
   
-  public static function similarVendors($subtype, $area, $current_vendor) {
+  public static function similarVendors($subtype, $area, $current_vendor, $vendor_type) {
     
     $container = ContentContainerHelper::getCurrent();
     
     if(empty($area) || $area == 0)
-      $area = 1;
+      $area = 0;
     
     if($container != null)
       $detail_url = $container->createUrl('/stepstone_vendors/vendors/detail');
@@ -351,19 +351,27 @@ class VendorsEntry {
     
     $connection = Yii::$app->getDb();
     
+    if($area == '0') { 
+      $location_join = '';
+      $area_where = '';
+    } else {
+      $location_join = 'LEFT JOIN vendor_area_list as l on l.vendor_id = v.id';
+      $area_where = "l.area_id = $area and";
+    }  
+    
     if(empty($subtype)) {
       
       $command = $connection->createCommand("select v.*
       from vendors as v 
-      LEFT JOIN vendor_area_list as l on l.vendor_id = v.id 
-      where l.area_id = $area order by vendor_name");
+      $location_join 
+      where $area_where vendor_type = $vendor_type order by vendor_name");
             
     } else {
       
       $command = $connection->createCommand("select v.*
       from vendors as v 
-      LEFT JOIN vendor_area_list as l on l.vendor_id = v.id 
-      where l.area_id = $area and subtype = $subtype order by vendor_name");      
+      $location_join 
+      where $area_where subtype = $subtype order by vendor_name");      
       
     }
     
