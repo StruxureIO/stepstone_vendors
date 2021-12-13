@@ -40,9 +40,10 @@ $container_guid = ($container) ? $container->guid : null;
           ?>
         </div>
         <input type="hidden" id="current-vendor-subtype" value="">
-        <input type="hidden" id="current-location" value="1">
-
+        <input type="hidden" id="current-location" value="0">
       </div>
+
+    </div>
 
     <div class="panel-body">
 
@@ -66,7 +67,7 @@ $this->registerJs("
 
   load_all_vendors(0);
 
-  function load_vendors(page, vendor_type_id, location = '') {
+  function load_vendors(page, vendor_type_id, location = '0') {
 
     $('#ajaxloader').show();
 
