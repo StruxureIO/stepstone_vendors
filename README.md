@@ -22,8 +22,8 @@ added along with the font awesome icon that will be associated with the type.
 To find an appropriate icon, visit this page, 
 https://fontawesome.com/v5.15/icons?d=gallery&p=2 type in the name of an icon to search for 
 and press enter. Once a suitable icon has been found, click on the icon to go to its page. Once 
-on the icon's page, click on the example HTML code displayed, such as '<i class="far fa-
-abacus"></i>' and this code will be copied to your device's clipboard. Go back to the Add 
+on the icon's page, click on the example HTML code displayed, such as `'<i class="far fa-`
+`abacus"></i>'` and this code will be copied to your device's clipboard. Go back to the Add 
 New Type page and paste in the icon code into the Icon field and click the Save button. This 
 will trigger a function that will strip off the everything from the HTML code except the font 
 awesome class names before saving. Now the new type name and icon are ready to be 
