@@ -1,8 +1,8 @@
 # StepStone Vendors Module 
 
 The StepStone Vendors Module allows the display of a list of vendors by area, types and 
-subtypes. Across the top is the list of areas. Select 'Texas' to display vendors in all areas. 
-Clicking a an area other than Texas will display vendors in that particular area. 
+subtypes. Across the top is the list of areas. Select 'All' to display vendors in all areas. 
+Clicking a an area other than All will display vendors in that particular area. 
  
 Clicking on a vendor type will display all vendors of that type who are in currently selected 
 area. This action will also display a list of vendor subtypes below the currently selected vendor 
