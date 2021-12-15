@@ -513,3 +513,11 @@ a.mail-to-link:hover {
 #sim-vendor-list {
   padding-left: 0;
 }
+
+a.delete-vendor-subtype {
+  cursor: pointer;
+}
+
+/*a.delete-vendor-subtype span.glyphicon.glyphicon-trash {
+  cursor: pointer;  
+}*/
