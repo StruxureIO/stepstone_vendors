@@ -46,7 +46,7 @@ use yii\widgets\Pjax;
                               return Html::a( '<span class="glyphicon glyphicon-pencil"></span>' , Url::to("index.php?r=stepstone_vendors/admin/updatetype&id=$key")); 
                         },
                         'delete' => function($url, $model, $key) {
-                          return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete-type', 'id' => $key], ['title' => 'Delete', 'class' => '', 'data' => ['confirm' => 'Are you sure you want to delete this type?', 'method' => 'post', 'data-pjax' => false],]);
+                          return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete-type', 'id' => $key], ['title' => 'Delete', 'class' => '', 'data' => ['confirm' => 'Are you sure you want to delete ' . $model->type_name  .'?', 'method' => 'post', 'data-pjax' => false],]);
                         }],                                                                
                     'template'=>'{update} {delete}',
                   ],

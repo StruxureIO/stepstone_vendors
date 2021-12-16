@@ -74,10 +74,10 @@ if(isset($model->type_id)) {
             //echo '  <td class="sbty-delete"><a href=""><span class="glyphicon glyphicon-trash"></span></a></td>'  . PHP_EOL;
             if (Yii::$app->urlManager->enablePrettyUrl) { 
               echo '<td class="sbty-edit">' . Html::a( '<span class="glyphicon glyphicon-pencil"></span>' , Url::to("updatesubtype?subtype_id=" . $subtype['subtype_id'] . "&id=" . $model->type_id . "&name=" . $model->type_name)) . '</td>';
-              echo '<td class="sbty-delete"><a class="delete-vendor-subtype" data-id="'.$model->type_id.'" subtype_id="'.$subtype['subtype_id'].'" ><span class="glyphicon glyphicon-trash"></span></a></td>';
+              echo '<td class="sbty-delete"><a class="delete-vendor-subtype" data-id="'.$model->type_id.'" subtype_id="'.$subtype['subtype_id'].'" subtype-name="'.$subtype['subtype_name'].'" ><span class="glyphicon glyphicon-trash"></span></a></td>';
             } else {
               echo '<td class="sbty-edit">' . Html::a( '<span class="glyphicon glyphicon-pencil"></span>' , Url::to("index.php?r=stepstone_vendors/admin/updatesubtype&subtype_id=" . $subtype['subtype_id'] . "&id=" . $model->type_id . "&name=" . $model->type_name)) . '</td>';
-              echo '<td class="sbty-delete"><a class="delete-vendor-subtype2" data-id="'.$model->type_id.'" subtype_id="'.$subtype['subtype_id'].'" ><span class="glyphicon glyphicon-trash"></span></a></td>';
+              echo '<td class="sbty-delete"><a class="delete-vendor-subtype2" data-id="'.$model->type_id.'" subtype_id="'.$subtype['subtype_id'].'" subtype-name="'.$subtype['subtype_name'].'" ><span class="glyphicon glyphicon-trash"></span></a></td>';
             }
             echo '</tr>' . PHP_EOL;
             $count++;
@@ -127,9 +127,10 @@ $this->registerJs("
     e.stopImmediatePropagation();
     var vendor_id = $(this).attr('data-id');
     var subtype_id = $(this).attr('subtype_id');
+    var subtype_name = $(this).attr('subtype-name');
     
     //console.log('vendor_id',vendor_id,'subtype_id',subtype_id);
-    if(confirm('Are you sure you want to delete this subtype?')) {
+    if(confirm('Are you sure you want to delete ' + subtype_name + '?')) {
       window.location.href = 'deletesubtype?subtype_id=' + subtype_id + '&id=' + vendor_id;
     }
     
@@ -139,8 +140,9 @@ $this->registerJs("
     e.stopImmediatePropagation();
     var vendor_id = $(this).attr('data-id');
     var subtype_id = $(this).attr('subtype_id');
+    var subtype_name = $(this).attr('subtype-name');
     
-    if(confirm('Are you sure you want to delete this subtype?')) {
+    if(confirm('Are you sure you want to delete ' + subtype_name + '?')) {
       window.location.href = 'deletesubtype&subtype_id=' + subtype_id + '&id=' + vendor_id;
     }
     
