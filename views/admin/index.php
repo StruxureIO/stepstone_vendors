@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
                   ['class' => 'yii\grid\ActionColumn',
                       'buttons' => [
                         'delete' => function($url, $model, $key) {
-                          return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete', 'id' => $key], ['title' => 'Delete', 'class' => '', 'data' => ['confirm' => 'Are you sure you want to delete this vendor?', 'method' => 'post', 'data-pjax' => false],]);
+                          return Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete', 'id' => $key], ['title' => 'Delete', 'class' => '', 'data' => ['confirm' => 'Are you sure you want to delete ' . $model->vendor_name . '?', 'method' => 'post', 'data-pjax' => false],]);
                         }],                                                                
                     'template'=>'{update} {delete}',
                   ],
